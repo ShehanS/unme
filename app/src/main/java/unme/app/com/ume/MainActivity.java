@@ -118,7 +118,7 @@ private FirebaseAuth.AuthStateListener  authStateListener;
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (!task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Authentication failed." + task.getException(),
+                            Toast.makeText(MainActivity.this, "Authentication failed !" + task.getException(),
                                     Toast.LENGTH_SHORT).show();
                         }
 
