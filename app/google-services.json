@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "847386486182",
+    "firebase_url": "https://ionic3-db-83055.firebaseio.com",
+    "project_id": "ionic3-db-83055",
+    "storage_bucket": "ionic3-db-83055.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847386486182:android:1b6ca33519245a9c",
+        "android_client_info": {
+          "package_name": "com.map.shehan.rest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847386486182-0jtdd1ut4ps28rcj340i46dlnqb9mqif.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1KBisfre2Nw-l__LTEIcNYeJ6b2tLYNs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847386486182:android:cc1b2fddda82e0bd",
+        "android_client_info": {
+          "package_name": "unme.app.com.ume"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847386486182-0jtdd1ut4ps28rcj340i46dlnqb9mqif.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1KBisfre2Nw-l__LTEIcNYeJ6b2tLYNs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

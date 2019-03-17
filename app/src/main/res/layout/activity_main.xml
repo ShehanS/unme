@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layer1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="81dp"
+    android:background="@drawable/singup"
+    >
+
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="669dp"
+        android:orientation="vertical"
+
+
+        tools:layout_editor_absoluteY="8dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New Guest"
+            android:textColor="@color/color1"
+            android:textSize="18sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="628dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="30dp"
+                android:divider="@drawable/divider"
+                android:orientation="vertical"
+                android:showDividers="middle"
+
+                >
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </android.support.constraint.ConstraintLayout>
+
+                <EditText
+                    android:id="@+id/userID"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/inputbox"
+                    android:ems="10"
+                    android:hint="User ID"
+
+                    android:inputType="textNoSuggestions|textPersonName"
+                    android:padding="16dp"
+                    android:textColor="@color/color1" />
+
+                <EditText
+                    android:id="@+id/txtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/inputbox"
+                    android:ems="10"
+                    android:hint="Name"
+
+                    android:inputType="textNoSuggestions|textPersonName"
+                    android:padding="16dp"
+                    android:textColor="@color/color1" />
+
+                <EditText
+                    android:id="@+id/txtSurename"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/inputbox"
+                    android:ems="10"
+
+                    android:hint="Surename"
+
+                    android:inputType="textPersonName"
+                    android:padding="16dp"
+                    android:textColor="@color/color1" />
+
+                <EditText
+                    android:id="@+id/txtPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:background="@drawable/inputbox"
+                    android:ems="10"
+
+                    android:hint="Phone"
+                    android:inputType="phone"
+                    android:padding="16dp"
+                    android:textColor="@color/color1" />
+
+                <EditText
+                    android:id="@+id/txtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/inputbox"
+                    android:ems="10"
+
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:padding="16dp"
+                    android:textColor="@color/color1" />
+
+                <EditText
+                    android:id="@+id/txtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/inputbox"
+                    android:ems="10"
+
+                    android:hint="Address"
+                    android:inputType="textPostalAddress"
+                    android:padding="16dp"
+                    android:textColor="@color/color1" />
+
+                <Spinner
+                    android:id="@+id/select1"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/inputbox"
+                    android:ems="10"
+
+
+                    />
+
+                <Spinner
+                    android:id="@+id/select2"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/inputbox"
+                    android:ems="10"
+
+                    />
+
+
+                <RadioGroup
+                    android:id="@+id/opt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RadioButton
+                        android:id="@+id/opt1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Adult" />
+
+                    <RadioButton
+                        android:id="@+id/opt2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Child" />
+
+                    <RadioButton
+                        android:id="@+id/opt3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Infront" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/txtUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/inputbox"
+                    android:ems="10"
+
+                    android:hint="Username"
+                    android:inputType="textPostalAddress"
+                    android:padding="16dp"
+                    android:textColor="@color/color1" />
+
+                <EditText
+                    android:id="@+id/txtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/inputbox"
+                    android:ems="10"
+
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="16dp"
+                    android:textColor="@color/color1" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:text="Save"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
