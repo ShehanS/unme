@@ -1,9 +1,6 @@
 package unme.app.com.ume;
 
-import com.google.firebase.firestore.IgnoreExtraProperties;
-
-@IgnoreExtraProperties
-public class UserModel {
+class UserModel {
     private String userId;
     private String type;
     private String username;
@@ -13,6 +10,9 @@ public class UserModel {
     private String email;
     private String contact;
     private String web;
+
+    private UserModel() {
+    }
 
     public UserModel(String userId, String type, String username, String password, String firstname, String lastname, String email, String contact, String web) {
         this.userId = userId;
@@ -25,6 +25,7 @@ public class UserModel {
         this.contact = contact;
         this.web = web;
     }
+
 
     public String getUserId() {
         return userId;

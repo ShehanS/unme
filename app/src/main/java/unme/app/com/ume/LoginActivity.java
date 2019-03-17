@@ -11,11 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,18 +21,17 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class LoginActivity extends AppCompatActivity {
-private EditText txtUsername, txtPassword;
-private Button btnLogin;
-private TextView txtSingup;
-    private FirebaseAuth auth;
-public static String LOG_APP = "U&ME : ";
+    public static String LOG_APP = "[LoginActivity ] : ";
+    private EditText txtUsername, txtPassword;
+    private Button btnLogin;
+    private TextView txtSingup;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        auth = FirebaseAuth.getInstance();
-        txtSingup = (TextView)findViewById(R.id.txtSingup);
+        txtSingup = (TextView) findViewById(R.id.txtSingup);
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
 
@@ -49,55 +43,69 @@ public static String LOG_APP = "U&ME : ";
         });
 
         btnLogin = findViewById(R.id.btnLogin);
-        if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, LandingPageActivity.class));
-            finish();
-        }
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String username, password;
-                username = txtUsername.getText().toString();
-                password = txtPassword.getText().toString();
+                login();
+            }
+        });
 
-                if (TextUtils.isEmpty(username)) {
-                    Toast.makeText(getApplicationContext(), "Please enter username!", Toast.LENGTH_SHORT).show();
-                    return;
+
+    }
+
+    private void login() {
+        Log.d(LOG_APP, "Start Login");
+        final String username, password;
+        username = txtUsername.getText().toString();
+        password = txtPassword.getText().toString();
+
+        if (TextUtils.isEmpty(username)) {
+            Toast.makeText(getApplicationContext(), "Please enter username!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("users");
+        Log.d(LOG_APP, "[Check user]");
+        Query query = mDatabase.orderByChild("username").equalTo(username);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                        UserModel userModel = childSnapshot.getValue(UserModel.class);
+
+                        if (userModel.getUsername().equals(username) && userModel.getPassword().equals(password)) {
+                            Intent intent = new Intent(LoginActivity.this, LandingPageActivity.class);
+                            startActivity(intent);
+                            finish();
+
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Password is wrong !", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                } else {
+                    Toast.makeText(LoginActivity.this, "Cannot find user !", Toast.LENGTH_LONG).show();
                 }
+            }
 
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_SHORT).show();
-                return;
-                }
-
-
-                auth.signInWithEmailAndPassword(username, password)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                                if (!task.isSuccessful()) {
-
-                                    if (password.length() < 6) {
-                                        Toast.makeText(LoginActivity.this, "Password must be 6 or other than!", Toast.LENGTH_LONG).show();
-
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, "Wrong user!", Toast.LENGTH_LONG).show();
-                                    }
-                                } else {
-                                    Intent intent = new Intent(LoginActivity.this, LandingPageActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }
-
-
-                        });
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(LOG_APP, "loadPost:onCancelled", databaseError.toException());
             }
         });
 
     }
-
-
 }
+
+
+
+
+
+
 

@@ -14,8 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 import org.w3c.dom.Text;
 
 public class LandingPageActivity extends AppCompatActivity {
-    private FirebaseAuth.AuthStateListener authListener;
-    private FirebaseAuth auth;
+
     private TextView txt;
     private Button btnLogout;
 
@@ -25,30 +24,8 @@ public class LandingPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
         txt = (TextView) findViewById(R.id.textView);
-        btnLogout = (Button)findViewById(R.id.btnLogout);
-        auth = FirebaseAuth.getInstance();
+        btnLogout = (Button) findViewById(R.id.btnLogout);
 
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        txt.setText("Hi.."+user.getEmail());
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                auth.signOut();
-                startActivity(new Intent(LandingPageActivity.this, LoginActivity.class));
-                finish();
-            }
-        });
-
-        authListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
-                    startActivity(new Intent(LandingPageActivity.this, LoginActivity.class));
-                    finish();
-                }
-            }
-        };
     }
 }

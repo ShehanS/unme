@@ -27,8 +27,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
@@ -113,10 +116,13 @@ private FirebaseAuth.AuthStateListener  authStateListener;
                     Toast.makeText(getApplicationContext(), "Enter Email address !", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                /*
+
                 auth.createUserWithEmailAndPassword(UserName, Password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
+                           auth.getCurrentUser().getUid();
                         if (!task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Authentication failed !" + task.getException(),
                                     Toast.LENGTH_SHORT).show();
@@ -125,14 +131,14 @@ private FirebaseAuth.AuthStateListener  authStateListener;
 
                     }
                 });
+
+                */
                 UserModel userModel = new UserModel(UserID, UserType, UserName, Password, FirstName, LastName, Contact, Email, WebAddress);
                 mDatabase.child("users").child(user_uuid).setValue(userModel);
                 Toast.makeText(MainActivity.this, "Create Profile !", Toast.LENGTH_LONG).show();
 
 
             }
-
-
 
 
         });
