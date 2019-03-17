@@ -4,93 +4,97 @@ import com.google.firebase.firestore.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class UserModel {
-    private String name;
-    private String surename;
-    private String phone;
+    private String userId;
+    private String type;
+    private String username;
+    private String password;
+    private String firstname;
+    private String lastname;
     private String email;
-    private String adddress;
-    private String select1;
-    private String select2;
-    private String select3;
+    private String contact;
+    private String web;
 
-
-    public UserModel(String name, String surename, String phone, String email, String adddress, String select1, String select2, String select3) {
-        this.name = name;
-        this.surename = surename;
-        this.phone = phone;
+    public UserModel(String userId, String type, String username, String password, String firstname, String lastname, String email, String contact, String web) {
+        this.userId = userId;
+        this.type = type;
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
-        this.adddress = adddress;
-        this.select1 = select1;
-        this.select2 = select2;
-        this.select3 = select3;
-
-
+        this.contact = contact;
+        this.web = web;
     }
 
-    public String getName(){
-       return name;
+    public String getUserId() {
+        return userId;
     }
 
-    public String getSurename(){
-        return surename;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getPhone(){
-        return phone;
+    public String getType() {
+        return type;
     }
 
-    public String getEmail(){
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getEmail() {
         return email;
     }
 
-    public String getAdddress(){
-        return adddress;
-    }
-
-    public String getSelect1(){
-        return select1;
-    }
-
-    public String getSelect2(){
-        return select2;
-    }
-
-    public String getSelect3(){
-        return select3;
-    }
-
-
-
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public void setSurename(String surename){
-        this.surename = surename;
-    }
-
-    public void setPhone(String phone){
-        this.phone = phone;
-    }
-
-    public void setEmail(String email){
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setAdddress(String adddress) {
-        this.adddress = adddress;
+    public String getContact() {
+        return contact;
     }
 
-    public void setSelect1(String select1){
-        this.select1 = select1;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
-    public void setSelect2(String select2){
-        this.select2 = select2;
+    public String getWeb() {
+        return web;
     }
 
-    public void setSelect3(String select3){
-        this.select2 = select3;
+    public void setWeb(String web) {
+        this.web = web;
     }
-
 }

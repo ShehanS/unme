@@ -12,38 +12,51 @@
 
 
     <LinearLayout
-        android:layout_width="400dp"
+        android:layout_width="402dp"
         android:layout_height="669dp"
         android:orientation="vertical"
 
 
+        android:paddingLeft="0dp"
+        android:paddingBottom="0dp"
+        tools:layout_editor_absoluteX="-2dp"
         tools:layout_editor_absoluteY="8dp">
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="match_parent"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="New Guest"
             android:textColor="@color/color1"
             android:textSize="18sp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="680dp"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingTop="30dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        tools:layout_editor_absoluteY="6dp">
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="628dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_height="628dp">
 
 
             <LinearLayout
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="30dp"
+
                 android:divider="@drawable/divider"
                 android:orientation="vertical"
-                android:showDividers="middle"
-
-                >
+                android:showDividers="middle">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -63,27 +76,60 @@
                     android:padding="16dp"
                     android:textColor="@color/color1" />
 
-                <EditText
-                    android:id="@+id/txtName"
+                <Spinner
+                    android:id="@+id/select1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:background="@drawable/inputbox"
                     android:ems="10"
-                    android:hint="Name"
 
-                    android:inputType="textNoSuggestions|textPersonName"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
+
+                    />
 
                 <EditText
-                    android:id="@+id/txtSurename"
+                    android:id="@+id/txtUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/inputbox"
                     android:ems="10"
 
-                    android:hint="Surename"
+                    android:hint="Username"
+                    android:inputType="textPostalAddress"
+                    android:padding="16dp"
+                    android:textColor="@color/color1" />
 
+                <EditText
+                    android:id="@+id/txtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/inputbox"
+                    android:ems="10"
+
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="16dp"
+                    android:textColor="@color/color1" />
+
+                <EditText
+                    android:id="@+id/txtFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/inputbox"
+                    android:ems="10"
+
+                    android:hint="First Name"
+                    android:inputType="textPersonName"
+                    android:padding="16dp"
+                    android:textColor="@color/color1" />
+
+                <EditText
+                    android:id="@+id/txtLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/inputbox"
+                    android:ems="10"
+
+                    android:hint="Last Name"
                     android:inputType="textPersonName"
                     android:padding="16dp"
                     android:textColor="@color/color1" />
@@ -114,88 +160,17 @@
                     android:textColor="@color/color1" />
 
                 <EditText
-                    android:id="@+id/txtAddress"
+                    android:id="@+id/txtWeb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/inputbox"
                     android:ems="10"
 
-                    android:hint="Address"
-                    android:inputType="textPostalAddress"
+                    android:hint="Website"
+                    android:inputType="textWebEmailAddress"
                     android:padding="16dp"
                     android:textColor="@color/color1" />
 
-                <Spinner
-                    android:id="@+id/select1"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-
-                    />
-
-                <Spinner
-                    android:id="@+id/select2"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-                    />
-
-
-                <RadioGroup
-                    android:id="@+id/opt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <RadioButton
-                        android:id="@+id/opt1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Adult" />
-
-                    <RadioButton
-                        android:id="@+id/opt2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Child" />
-
-                    <RadioButton
-                        android:id="@+id/opt3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Infront" />
-
-                </RadioGroup>
-
-                <EditText
-                    android:id="@+id/txtUsername"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-                    android:hint="Username"
-                    android:inputType="textPostalAddress"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
-
-                <EditText
-                    android:id="@+id/txtPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
 
                 <Button
                     android:id="@+id/btnSave"
@@ -209,7 +184,6 @@
 
             </LinearLayout>
         </ScrollView>
-
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
