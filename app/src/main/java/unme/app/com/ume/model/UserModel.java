@@ -98,4 +98,6 @@ public class UserModel {
     public void setWeb(String web) {
         this.web = web;
     }
+
+
 }

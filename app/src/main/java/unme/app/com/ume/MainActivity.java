@@ -26,9 +26,6 @@ public static String LOG_APP = "U&ME : ";
 private Button btnSave;
 private DatabaseReference mDatabase;
     private EditText txtWebAddress, txtLastName, txtFirstName, txtUserName, txtSurename, txtPhone, txtEmail, txtAddress, txtUsername, txtPassword, txtUserID;
-private RadioGroup radioGroup;
-private RadioButton radioButton;
-private FirebaseAuth auth;
 
 
 private FirebaseAuth.AuthStateListener  authStateListener;
@@ -39,7 +36,6 @@ private FirebaseAuth.AuthStateListener  authStateListener;
         Random random = new Random();
         final String user_uuid =  String.format("%04d", random.nextInt(10000));
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        auth = FirebaseAuth.getInstance();
         txtUserID = (EditText) findViewById(R.id.userID);
         txtUserName = (EditText) findViewById(R.id.txtUsername);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
@@ -104,7 +100,7 @@ private FirebaseAuth.AuthStateListener  authStateListener;
                 }
 
 
-                UserModel userModel = new UserModel(UserID, UserType, UserName, Password, FirstName, LastName, Contact, Email, WebAddress);
+                UserModel userModel = new UserModel(UserID, UserType, UserName, Password, FirstName, LastName, Email, Contact, WebAddress);
                 mDatabase.child("users").child(user_uuid).setValue(userModel);
                 Toast.makeText(MainActivity.this, "Create Profile !", Toast.LENGTH_LONG).show();
 

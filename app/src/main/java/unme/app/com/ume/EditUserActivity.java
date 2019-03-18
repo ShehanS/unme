@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -17,10 +18,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import unme.app.com.ume.model.UserModel;
 
 public class EditUserActivity extends AppCompatActivity {
     public static String LOG_APP = "[EditUserActivity ] : ";
+    String USER_ID, USER_TYPE;
     private DatabaseReference mDatabase;
     private Spinner userType;
     private Button btnSave;
@@ -30,8 +35,8 @@ public class EditUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
-        String USER_ID = getIntent().getStringExtra("USER_ID");
-        System.out.println(USER_ID);
+        USER_ID = getIntent().getStringExtra("USER_ID");
+
         txtUserName = (EditText) findViewById(R.id.txtUsername);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
         txtFirstName = (EditText) findViewById(R.id.txtFirstName);
@@ -41,7 +46,12 @@ public class EditUserActivity extends AppCompatActivity {
         txtWebAddress = (EditText) findViewById(R.id.txtWeb);
         userType = (Spinner) findViewById(R.id.select1);
         btnSave = (Button) findViewById(R.id.btnSave);
-
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpdateUser();
+            }
+        });
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
         Query query = mDatabase.orderByKey().equalTo(USER_ID);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -57,7 +67,8 @@ public class EditUserActivity extends AppCompatActivity {
                         txtPhone.setText(userModel.getContact());
                         txtEmail.setText(userModel.getEmail());
                         txtWebAddress.setText(userModel.getWeb());
-
+                        USER_ID = userModel.getUserId();
+                        USER_TYPE = userModel.getType();
 
                     }
                 }
@@ -74,7 +85,31 @@ public class EditUserActivity extends AppCompatActivity {
 
 
     public void UpdateUser() {
+        String UserName, Password, FirstName, LastName, Contact, Email, WebAddress, UserType;
+        USER_TYPE = "Client";
+        UserName = txtUserName.getText().toString().trim();
+        Password = txtPassword.getText().toString().trim();
+        FirstName = txtFirstName.getText().toString().trim();
+        LastName = txtLastName.getText().toString().trim();
+        Contact = txtPhone.getText().toString().trim();
+        Email = txtEmail.getText().toString().trim();
+        WebAddress = txtWebAddress.getText().toString().trim();
 
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(USER_ID);
+        Map<String, Object> updates = new HashMap<String, Object>();
+        updates.put("contact", Contact);
+        updates.put("email", Email);
+        updates.put("firstname", FirstName);
+        updates.put("lastname", LastName);
+        updates.put("password", Password);
+        updates.put("type", USER_TYPE);
+        updates.put("userId", USER_ID);
+        updates.put("username", UserName);
+        updates.put("web", WebAddress);
+
+        mDatabase.updateChildren(updates);
+
+        Toast.makeText(getApplicationContext(), "Updated !", Toast.LENGTH_SHORT).show();
 
     }
 }
