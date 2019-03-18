@@ -1,6 +1,7 @@
 package unme.app.com.ume;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private TextView txtSingup;
     private DatabaseReference mDatabase;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         txtSingup = (TextView) findViewById(R.id.txtSingup);
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
-
+        sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE);
         txtSingup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login() {
         Log.d(LOG_APP, "Start Login");
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
         final String username, password;
         username = txtUsername.getText().toString();
         password = txtPassword.getText().toString();
@@ -80,6 +83,10 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (userModel.getUsername().equals(username) && userModel.getPassword().equals(password)) {
                             Intent intent = new Intent(LoginActivity.this, LandingPageActivity.class);
+                            //create session
+                            editor.putString("USER_ID", userModel.getUserId());
+                            editor.putString("USER", userModel.getUsername());
+                            editor.commit();
                             startActivity(intent);
                             finish();
 

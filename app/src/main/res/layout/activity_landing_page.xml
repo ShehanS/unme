@@ -9,33 +9,48 @@
     >
 
     <LinearLayout
-        android:layout_width="396dp"
-        android:layout_height="104dp"
+        android:id="@+id/main"
+        android:layout_width="395dp"
+        android:layout_height="678dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
         <LinearLayout
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="80dp"
+            android:background="@drawable/header"
+            android:orientation="vertical"
 
-            <Button
-                android:id="@+id/btnLogout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Logout"
-                tools:layout_editor_absoluteX="250dp"
-                tools:layout_editor_absoluteY="139dp" />
+            >
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                tools:layout_editor_absoluteX="44dp"
-                tools:layout_editor_absoluteY="120dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnProfile"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/profile_button"
+                    app:srcCompat="@mipmap/user" />
+
+                <TextView
+                    android:id="@+id/txtUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="right"
+                    android:text="Hi..."
+                    android:textSize="14pt" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>
