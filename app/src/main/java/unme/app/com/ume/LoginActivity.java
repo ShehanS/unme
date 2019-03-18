@@ -19,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import unme.app.com.ume.model.UserModel;
+
 
 public class LoginActivity extends AppCompatActivity {
     public static String LOG_APP = "[LoginActivity ] : ";

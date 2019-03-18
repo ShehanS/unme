@@ -1,38 +1,24 @@
 package unme.app.com.ume;
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.Random;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import unme.app.com.ume.UserModel;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import unme.app.com.ume.model.UserModel;
+
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 public static String LOG_APP = "U&ME : ";
@@ -117,22 +103,7 @@ private FirebaseAuth.AuthStateListener  authStateListener;
                     return;
                 }
 
-                /*
 
-                auth.createUserWithEmailAndPassword(UserName, Password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                           auth.getCurrentUser().getUid();
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Authentication failed !" + task.getException(),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-
-                    }
-                });
-
-                */
                 UserModel userModel = new UserModel(UserID, UserType, UserName, Password, FirstName, LastName, Contact, Email, WebAddress);
                 mDatabase.child("users").child(user_uuid).setValue(userModel);
                 Toast.makeText(MainActivity.this, "Create Profile !", Toast.LENGTH_LONG).show();

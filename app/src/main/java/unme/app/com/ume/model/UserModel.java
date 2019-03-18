@@ -1,6 +1,6 @@
-package unme.app.com.ume;
+package unme.app.com.ume.model;
 
-class UserModel {
+public class UserModel {
     private String userId;
     private String type;
     private String username;

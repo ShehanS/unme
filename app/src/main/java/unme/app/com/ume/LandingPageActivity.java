@@ -1,27 +1,25 @@
 package unme.app.com.ume;
 
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.content.SharedPreferences;
-import android.widget.Toast;
+
 
 
 public class LandingPageActivity extends AppCompatActivity {
     private TextView userLogin;
     private ImageButton btnProfile;
     private SharedPreferences sharedPreferences;
-    private ImageButton btnLogOut;
-
-
+    String sessionUserID, sessionUser;
+    private ImageButton btnLogOut, btnEditProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +30,8 @@ public class LandingPageActivity extends AppCompatActivity {
         btnProfile = (ImageButton) findViewById(R.id.btnProfile);
 
         sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE);
-        String sessionUserID = sharedPreferences.getString("USER_ID", null);
-        String sessionUser = sharedPreferences.getString("USER", null);
+        sessionUserID = sharedPreferences.getString("USER_ID", null);
+        sessionUser = sharedPreferences.getString("USER", null);
         if ((sessionUserID == null) || (sessionUser == null)) {
 
             Intent intent = new Intent(LandingPageActivity.this, LoginActivity.class);
@@ -57,6 +55,17 @@ public class LandingPageActivity extends AppCompatActivity {
         View view = inflater.inflate(R.layout.profile_alert_box, null);
         builder.setView(view);
         btnLogOut = (ImageButton) view.findViewById(R.id.btnLogout);
+        btnEditProfile = (ImageButton) view.findViewById(R.id.btnProEdit);
+
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingPageActivity.this, EditUserActivity.class);
+                intent.putExtra("USER_ID", sessionUserID);
+                startActivity(intent);
+            }
+        });
+
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
