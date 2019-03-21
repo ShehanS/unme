@@ -49,9 +49,10 @@ public class CountdownActivity extends AppCompatActivity {
 
     String sessionUser, sessionUserID;
     Long eventMilis;
-    private String EVENT_DATE_TIME;
+
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private LinearLayout linear_layout_1, linear_layout_2;
+    String EVENT_DATE_TIME;
+    private LinearLayout linear_layout_2;
     private TextView tv_days, tv_hour, tv_minute, tv_second, txtEventName, txtEventTime;
     private Handler handler = new Handler();
     private Runnable runnable;
@@ -63,6 +64,7 @@ public class CountdownActivity extends AppCompatActivity {
     private EditText inputEventName;
     public static String LOG_APP = "[CountDown ] : ";
     private Countdown countdown;
+    private long timeMils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,18 +83,23 @@ public class CountdownActivity extends AppCompatActivity {
 
         btnShowDateTime = findViewById(R.id.btnShowDateTime);
         btnAddEvent = findViewById(R.id.btnAddEvent);
-        simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy h:mm a", Locale.getDefault());
         mDatabase = FirebaseDatabase.getInstance().getReference("event");
-
+        getData();
         btnAddEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                countdown = new Countdown(sessionUserID,inputEventName.getText().toString(), Long.valueOf(eventMilis));
-                mDatabase.child(sessionUserID).setValue(countdown);
                 getData();
+                countdown = new Countdown(sessionUserID,inputEventName.getText().toString(), eventMilis);
+                mDatabase.child(sessionUserID).setValue(countdown);
+
             }
         });
 
+        linear_layout_2 = findViewById(R.id.linear_layout_2);
+        tv_days = findViewById(R.id.tv_days);
+        tv_hour = findViewById(R.id.tv_hour);
+        tv_minute = findViewById(R.id.tv_minute);
+        tv_second = findViewById(R.id.tv_second);
 
         System.out.println("========================================");
 
@@ -103,12 +110,17 @@ public class CountdownActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+        countDownStart();
+
+
+
 btnStart.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
+        System.out.println("Start countdown");
         countDownStart();
-        EVENT_DATE_TIME = String.valueOf(countdown.getEvent_time());
-    }
+      }
 });
 
         btnShowDateTime.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +130,7 @@ btnStart.setOnClickListener(new View.OnClickListener() {
             }
         });
 
-        getData();
+
 
     }
 
@@ -141,7 +153,7 @@ btnStart.setOnClickListener(new View.OnClickListener() {
                         timePicker.getCurrentMinute());
 
 
-                eventMilis = calendar.getTimeInMillis();
+               eventMilis = calendar.getTimeInMillis();
                 alertDialog.dismiss();
 
             }
@@ -155,6 +167,7 @@ btnStart.setOnClickListener(new View.OnClickListener() {
 
 
     private void countDownStart() {
+
         runnable = new Runnable() {
             @Override
             public void run() {
@@ -175,8 +188,8 @@ btnStart.setOnClickListener(new View.OnClickListener() {
                         tv_minute.setText(String.format("%02d", Minutes));
                         tv_second.setText(String.format("%02d", Seconds));
                     } else {
-                        linear_layout_1.setVisibility(View.VISIBLE);
-                        linear_layout_2.setVisibility(View.GONE);
+
+                        linear_layout_2.setVisibility(View.VISIBLE);
                         handler.removeCallbacks(runnable);
                     }
                 } catch (Exception e) {
@@ -185,6 +198,7 @@ btnStart.setOnClickListener(new View.OnClickListener() {
             }
         };
         handler.postDelayed(runnable, 0);
+
     }
 
     protected void onStop() {
@@ -203,9 +217,15 @@ btnStart.setOnClickListener(new View.OnClickListener() {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     Countdown countdown = childSnapshot.getValue(Countdown.class);
-
                     txtEventName.setText(countdown.getEvent_name());
-                   txtEventTime.setText(getDate(countdown.getEvent_time(),DATE_FORMAT));
+                    timeMils = countdown.getEvent_time();
+                    SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTimeInMillis(timeMils);
+                    EVENT_DATE_TIME = formatter.format(calendar.getTime());
+                    txtEventTime.setText(EVENT_DATE_TIME);
+                    //return formatter.format(calendar.getTime());
+                    System.out.println("Event time "+EVENT_DATE_TIME);
 
 
 
@@ -221,16 +241,6 @@ btnStart.setOnClickListener(new View.OnClickListener() {
 
     }
 
-    public String getDate(long milliSeconds, String dateFormat)
-    {
-
-        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
-
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(milliSeconds);
-        return formatter.format(calendar.getTime());
-    }
 }
 
 

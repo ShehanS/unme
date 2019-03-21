@@ -26,7 +26,8 @@
         <activity android:name=".LandingPageActivity" />
         <activity android:name=".EditUserActivity" />
         <activity android:name=".LandingPage2Activity" />
-        <activity android:name=".CountdownActivity"></activity>
+        <activity android:name=".CountdownActivity" />
+        <activity android:name=".TodoList"></activity>
     </application>
 
 </manifest>
