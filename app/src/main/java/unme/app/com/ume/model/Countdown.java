@@ -2,7 +2,7 @@ package unme.app.com.ume.model;
 
 public class Countdown {
     private String event_name;
-    private Double event_time;
+    private long event_time;
     private String userId;
 
 
@@ -11,7 +11,7 @@ public class Countdown {
     public Countdown(){}
 
 
-    public Countdown(String userId, String event_name, Double event_time) {
+    public Countdown(String userId, String event_name, long event_time) {
        this.userId = userId;
         this.event_name = event_name;
         this.event_time = event_time;
@@ -21,7 +21,7 @@ public class Countdown {
         this.event_name = event_name;
     }
 
-    public void setEvent_time(Double event_time){
+    public void setEvent_time(long event_time){
         this.event_time = event_time;
     }
 
@@ -33,7 +33,7 @@ public class Countdown {
         return event_name;
     }
 
-    public Double getEvent_time(){
+    public long getEvent_time(){
         return event_time;
     }
 

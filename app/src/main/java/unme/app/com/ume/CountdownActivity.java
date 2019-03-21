@@ -48,8 +48,8 @@ import unme.app.com.ume.model.UserModel;
 public class CountdownActivity extends AppCompatActivity {
 
     String sessionUser, sessionUserID;
-    Double eventMilis;
-    private String EVENT_DATE_TIME = "2019-12-31 10:30:00";
+    Long eventMilis;
+    private String EVENT_DATE_TIME;
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private LinearLayout linear_layout_1, linear_layout_2;
     private TextView tv_days, tv_hour, tv_minute, tv_second, txtEventName, txtEventTime;
@@ -62,6 +62,7 @@ public class CountdownActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private EditText inputEventName;
     public static String LOG_APP = "[CountDown ] : ";
+    private Countdown countdown;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +87,7 @@ public class CountdownActivity extends AppCompatActivity {
         btnAddEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Countdown countdown = new Countdown(sessionUserID,inputEventName.getText().toString(), eventMilis);
+                countdown = new Countdown(sessionUserID,inputEventName.getText().toString(), Long.valueOf(eventMilis));
                 mDatabase.child(sessionUserID).setValue(countdown);
                 getData();
             }
@@ -102,7 +103,13 @@ public class CountdownActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
+btnStart.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        countDownStart();
+        EVENT_DATE_TIME = String.valueOf(countdown.getEvent_time());
+    }
+});
 
         btnShowDateTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,13 +141,17 @@ public class CountdownActivity extends AppCompatActivity {
                         timePicker.getCurrentMinute());
 
 
-                eventMilis = (Double.valueOf(calendar.getTimeInMillis()));
+                eventMilis = calendar.getTimeInMillis();
                 alertDialog.dismiss();
+
             }
         });
         alertDialog.setView(dialogView);
         alertDialog.show();
     }
+
+
+
 
 
     private void countDownStart() {
@@ -182,11 +193,7 @@ public class CountdownActivity extends AppCompatActivity {
     }
 
 
-    public void setDateForCountDown() {
-        //    sessionUserID;
 
-
-    }
 
 
     public void getData(){
@@ -198,10 +205,9 @@ public class CountdownActivity extends AppCompatActivity {
                     Countdown countdown = childSnapshot.getValue(Countdown.class);
 
                     txtEventName.setText(countdown.getEvent_name());
-                    txtEventTime.setText(countdown.getEvent_time().toString());
-                    System.out.println(countdown);
-                    System.out.println( countdown.getEvent_name());
-                    System.out.println( countdown.getEvent_time().toString());
+                   txtEventTime.setText(getDate(countdown.getEvent_time(),DATE_FORMAT));
+
+
 
 
                 }
@@ -215,5 +221,17 @@ public class CountdownActivity extends AppCompatActivity {
 
     }
 
+    public String getDate(long milliSeconds, String dateFormat)
+    {
 
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliSeconds);
+        return formatter.format(calendar.getTime());
+    }
 }
+
+
+
