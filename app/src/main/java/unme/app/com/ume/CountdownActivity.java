@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.Constants;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class CountdownActivity extends AppCompatActivity {
     private String EVENT_DATE_TIME = "2019-12-31 10:30:00";
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private LinearLayout linear_layout_1, linear_layout_2;
-    private TextView tv_days, tv_hour, tv_minute, tv_second, addEventText;
+    private TextView tv_days, tv_hour, tv_minute, tv_second, txtEventName, txtEventTime;
     private Handler handler = new Handler();
     private Runnable runnable;
     private Button btnStart, btnStop, btnShowDateTime, btnAddEvent;
@@ -59,10 +60,8 @@ public class CountdownActivity extends AppCompatActivity {
     private Calendar calendar;
     private DatabaseReference mDatabase;
     private SharedPreferences sharedPreferences;
-    private ListView listView;
-    private ArrayList<String> arrayList = new ArrayList<>();
-    private EditText txtEvent;
-
+    private EditText inputEventName;
+    public static String LOG_APP = "[CountDown ] : ";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,44 +74,25 @@ public class CountdownActivity extends AppCompatActivity {
 
         btnStart = findViewById(R.id.btnStart);
         btnStop = findViewById(R.id.btnStop);
-        txtEvent = findViewById(R.id.txtEvent);
+        txtEventName = findViewById(R.id.txtEventName);
+        txtEventTime = findViewById(R.id.txtEventTime);
+        inputEventName = findViewById(R.id.txtEvent);
+
         btnShowDateTime = findViewById(R.id.btnShowDateTime);
         btnAddEvent = findViewById(R.id.btnAddEvent);
         simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy h:mm a", Locale.getDefault());
-        listView = findViewById(R.id.myList);
         mDatabase = FirebaseDatabase.getInstance().getReference("event");
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line);
-        listView.setAdapter(adapter);
 
         btnAddEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Countdown countdown = new Countdown(txtEvent.getText().toString(), eventMilis);
+                Countdown countdown = new Countdown(sessionUserID,inputEventName.getText().toString(), eventMilis);
                 mDatabase.child(sessionUserID).setValue(countdown);
+                getData();
             }
         });
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("event");
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    Countdown countdown = childSnapshot.getValue(Countdown.class);
-                    arrayList.add("Event Name: " + countdown.getEvent_name() + " " + "Event Time: " + countdown.getEvent_time().toString());
-                    System.out.println(countdown);
-                    System.out.println( countdown.getEvent_name());
-                    System.out.println( countdown.getEvent_time().toString());
-                    adapter.notifyDataSetChanged();
-                }
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        mDatabase.addValueEventListener(postListener);
         System.out.println("========================================");
 
         System.out.println(sessionUserID);
@@ -131,6 +111,7 @@ public class CountdownActivity extends AppCompatActivity {
             }
         });
 
+        getData();
 
     }
 
@@ -204,6 +185,33 @@ public class CountdownActivity extends AppCompatActivity {
     public void setDateForCountDown() {
         //    sessionUserID;
 
+
+    }
+
+
+    public void getData(){
+        Query query = mDatabase.orderByChild("userId").equalTo(sessionUserID);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    Countdown countdown = childSnapshot.getValue(Countdown.class);
+
+                    txtEventName.setText(countdown.getEvent_name());
+                    txtEventTime.setText(countdown.getEvent_time().toString());
+                    System.out.println(countdown);
+                    System.out.println( countdown.getEvent_name());
+                    System.out.println( countdown.getEvent_time().toString());
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(LOG_APP, databaseError.getDetails());
+            }
+        });
 
     }
 

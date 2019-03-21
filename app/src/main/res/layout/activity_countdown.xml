@@ -242,10 +242,48 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ListView
-                android:id="@+id/myList"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/My_Event"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12pt"
+                    android:padding="6pt"
+                    android:textColor="@color/white"
+                    android:text="My Event" />
+
+                <TextView
+                    android:id="@+id/txtEventName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="6pt"
+                    android:text="Event Name"
+                    android:textColor="@color/white"
+                    android:textSize="10pt" />
+
+                <TextView
+                    android:id="@+id/txtEventTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="6pt"
+                    android:text="Event Time"
+                    android:textColor="@color/white"
+                    android:textSize="10pt" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="324dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20pt"
+                    android:background="@drawable/button"
+                    android:text="Delete" />
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
