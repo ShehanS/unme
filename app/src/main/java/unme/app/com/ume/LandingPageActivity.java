@@ -15,10 +15,9 @@ import android.content.SharedPreferences;
 
 public class LandingPageActivity extends AppCompatActivity {
     private TextView userLogin;
-    private ImageButton btnProfile;
     private SharedPreferences sharedPreferences;
     String sessionUserID, sessionUser, appSwitch;
-    private ImageButton btnLogOut, btnEditProfile, btnCountDown;
+    private ImageButton btnProfile, btnLogOut, btnEditProfile, btnCountDown, btnToDo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +27,7 @@ public class LandingPageActivity extends AppCompatActivity {
         userLogin = (TextView) findViewById(R.id.txtUsername);
         btnProfile = (ImageButton) findViewById(R.id.btnProfile);
         btnCountDown = (ImageButton) findViewById(R.id.btnCountDown);
+        btnToDo = (ImageButton) findViewById(R.id.btnTodo);
         sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE);
         sessionUserID = sharedPreferences.getString("USER_ID", null);
         sessionUser = sharedPreferences.getString("USER", null);
@@ -41,7 +41,13 @@ public class LandingPageActivity extends AppCompatActivity {
                 alertModal();
             }
         });
-
+        btnToDo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingPageActivity.this, TodoList.class);
+                startActivity(intent);
+            }
+        });
         btnCountDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

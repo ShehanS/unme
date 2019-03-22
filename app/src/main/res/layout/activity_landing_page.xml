@@ -68,6 +68,13 @@
                     android:layout_height="wrap_content"
                     android:padding="30dp"
                     app:srcCompat="@mipmap/cowndown" />
+
+                <ImageButton
+                    android:id="@+id/btnTodo"
+                    android:layout_width="92dp"
+                    android:layout_height="match_parent"
+                    android:padding="30dp"
+                    app:srcCompat="@mipmap/todo" />
             </TableRow>
 
             <TableRow

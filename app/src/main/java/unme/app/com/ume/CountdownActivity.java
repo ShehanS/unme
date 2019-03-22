@@ -47,18 +47,15 @@ import unme.app.com.ume.model.UserModel;
 
 public class CountdownActivity extends AppCompatActivity {
 
-    String sessionUser, sessionUserID;
-    Long eventMilis;
-
+    private String sessionUser, sessionUserID;
+    private Long eventMilis;
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    String EVENT_DATE_TIME;
+    private String EVENT_DATE_TIME;
     private LinearLayout linear_layout_2;
     private TextView tv_days, tv_hour, tv_minute, tv_second, txtEventName, txtEventTime;
     private Handler handler = new Handler();
     private Runnable runnable;
     private Button btnStart, btnStop, btnShowDateTime, btnAddEvent;
-    private SimpleDateFormat simpleDateFormat;
-    private Calendar calendar;
     private DatabaseReference mDatabase;
     private SharedPreferences sharedPreferences;
     private EditText inputEventName;
@@ -101,10 +98,9 @@ public class CountdownActivity extends AppCompatActivity {
         tv_minute = findViewById(R.id.tv_minute);
         tv_second = findViewById(R.id.tv_second);
 
-        System.out.println("========================================");
 
-        System.out.println(sessionUserID);
-        System.out.println(sessionUser);
+
+
         if ((sessionUser == null) || (sessionUser == null)) {
             Intent intent = new Intent(CountdownActivity.this, LoginActivity.class);
             startActivity(intent);
