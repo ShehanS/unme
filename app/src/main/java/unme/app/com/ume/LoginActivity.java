@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         txtSingup = (TextView) findViewById(R.id.txtSingup);
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
+
         sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE);
         sessionUserID = sharedPreferences.getString("USER_ID", null);
         sessionUser = sharedPreferences.getString("USER", null);
