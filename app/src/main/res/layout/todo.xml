@@ -9,81 +9,87 @@
 
     >
 
-    <LinearLayout
-        android:layout_width="395dp"
-        android:layout_height="734dp"
-
-        android:layout_margin="10pt"
-        android:orientation="vertical"
-        android:showDividers="middle"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10pt">
+            android:layout_width="395dp"
+            android:layout_height="734dp"
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5pt"
-                android:text="Add Todo"
-                android:textSize="12pt" />
+            android:layout_margin="10pt"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:divider="@drawable/divider"
                 android:orientation="vertical"
-                android:showDividers="middle">
+                android:padding="10pt">
 
-                <EditText
-                    android:id="@+id/txtTaskName"
+                <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-                    android:hint="Task Name"
-                    android:inputType="text"
-                    android:padding="16dp"
+                    android:layout_margin="5pt"
+                    android:text="Add Todo"
+                    android:textSize="12pt" />
 
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white" />
-
-                <EditText
-                    android:id="@+id/txtTask"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="175dp"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-                    android:hint="Task"
-                    android:inputType="text"
-                    android:padding="16dp"
-                    android:textColor="@color/color1"
-                    android:textColorHint="@color/white" />
+                    android:layout_height="match_parent"
+                    android:divider="@drawable/divider"
+                    android:orientation="vertical"
+                    android:showDividers="middle">
+
+                    <EditText
+                        android:id="@+id/txtTaskName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
+                        android:hint="Task Name"
+                        android:inputType="text"
+                        android:padding="16dp"
+
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white" />
+
+                    <EditText
+                        android:id="@+id/txtTask"
+                        android:layout_width="match_parent"
+                        android:layout_height="175dp"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
+                        android:hint="Task"
+                        android:inputType="text"
+                        android:padding="16dp"
+                        android:textColor="@color/color1"
+                        android:textColorHint="@color/white" />
 
 
-                <CheckedTextView
-                    android:id="@+id/taskStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ongoing"
-                    android:textColor="@color/white"
-                    android:textSize="8pt" />
+                    <CheckedTextView
+                        android:id="@+id/taskStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ongoing"
+                        android:textColor="@color/white"
+                        android:textSize="8pt" />
 
-                <Button
-                    android:id="@+id/btnSave"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button"
-                    android:text="Save"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/input_form_lights" />
+                    <Button
+                        android:id="@+id/btnSave"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button"
+                        android:text="Save"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/input_form_lights" />
 
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>
