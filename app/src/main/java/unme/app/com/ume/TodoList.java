@@ -188,7 +188,8 @@ public class TodoList extends AppCompatActivity {
         editDate = view.findViewById(R.id.editDate);
         btnDelete = view.findViewById(R.id.btnDelete);
         builder.setView(view);
-
+        final AlertDialog alert = builder.create();
+        alert.show();
 
         System.out.println("selected-"+selected);
         mDatabase = FirebaseDatabase.getInstance().getReference("todo").child(sessionUserID);
@@ -219,30 +220,35 @@ public class TodoList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-                mDatabase.child("todo").child(sessionUserID).orderByChild("taskName").equalTo(selected).addValueEventListener(new ValueEventListener() {
+                mDatabase = FirebaseDatabase.getInstance().getReference("todo").child(sessionUserID);
+                Query query = mDatabase.orderByChild("taskName").equalTo(selected);
+                query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
-                            String key = dataSnapshot1.getKey();
-                            System.out.println("Key -------"+key);
-                            dataSnapshot.getRef().removeValue();
+                        for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                            dataSnapshot1.getRef().removeValue();
+                            adapter.clear();
+                            adapter.notifyDataSetChanged();
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                        System.out.println(databaseError.getMessage());
                     }
                 });
+
+        Toast.makeText(getApplicationContext(),"Removed task !", Toast.LENGTH_LONG).show();
+        alert.dismiss();
+
+
 
             }
         });
 
 
 
-        AlertDialog alert = builder.create();
-        alert.show();
+
     }
 
 }

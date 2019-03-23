@@ -31,12 +31,13 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private SharedPreferences sharedPreferences;
     String sessionUserID, sessionUser, appSwitch;
+    private  Intent customer_intent, service_intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        txtSingup = (TextView) findViewById(R.id.txtSingup);
+        txtSingup = findViewById(R.id.txtSingup);
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
 
@@ -46,26 +47,27 @@ public class LoginActivity extends AppCompatActivity {
         appSwitch = sharedPreferences.getString("APP_TYPE", null);
 
         System.out.println("======APP TYPE==========");
-        System.out.println(appSwitch);
         System.out.println("======Session status ==========");
+        System.out.println(appSwitch);
         System.out.println("sessionUserID-" + sessionUserID);
         System.out.println("sessionUser-" + sessionUser);
 
+        customer_intent = new Intent(LoginActivity.this, LandingPageActivity.class);
+        service_intent = new Intent(LoginActivity.this, LandingPage2Activity.class);
+
+
+
         if (((sessionUserID != null) || (sessionUser != null))){
-            if (appSwitch =="Service"){
-                Intent intent = new Intent(LoginActivity.this, LandingPage2Activity.class);
-                startActivity(intent);
-                finish();
+        if (appSwitch.equals("Service")){
+            finish();
+            startActivity(service_intent);
+        }
+        if(appSwitch.equals("Customer")){
+            finish();
+            startActivity(customer_intent);
+            System.out.println("++++++++CUSTOMER++++++");
 
-            }
-
-            if(appSwitch=="Customer"){
-                Intent intent = new Intent(LoginActivity.this, LandingPageActivity.class);
-                startActivity(intent);
-                finish();
-
-            }
-
+        }
         }
 
 
@@ -123,8 +125,6 @@ public class LoginActivity extends AppCompatActivity {
                         UserModel userModel = childSnapshot.getValue(UserModel.class);
 
                         if (userModel.getUsername().equals(username) && userModel.getPassword().equals(password)) {
-                            Intent customer_intent = new Intent(LoginActivity.this, LandingPageActivity.class);
-                            Intent service_intent = new Intent(LoginActivity.this, LandingPage2Activity.class);
                             //create session
                             editor.putString("USER_ID", userModel.getUserId());
                             editor.putString("USER", userModel.getUsername());
@@ -132,13 +132,13 @@ public class LoginActivity extends AppCompatActivity {
 
                             System.out.println(userModel.getType());
                             if (userModel.getType().equals("Customer")) {
-                                editor.putString("APP_TYPE", "Customer");
+                                editor.putString("APP_TYPE", userModel.getType());
                                 editor.commit();
                                 startActivity(customer_intent);
                                 finish();
 
                             }else if(userModel.getType().equals("Service")){
-                                editor.putString("APP_TYPE", "Service");
+                                editor.putString("APP_TYPE", userModel.getType());
                                 editor.commit();
                                 startActivity(service_intent);
                                 finish();
@@ -160,6 +160,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+
+
+
+
 }
 
 

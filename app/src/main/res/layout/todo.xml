@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add Todo"
+                android:textColor="@color/white"
                 android:textSize="12pt" />
 
             <LinearLayout
@@ -33,7 +34,6 @@
                 android:layout_height="match_parent"
                 android:divider="@drawable/divider"
                 android:orientation="vertical"
-                android:padding="10dp"
                 android:showDividers="middle"
                 tools:layout_editor_absoluteX="18dp"
                 tools:layout_editor_absoluteY="656dp">
