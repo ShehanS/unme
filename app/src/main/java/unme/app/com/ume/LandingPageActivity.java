@@ -63,8 +63,8 @@ public class LandingPageActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.profile_alert_box, null);
         builder.setView(view);
-        btnLogOut = (ImageButton) view.findViewById(R.id.btnLogout);
-        btnEditProfile = (ImageButton) view.findViewById(R.id.btnProEdit);
+        btnLogOut = view.findViewById(R.id.btnLogout);
+        btnEditProfile = view.findViewById(R.id.btnProEdit);
 
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override

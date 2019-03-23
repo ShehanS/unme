@@ -57,6 +57,8 @@ public class EditUserActivity extends AppCompatActivity {
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //Load data to the UserModel
+
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                         UserModel userModel = childSnapshot.getValue(UserModel.class);
@@ -85,6 +87,7 @@ public class EditUserActivity extends AppCompatActivity {
 
 
     public void UpdateUser() {
+        //Update user
         String UserName, Password, FirstName, LastName, Contact, Email, WebAddress, UserType;
         USER_TYPE = "Client";
         UserName = txtUserName.getText().toString().trim();

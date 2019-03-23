@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,15 +45,15 @@ import unme.app.com.ume.model.Todo;
 public class TodoList extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private String sessionUser, sessionUserID;
-    private Button btnAddTask, btnSaveTask;
+    private Button btnAddTask, btnSaveTask, btnDelete;
     private EditText taskName, task, editTaskName, editTask, editDate;
     private CheckedTextView checkedTextView;
     private DatabaseReference mDatabase;
     private ListView listView;
-    private TextView txtTaskName, txtTask, txtTaskdate;
-    private String selected;
+        private String selected;
     public static String LOG_APP = "[ToDo ] : ";
     ArrayList<String> list = new ArrayList<>();
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,8 @@ public class TodoList extends AppCompatActivity {
             finish();
         }
         btnAddTask.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
                 addTodo();
@@ -103,11 +106,13 @@ public class TodoList extends AppCompatActivity {
         task = view.findViewById(R.id.txtTask);
         checkedTextView = view.findViewById(R.id.taskStatus);
         mDatabase = FirebaseDatabase.getInstance().getReference("todo");
-
+        final AlertDialog alert = builder.create();
+        alert.show();
 
         btnSaveTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Random random = new Random();
                 String key = String.format("%08d", random.nextInt(10000));
                 String MyTaskName, MyTask;
@@ -117,21 +122,42 @@ public class TodoList extends AppCompatActivity {
                 MyTaskName = taskName.getText().toString();
                 MyTask = task.getText().toString();
 
+
+                if (TextUtils.isEmpty(MyTaskName)) {
+                    Toast.makeText(getApplicationContext(), "Enter your task name !", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(MyTask)) {
+                    Toast.makeText(getApplicationContext(), "Enter your task !", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+
                 Todo todo = new Todo(key, sessionUserID, MyTaskName, MyTask, "Ongoing", currentDate);
                 mDatabase.child(sessionUserID).child(key).setValue(todo);
+
+
+
+                    Toast.makeText(getApplicationContext(), "Add task !", Toast.LENGTH_SHORT).show();
+                adapter.clear();
+                alert.dismiss();
+
+
 
             }
         });
 
 
-        AlertDialog alert = builder.create();
-        alert.show();
+
     }
 
 
     public void getData() {
+
         mDatabase = FirebaseDatabase.getInstance().getReference("todo").child(sessionUserID);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, list);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, list);
         listView.setAdapter(adapter);
         mDatabase.orderByChild(sessionUserID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -160,6 +186,7 @@ public class TodoList extends AppCompatActivity {
         editTaskName = view.findViewById(R.id.editTaskName);
         editTask = view.findViewById(R.id.editTask);
         editDate = view.findViewById(R.id.editDate);
+        btnDelete = view.findViewById(R.id.btnDelete);
         builder.setView(view);
 
 
@@ -172,7 +199,7 @@ public class TodoList extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     Todo todo = childSnapshot.getValue(Todo.class);
-                    System.out.println("++++++++++++++++++++++++++++++MM");
+
 
                     editTaskName.setText(todo.getTaskName());
                     editTask.setText(todo.getTask());
@@ -187,6 +214,17 @@ public class TodoList extends AppCompatActivity {
                 System.out.println(databaseError.getMessage());
             }
         });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDatabase = FirebaseDatabase.getInstance().getReference("todo").child(sessionUserID).child(selected);
+                 mDatabase.removeValue();
+
+            }
+        });
+
+
 
         AlertDialog alert = builder.create();
         alert.show();

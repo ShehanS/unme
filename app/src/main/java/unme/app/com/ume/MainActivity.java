@@ -1,5 +1,6 @@
 package unme.app.com.ume;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,10 +26,10 @@ public static String LOG_APP = "U&ME : ";
     private Spinner userType;
 private Button btnSave;
 private DatabaseReference mDatabase;
-    private EditText txtWebAddress, txtLastName, txtFirstName, txtUserName, txtSurename, txtPhone, txtEmail, txtAddress, txtUsername, txtPassword, txtUserID;
+    private EditText txtWebAddress, txtLastName, txtFirstName, txtUserName, txtPhone, txtEmail, txtPassword;
 
 
-private FirebaseAuth.AuthStateListener  authStateListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +37,7 @@ private FirebaseAuth.AuthStateListener  authStateListener;
         Random random = new Random();
         final String user_uuid =  String.format("%04d", random.nextInt(10000));
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        txtUserID = (EditText) findViewById(R.id.userID);
+
         txtUserName = (EditText) findViewById(R.id.txtUsername);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
         txtFirstName = (EditText) findViewById(R.id.txtFirstName);
@@ -46,7 +47,7 @@ private FirebaseAuth.AuthStateListener  authStateListener;
         txtWebAddress = (EditText) findViewById(R.id.txtWeb);
         userType = (Spinner) findViewById(R.id.select1);
         btnSave = (Button) findViewById(R.id.btnSave);
-        txtUserID.setText(user_uuid);
+
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.select1, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userType.setAdapter(adapter1);
@@ -58,7 +59,7 @@ private FirebaseAuth.AuthStateListener  authStateListener;
 
                 String UserID, UserName, Password, FirstName, LastName, Contact, Email, WebAddress, UserType;
 
-                UserID = txtUserID.getText().toString().trim();
+                UserID = user_uuid;
                 UserName = txtUserName.getText().toString().trim();
                 Password = txtPassword.getText().toString().trim();
                 FirstName = txtFirstName.getText().toString().trim();
@@ -103,6 +104,8 @@ private FirebaseAuth.AuthStateListener  authStateListener;
                 UserModel userModel = new UserModel(UserID, UserType, UserName, Password, FirstName, LastName, Email, Contact, WebAddress);
                 mDatabase.child("users").child(user_uuid).setValue(userModel);
                 Toast.makeText(MainActivity.this, "Create Profile !", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
 
 
             }

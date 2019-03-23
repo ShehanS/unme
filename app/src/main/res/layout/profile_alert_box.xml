@@ -5,44 +5,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@color/colorPrimary"
-            android:padding="10dp"
-            android:text="Profile Setting"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp"
-            app:fontFamily="sans-serif" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="20dp">
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
 
-            <ImageButton
-                android:id="@+id/btnLogout"
+            <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/user" />
+                android:layout_margin="10dp"
+                android:background="@color/colorPrimary"
+                android:padding="10dp"
+                android:text="Profile Setting"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
+                app:fontFamily="sans-serif" />
 
-            <ImageButton
-                android:id="@+id/btnProEdit"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/user" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="74dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btnProEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:background="@drawable/profile_button"
+                        android:src="@mipmap/login" />
+
+                    <TextView
+                        android:id="@+id/logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10pt"
+                        android:text="Edit Me" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btnLogout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/profile_button"
+                        app:srcCompat="@mipmap/edituser" />
+
+                    <TextView
+                        android:id="@+id/Logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10pt"
+                        android:text="Logout" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

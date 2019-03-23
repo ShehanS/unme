@@ -147,8 +147,8 @@
         android:layout_width="wrap_content"
         android:layout_height="680dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="62dp">
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="111dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -163,7 +163,7 @@
 
             <EditText
                 android:id="@+id/txtEvent"
-                android:layout_width="wrap_content"
+                android:layout_width="193dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/inputbox"
                 android:ems="10"
@@ -198,43 +198,6 @@
             tools:layout_editor_absoluteY="62dp">
 
 
-            <Button
-                android:id="@+id/btnAddEvent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:padding="18dp"
-                android:text="Save"
-                android:textColor="@color/white"
-
-                />
-
-            <Button
-                android:id="@+id/btnStart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:padding="18dp"
-                android:text="Start"
-                android:textColor="@color/white"
-
-                />
-
-            <Button
-                android:id="@+id/btnStop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:padding="18dp"
-                android:text="Stop"
-                android:textColor="@color/white"
-
-                />
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -244,23 +207,24 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/My_Event"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12pt"
                     android:padding="6pt"
+                    android:text="My Event"
                     android:textColor="@color/white"
-                    android:text="My Event" />
+                    android:textSize="12pt" />
 
                 <TextView
                     android:id="@+id/txtEventName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="6pt"
+                    android:layout_marginLeft="5dp"
+                    android:padding="3dp"
                     android:text="Event Name"
                     android:textColor="@color/white"
                     android:textSize="10pt" />
@@ -269,19 +233,24 @@
                     android:id="@+id/txtEventTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="6pt"
+                    android:layout_marginLeft="5dp"
+                    android:padding="3dp"
                     android:text="Event Time"
                     android:textColor="@color/white"
                     android:textSize="10pt" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/btnAddEvent"
                     android:layout_width="324dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20pt"
+                    android:layout_marginTop="60dp"
+                    android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="Delete" />
+                    android:padding="18dp"
+                    android:text="Save"
+
+                    android:textColor="@color/white" />
 
             </LinearLayout>
         </LinearLayout>

@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         final String username, password;
         username = txtUsername.getText().toString();
         password = txtPassword.getText().toString();
-
+//check input box value
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(getApplicationContext(), "Please enter username!", Toast.LENGTH_SHORT).show();
             return;

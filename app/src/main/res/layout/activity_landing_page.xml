@@ -28,7 +28,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                >
 
                 <ImageButton
                     android:id="@+id/btnProfile"
@@ -60,21 +62,30 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                >
 
                 <ImageButton
                     android:id="@+id/btnCountDown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="30dp"
-                    app:srcCompat="@mipmap/cowndown" />
+                    app:srcCompat="@mipmap/countdown" />
 
                 <ImageButton
                     android:id="@+id/btnTodo"
-                    android:layout_width="92dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="30dp"
                     app:srcCompat="@mipmap/todo" />
+
+                <ImageButton
+                    android:id="@+id/btnGust"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="30dp"
+                    app:srcCompat="@mipmap/gust" />
             </TableRow>
 
             <TableRow

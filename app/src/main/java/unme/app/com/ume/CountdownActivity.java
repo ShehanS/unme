@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,19 +62,19 @@ public class CountdownActivity extends AppCompatActivity {
     private EditText inputEventName;
     public static String LOG_APP = "[CountDown ] : ";
     private Countdown countdown;
-    private long timeMils;
+    private long timeMils = 0;
+    private String eventName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countdown);
 
-
+    //Get session data
         sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE);
         sessionUserID = sharedPreferences.getString("USER_ID", null);
         sessionUser = sharedPreferences.getString("USER", null);
 
-        btnStart = findViewById(R.id.btnStart);
-        btnStop = findViewById(R.id.btnStop);
+        //Get xml components
         txtEventName = findViewById(R.id.txtEventName);
         txtEventTime = findViewById(R.id.txtEventTime);
         inputEventName = findViewById(R.id.txtEvent);
@@ -82,12 +83,28 @@ public class CountdownActivity extends AppCompatActivity {
         btnAddEvent = findViewById(R.id.btnAddEvent);
         mDatabase = FirebaseDatabase.getInstance().getReference("event");
         getData();
+
+        //Create countdown
         btnAddEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                eventName = inputEventName.getText().toString();
+
+                if (TextUtils.isEmpty(eventName)) {
+                    Toast.makeText(getApplicationContext(), "Please enter event name!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (eventMilis.equals(0)) {
+                    Toast.makeText(getApplicationContext(), "Please pick time !", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //Refresh data, save and start timer
                 getData();
                 countdown = new Countdown(sessionUserID,inputEventName.getText().toString(), eventMilis);
                 mDatabase.child(sessionUserID).setValue(countdown);
+                countDownStart();
 
             }
         });
@@ -98,9 +115,6 @@ public class CountdownActivity extends AppCompatActivity {
         tv_minute = findViewById(R.id.tv_minute);
         tv_second = findViewById(R.id.tv_second);
 
-
-
-
         if ((sessionUser == null) || (sessionUser == null)) {
             Intent intent = new Intent(CountdownActivity.this, LoginActivity.class);
             startActivity(intent);
@@ -110,16 +124,7 @@ public class CountdownActivity extends AppCompatActivity {
         countDownStart();
 
 
-
-btnStart.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        System.out.println("Start countdown");
-        countDownStart();
-      }
-});
-
-        btnShowDateTime.setOnClickListener(new View.OnClickListener() {
+       btnShowDateTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDateTime();
@@ -130,7 +135,7 @@ btnStart.setOnClickListener(new View.OnClickListener() {
 
     }
 
-
+//Show alert
     public void showDateTime() {
         final View dialogView = View.inflate(this, R.layout.date_time, null);
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -205,7 +210,7 @@ btnStart.setOnClickListener(new View.OnClickListener() {
 
 
 
-
+//Get data from firebase using session user id
     public void getData(){
         Query query = mDatabase.orderByChild("userId").equalTo(sessionUserID);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -213,15 +218,14 @@ btnStart.setOnClickListener(new View.OnClickListener() {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     Countdown countdown = childSnapshot.getValue(Countdown.class);
-                    txtEventName.setText(countdown.getEvent_name());
+                    txtEventName.setText("Event Name: "+countdown.getEvent_name());
                     timeMils = countdown.getEvent_time();
                     SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTimeInMillis(timeMils);
                     EVENT_DATE_TIME = formatter.format(calendar.getTime());
-                    txtEventTime.setText(EVENT_DATE_TIME);
-                    //return formatter.format(calendar.getTime());
-                    System.out.println("Event time "+EVENT_DATE_TIME);
+                    txtEventTime.setText("Event Time: "+EVENT_DATE_TIME);
+
 
 
 
