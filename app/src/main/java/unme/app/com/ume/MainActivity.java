@@ -60,13 +60,13 @@ private DatabaseReference mDatabase;
                 String UserID, UserName, Password, FirstName, LastName, Contact, Email, WebAddress, UserType;
 
                 UserID = user_uuid;
-                UserName = txtUserName.getText().toString().trim();
-                Password = txtPassword.getText().toString().trim();
-                FirstName = txtFirstName.getText().toString().trim();
-                LastName = txtLastName.getText().toString().trim();
-                Contact = txtPhone.getText().toString().trim();
-                Email = txtEmail.getText().toString().trim();
-                WebAddress = txtWebAddress.getText().toString().trim();
+                UserName = txtUserName.getEditableText().toString().trim();
+                Password = txtPassword.getEditableText().toString().trim();
+                FirstName = txtFirstName.getEditableText().toString().trim();
+                LastName = txtLastName.getEditableText().toString().trim();
+                Contact = txtPhone.getEditableText().toString().trim();
+                Email = txtEmail.getEditableText().toString().trim();
+                WebAddress = txtWebAddress.getEditableText().toString().trim();
                 UserType = userType.getSelectedItem().toString();
 
 
@@ -79,6 +79,13 @@ private DatabaseReference mDatabase;
                     Toast.makeText(getApplicationContext(), "Enter your Password !", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+
+                if (Password.length()<6) {
+                    Toast.makeText(getApplicationContext(), "Password is short !", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
                 if (TextUtils.isEmpty(FirstName)) {
                     Toast.makeText(getApplicationContext(), "Enter your First name !", Toast.LENGTH_SHORT).show();
@@ -95,8 +102,22 @@ private DatabaseReference mDatabase;
                     return;
                 }
 
+                if (Contact.length()<10){
+                    Toast.makeText(getApplicationContext(), "Invalid number !", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+
                 if (TextUtils.isEmpty(Email)) {
                     Toast.makeText(getApplicationContext(), "Enter Email address !", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                if (Email.matches(emailPattern)) {
+                }else{
+                    Toast.makeText(getApplicationContext(),"Invalid email address !", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
