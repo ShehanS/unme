@@ -56,7 +56,7 @@ public class CountdownActivity extends AppCompatActivity {
     private TextView tv_days, tv_hour, tv_minute, tv_second, txtEventName, txtEventTime;
     private Handler handler = new Handler();
     private Runnable runnable;
-    private Button btnStart, btnStop, btnShowDateTime, btnAddEvent;
+    private Button btnShowDateTime, btnAddEvent;
     private DatabaseReference mDatabase;
     private SharedPreferences sharedPreferences;
     private EditText inputEventName;
@@ -82,6 +82,7 @@ public class CountdownActivity extends AppCompatActivity {
         btnShowDateTime = findViewById(R.id.btnShowDateTime);
         btnAddEvent = findViewById(R.id.btnAddEvent);
         mDatabase = FirebaseDatabase.getInstance().getReference("event");
+        // Load database data
         getData();
 
         //Create countdown
@@ -89,7 +90,7 @@ public class CountdownActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 eventName = inputEventName.getText().toString();
-
+            //check inputs values
                 if (TextUtils.isEmpty(eventName)) {
                     Toast.makeText(getApplicationContext(), "Please enter event name!", Toast.LENGTH_SHORT).show();
                     return;
@@ -152,8 +153,6 @@ public class CountdownActivity extends AppCompatActivity {
                         datePicker.getDayOfMonth(),
                         timePicker.getCurrentHour(),
                         timePicker.getCurrentMinute());
-
-
                eventMilis = calendar.getTimeInMillis();
                 alertDialog.dismiss();
 
@@ -168,7 +167,6 @@ public class CountdownActivity extends AppCompatActivity {
 
 
     private void countDownStart() {
-
         runnable = new Runnable() {
             @Override
             public void run() {
@@ -218,19 +216,15 @@ public class CountdownActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     Countdown countdown = childSnapshot.getValue(Countdown.class);
-                    txtEventName.setText("Event Name: "+countdown.getEvent_name());
-                    timeMils = countdown.getEvent_time();
+                    txtEventName.setText("Event Name: "+countdown.getEvent_name()); //get event name in the database
+                    timeMils = countdown.getEvent_time(); //get event name  in the database
                     SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTimeInMillis(timeMils);
                     EVENT_DATE_TIME = formatter.format(calendar.getTime());
                     txtEventTime.setText("Event Time: "+EVENT_DATE_TIME);
 
-
-
-
-
-                }
+               }
             }
 
             @Override

@@ -54,17 +54,17 @@ public class TodoList extends AppCompatActivity {
     private ListView listView;
     private String selected;
     public static String LOG_APP = "[ToDo ] : ";
-    ArrayList<String> list = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    ArrayList<String> list = new ArrayList<>(); //create array list
+    ArrayAdapter<String> adapter; //create array adapter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_list);
 
-        sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE);
-        sessionUserID = sharedPreferences.getString("USER_ID", null);
-        sessionUser = sharedPreferences.getString("USER", null);
+        sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE); //session save name
+        sessionUserID = sharedPreferences.getString("USER_ID", null);//session save name
+        sessionUser = sharedPreferences.getString("USER", null);//session save key username
         btnAddTask = findViewById(R.id.btnAddTask);
         listView = findViewById(R.id.listView);
 
@@ -73,14 +73,14 @@ public class TodoList extends AppCompatActivity {
         getData();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selected = (String) parent.getItemAtPosition(position);
-                alertModal();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { //listen list view position
+                selected = (String) parent.getItemAtPosition(position); //get position value
+                alertModal(); //show selected value data. selected value is taskName
 
             }
         });
 
-        if ((sessionUser == null) || (sessionUser == null)) {
+        if ((sessionUser == null) || (sessionUser == null)) { //check session
             Intent intent = new Intent(TodoList.this, LoginActivity.class);
             startActivity(intent);
             finish();
@@ -97,6 +97,7 @@ public class TodoList extends AppCompatActivity {
 
 
     public void addTodo() {
+        //show alert
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.todo, null);
@@ -236,7 +237,7 @@ public class TodoList extends AppCompatActivity {
                         System.out.println(databaseError.getMessage());
                     }
                 });
-
+// Show remove task
         Toast.makeText(getApplicationContext(),"Removed task !", Toast.LENGTH_LONG).show();
         alert.dismiss();
 
@@ -263,7 +264,7 @@ btnUpdate.setOnClickListener(new View.OnClickListener() {
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+               for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){ // database updte by edit text box values
                    dataSnapshot1.getRef().child("taskName").setValue(editTaskName.getEditableText().toString());
                    dataSnapshot1.getRef().child("task").setValue(editTask.getEditableText().toString());
                    dataSnapshot1.getRef().child("date").setValue(editDate.getEditableText().toString());
@@ -277,7 +278,7 @@ btnUpdate.setOnClickListener(new View.OnClickListener() {
                 System.out.println(databaseError.getMessage());
             }
         });
-
+// show update message
 Toast.makeText(getApplicationContext(), "Updated !",Toast.LENGTH_LONG).show();
 
             }

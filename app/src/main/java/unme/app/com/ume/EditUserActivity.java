@@ -39,15 +39,15 @@ public class EditUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_user);
         USER_ID = getIntent().getStringExtra("USER_ID");
 
-        txtUserName = (EditText) findViewById(R.id.txtUsername);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
-        txtFirstName = (EditText) findViewById(R.id.txtFirstName);
-        txtLastName = (EditText) findViewById(R.id.txtLastName);
-        txtPhone = (EditText) findViewById(R.id.txtPhone);
-        txtEmail = (EditText) findViewById(R.id.txtEmail);
-        txtWebAddress = (EditText) findViewById(R.id.txtWeb);
-        userType = (Spinner) findViewById(R.id.select1);
-        btnSave = (Button) findViewById(R.id.btnSave);
+        txtUserName = findViewById(R.id.txtUsername);
+        txtPassword = findViewById(R.id.txtPassword);
+        txtFirstName = findViewById(R.id.txtFirstName);
+        txtLastName = findViewById(R.id.txtLastName);
+        txtPhone = findViewById(R.id.txtPhone);
+        txtEmail = findViewById(R.id.txtEmail);
+        txtWebAddress = findViewById(R.id.txtWeb);
+        userType =findViewById(R.id.select1);
+        btnSave =  findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,20 +56,20 @@ public class EditUserActivity extends AppCompatActivity {
         });
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
 
-        sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE);
-        sessionUserID = sharedPreferences.getString("USER_ID", null);
-        sessionUser = sharedPreferences.getString("USER", null);
+        sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE); //session save name
+        sessionUserID = sharedPreferences.getString("USER_ID", null);//session save key user id
+        sessionUser = sharedPreferences.getString("USER", null);//session save key username
 
-        Query query = mDatabase.orderByKey().equalTo(USER_ID);
+        Query query = mDatabase.orderByKey().equalTo(USER_ID); //search user in database using user id. it has been already saved when we login there for we can call get anywhere
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //Load data to the UserModel
 
                 if (dataSnapshot.exists()) {
-                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                        UserModel userModel = childSnapshot.getValue(UserModel.class);
-                        txtUserName.setText(userModel.getUsername());
+                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) { //get search result
+                        UserModel userModel = childSnapshot.getValue(UserModel.class); //assign result to the usermodel
+                        txtUserName.setText(userModel.getUsername()); // set usermodel value to the editable text boxes
                         txtPassword.setText(userModel.getPassword());
                         txtFirstName.setText(userModel.getFirstname());
                         txtLastName.setText((userModel.getLastname()));
@@ -84,7 +84,7 @@ public class EditUserActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) { //check database error
                 Log.d(LOG_APP, "onCalled", databaseError.toException());
                 Toast.makeText(EditUserActivity.this, "Database error !", Toast.LENGTH_SHORT).show();
             }
@@ -95,6 +95,7 @@ public class EditUserActivity extends AppCompatActivity {
 
     public void UpdateUser() {
         //Update user
+        // assign editable texbox value into the variable
         System.out.println("USER ID in EDIT "+sessionUserID);
         String UserName, Password, FirstName, LastName, Contact, Email, WebAddress;
         UserName = txtUserName.getText().toString().trim();
@@ -104,7 +105,7 @@ public class EditUserActivity extends AppCompatActivity {
         Contact = txtPhone.getText().toString().trim();
         Email = txtEmail.getText().toString().trim();
         WebAddress = txtWebAddress.getText().toString().trim();
-
+        //update database values
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(USER_ID);
         Map<String, Object> updates = new HashMap<String, Object>();
         updates.put("contact", Contact);
@@ -116,8 +117,10 @@ public class EditUserActivity extends AppCompatActivity {
         updates.put("username", UserName);
         updates.put("web", WebAddress);
 
-        mDatabase.updateChildren(updates);
+        mDatabase.updateChildren(updates); //force to the update
+        //show message
         Toast.makeText(getApplicationContext(), "Updated !", Toast.LENGTH_SHORT).show();
+        //close edit user window
         finish();
 
     }

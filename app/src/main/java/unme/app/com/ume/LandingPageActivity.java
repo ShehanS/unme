@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 
 
 public class LandingPageActivity extends AppCompatActivity {
+    //create object from xml
     private TextView userLogin;
     private SharedPreferences sharedPreferences;
     String sessionUserID, sessionUser, appSwitch;
@@ -24,25 +25,25 @@ public class LandingPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
         //Get login user id
-        userLogin = (TextView) findViewById(R.id.txtUsername);
-        btnProfile = (ImageButton) findViewById(R.id.btnProfile);
-        btnCountDown = (ImageButton) findViewById(R.id.btnCountDown);
-        btnToDo = (ImageButton) findViewById(R.id.btnTodo);
-        sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE);
-        sessionUserID = sharedPreferences.getString("USER_ID", null);
-        sessionUser = sharedPreferences.getString("USER", null);
-        appSwitch = sharedPreferences.getString("APP_TYPE", null);
+        userLogin = findViewById(R.id.txtUsername);
+        btnProfile = findViewById(R.id.btnProfile);
+        btnCountDown = findViewById(R.id.btnCountDown);
+        btnToDo =  findViewById(R.id.btnTodo);
+        sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE); //session save name
+        sessionUserID = sharedPreferences.getString("USER_ID", null);//session save key user id
+        sessionUser = sharedPreferences.getString("USER", null); //session save key username
 
 
-        userLogin.setText("Hi.." + sessionUser);
+        userLogin.setText("Hi.." + sessionUser); //Landing page header
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertModal();
+                alertModal();//call profile edit popup
             }
         });
         btnToDo.setOnClickListener(new View.OnClickListener() {
             @Override
+            // call todo list page
             public void onClick(View v) {
                 Intent intent = new Intent(LandingPageActivity.this, TodoList.class);
                 startActivity(intent);
@@ -51,7 +52,7 @@ public class LandingPageActivity extends AppCompatActivity {
         btnCountDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // call countdown page
                 Intent intent = new Intent(LandingPageActivity.this, CountdownActivity.class);
                 startActivity(intent);
             }
@@ -59,6 +60,7 @@ public class LandingPageActivity extends AppCompatActivity {
     }
 
     public void alertModal() {
+        //Create alert
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.profile_alert_box, null);
@@ -88,6 +90,7 @@ public class LandingPageActivity extends AppCompatActivity {
 
 
     public void Logout() {
+        //Clear session data and logout
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.commit();
