@@ -36,6 +36,8 @@ import java.util.ArrayList;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -45,7 +47,7 @@ import unme.app.com.ume.model.Todo;
 public class TodoList extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private String sessionUser, sessionUserID;
-    private Button btnAddTask, btnSaveTask, btnDelete;
+    private Button btnAddTask, btnSaveTask, btnDelete, btnUpdate;
     private EditText taskName, task, editTaskName, editTask, editDate;
     private CheckedTextView checkedTextView;
     private DatabaseReference mDatabase;
@@ -73,7 +75,6 @@ public class TodoList extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selected = (String) parent.getItemAtPosition(position);
-                System.out.println("Press alert");
                 alertModal();
 
             }
@@ -96,7 +97,6 @@ public class TodoList extends AppCompatActivity {
 
 
     public void addTodo() {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.todo, null);
@@ -112,7 +112,6 @@ public class TodoList extends AppCompatActivity {
         btnSaveTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Random random = new Random();
                 String key = String.format("%08d", random.nextInt(10000));
                 String MyTaskName, MyTask;
@@ -155,7 +154,6 @@ public class TodoList extends AppCompatActivity {
 
 
     public void getData() {
-
         mDatabase = FirebaseDatabase.getInstance().getReference("todo").child(sessionUserID);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, list);
         listView.setAdapter(adapter);
@@ -187,11 +185,12 @@ public class TodoList extends AppCompatActivity {
         editTask = view.findViewById(R.id.editTask);
         editDate = view.findViewById(R.id.editDate);
         btnDelete = view.findViewById(R.id.btnDelete);
+        btnUpdate = view.findViewById(R.id.btnUpdate);
         builder.setView(view);
         final AlertDialog alert = builder.create();
         alert.show();
 
-        System.out.println("selected-"+selected);
+
         mDatabase = FirebaseDatabase.getInstance().getReference("todo").child(sessionUserID);
 
         Query query = mDatabase.orderByChild("taskName").equalTo(selected);
@@ -245,11 +244,43 @@ public class TodoList extends AppCompatActivity {
 
             }
         });
-
+btnUpdate.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        updateTask();
+    }
+});
 
 
 
     }
+
+
+
+    public void updateTask(){
+        mDatabase = FirebaseDatabase.getInstance().getReference("todo").child(sessionUserID);
+        Query query = mDatabase.orderByChild("taskName").equalTo(selected);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                   dataSnapshot1.getRef().child("taskName").setValue(editTaskName.getEditableText().toString());
+                   dataSnapshot1.getRef().child("task").setValue(editTask.getEditableText().toString());
+                   dataSnapshot1.getRef().child("date").setValue(editDate.getEditableText().toString());
+                   adapter.clear();
+                   adapter.notifyDataSetChanged();
+               }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println(databaseError.getMessage());
+            }
+        });
+
+Toast.makeText(getApplicationContext(), "Updated !",Toast.LENGTH_LONG).show();
+
+            }
 
 }
 

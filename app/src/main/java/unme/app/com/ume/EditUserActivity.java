@@ -96,7 +96,7 @@ public class EditUserActivity extends AppCompatActivity {
     public void UpdateUser() {
         //Update user
         System.out.println("USER ID in EDIT "+sessionUserID);
-        String UserName, Password, FirstName, LastName, Contact, Email, WebAddress, UserType;
+        String UserName, Password, FirstName, LastName, Contact, Email, WebAddress;
         UserName = txtUserName.getText().toString().trim();
         Password = txtPassword.getText().toString().trim();
         FirstName = txtFirstName.getText().toString().trim();

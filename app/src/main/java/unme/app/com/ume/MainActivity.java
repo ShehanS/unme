@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 public static String LOG_APP = "U&ME : ";
-    private Spinner userType;
+private Spinner userType;
 private Button btnSave;
 private DatabaseReference mDatabase;
     private EditText txtWebAddress, txtLastName, txtFirstName, txtUserName, txtPhone, txtEmail, txtPassword;
