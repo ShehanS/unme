@@ -105,7 +105,9 @@ private DatabaseReference mDatabase;
                 mDatabase.child("users").child(user_uuid).setValue(userModel);
                 Toast.makeText(MainActivity.this, "Create Profile !", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                finish();
                 startActivity(intent);
+
 
 
             }

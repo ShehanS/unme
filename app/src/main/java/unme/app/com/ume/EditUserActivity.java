@@ -117,8 +117,8 @@ public class EditUserActivity extends AppCompatActivity {
         updates.put("web", WebAddress);
 
         mDatabase.updateChildren(updates);
-
         Toast.makeText(getApplicationContext(), "Updated !", Toast.LENGTH_SHORT).show();
+        finish();
 
     }
 }
