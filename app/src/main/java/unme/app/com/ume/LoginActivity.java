@@ -31,20 +31,22 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private SharedPreferences sharedPreferences;
     String sessionUserID, sessionUser, appSwitch;
+    //App create app  switch intent(Customer and Service)
     private  Intent customer_intent, service_intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //Create object from the xml
         txtSingup = findViewById(R.id.txtSingup);
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
-
-        sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE);
-        sessionUserID = sharedPreferences.getString("USER_ID", null);
-        sessionUser = sharedPreferences.getString("USER", null);
-        appSwitch = sharedPreferences.getString("APP_TYPE", null);
+        //Create session save keys
+        sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE); //session save name
+        sessionUserID = sharedPreferences.getString("USER_ID", null); //session save key user id
+        sessionUser = sharedPreferences.getString("USER", null);    //session save key username
+        appSwitch = sharedPreferences.getString("APP_TYPE", null);  //session save key app switch (customer or service)
 
         System.out.println("======APP TYPE==========");
         System.out.println("======Session status ==========");
@@ -52,20 +54,20 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println("sessionUserID-" + sessionUserID);
         System.out.println("sessionUser-" + sessionUser);
 
-        customer_intent = new Intent(LoginActivity.this, LandingPageActivity.class);
-        service_intent = new Intent(LoginActivity.this, LandingPage2Activity.class);
+        customer_intent = new Intent(LoginActivity.this, LandingPageActivity.class); //initialize customer intenat
+        service_intent = new Intent(LoginActivity.this, LandingPage2Activity.class); //initialize service intenat
 
 
 
-        if (((sessionUserID != null) || (sessionUser != null))){
-        if (appSwitch.equals("Service")){
+        if (((sessionUserID != null) || (sessionUser != null))){  //check onetime login
+        if (appSwitch.equals("Service")){                         //check appSwitch value
             finish();
-            startActivity(service_intent);
+            startActivity(service_intent);                      //goto service LandingPage2Activity
         }
-        if(appSwitch.equals("Customer")){
+        if(appSwitch.equals("Customer")){                       //goto service LandingPageActivity
             finish();
             startActivity(customer_intent);
-            System.out.println("++++++++CUSTOMER++++++");
+
 
         }
         }
@@ -74,14 +76,14 @@ public class LoginActivity extends AppCompatActivity {
 
         txtSingup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {   //goto singup page  MainActivity
 
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             }
         });
 
-        btnLogin = findViewById(R.id.btnLogin);
+        btnLogin = findViewById(R.id.btnLogin);         //call singin method
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,48 +116,50 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("users");
+        mDatabase = FirebaseDatabase.getInstance().getReference("users");       //Get firebase table path
         Log.d(LOG_APP, "[Check user]");
-        Query query = mDatabase.orderByChild("username").equalTo(username);
+        Query query = mDatabase.orderByChild("username").equalTo(username);          //Check entered username in the User collection
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                if (dataSnapshot.exists()) {// check database availability
+                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) { // check all the data in the database one by one
                         UserModel userModel = childSnapshot.getValue(UserModel.class);
 
-                        if (userModel.getUsername().equals(username) && userModel.getPassword().equals(password)) {
+                        if (userModel.getUsername().equals(username) && userModel.getPassword().equals(password)) {  //set to data usermodel
                             //create session
-                            editor.putString("USER_ID", userModel.getUserId());
-                            editor.putString("USER", userModel.getUsername());
-                            editor.commit();
+                            editor.putString("USER_ID", userModel.getUserId());//assign value for session
+                            editor.putString("USER", userModel.getUsername());//assign value for session
+                            editor.commit(); //save session
 
                             System.out.println(userModel.getType());
                             if (userModel.getType().equals("Customer")) {
-                                editor.putString("APP_TYPE", userModel.getType());
-                                editor.commit();
-                                startActivity(customer_intent);
-                                finish();
+                                editor.putString("APP_TYPE", userModel.getType()); //assign value for session
+                                editor.commit();//save session
+                                startActivity(customer_intent); //start customer intenat
+                                finish();//close login window
 
                             }else if(userModel.getType().equals("Service")){
-                                editor.putString("APP_TYPE", userModel.getType());
-                                editor.commit();
-                                startActivity(service_intent);
-                                finish();
+                                editor.putString("APP_TYPE", userModel.getType());//assign value for session
+                                editor.commit();//save session
+                                startActivity(service_intent);//start service intenat
+                                finish();//close login window
                             }
                         } else {
+                            // if password is wrong show toast
                             Toast.makeText(LoginActivity.this, "Password is wrong !", Toast.LENGTH_LONG).show();
                         }
 
                     }
                 } else {
+                    // if no user in the database show toast
                     Toast.makeText(LoginActivity.this, "Cannot find user !", Toast.LENGTH_LONG).show();
                 }
             }
-
+//show database error
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(LOG_APP, "loadPost:onCancelled", databaseError.toException());
+                System.out.println(databaseError.toException());
             }
         });
 
