@@ -218,8 +218,23 @@ public class TodoList extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatabase = FirebaseDatabase.getInstance().getReference("todo").child(sessionUserID).child(selected);
-                 mDatabase.removeValue();
+
+
+                mDatabase.child("todo").child(sessionUserID).orderByChild("taskName").equalTo(selected).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                            String key = dataSnapshot1.getKey();
+                            System.out.println("Key -------"+key);
+                            dataSnapshot.getRef().removeValue();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
             }
         });
