@@ -2,8 +2,8 @@
     <string name="app_name">U&amp;ME</string>
 
     <string-array name="select1">
-        <item>A customer</item>
-        <item>A service provider</item>
+        <item>Customer</item>
+        <item>Service</item>
 
     </string-array>
 

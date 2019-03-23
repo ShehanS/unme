@@ -50,7 +50,7 @@ public class TodoList extends AppCompatActivity {
     private CheckedTextView checkedTextView;
     private DatabaseReference mDatabase;
     private ListView listView;
-        private String selected;
+    private String selected;
     public static String LOG_APP = "[ToDo ] : ";
     ArrayList<String> list = new ArrayList<>();
     ArrayAdapter<String> adapter;

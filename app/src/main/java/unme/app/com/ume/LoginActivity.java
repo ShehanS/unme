@@ -52,14 +52,14 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println("sessionUser-" + sessionUser);
 
         if (((sessionUserID != null) || (sessionUser != null))){
-            if (appSwitch =="SERVICE"){
+            if (appSwitch =="Service"){
                 Intent intent = new Intent(LoginActivity.this, LandingPage2Activity.class);
                 startActivity(intent);
                 finish();
 
             }
 
-            if(appSwitch=="CUSTOMER"){
+            if(appSwitch=="Customer"){
                 Intent intent = new Intent(LoginActivity.this, LandingPageActivity.class);
                 startActivity(intent);
                 finish();
@@ -129,14 +129,14 @@ public class LoginActivity extends AppCompatActivity {
                             editor.commit();
 
                             System.out.println(userModel.getType());
-                            if (userModel.getType().equals("A customer")) {
-                                editor.putString("APP_TYPE", "CUSTOMER");
+                            if (userModel.getType().equals("Customer")) {
+                                editor.putString("APP_TYPE", "Customer");
                                 editor.commit();
                                 startActivity(customer_intent);
                                 finish();
 
-                            }else if(userModel.getType().equals("A service provider")){
-                                editor.putString("APP_TYPE", "SERVICE");
+                            }else if(userModel.getType().equals("Service")){
+                                editor.putString("APP_TYPE", "Service");
                                 editor.commit();
                                 startActivity(service_intent);
                                 finish();

@@ -29,6 +29,8 @@ public class EditUserActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private Spinner userType;
     private Button btnSave;
+    private SharedPreferences sharedPreferences;
+    private String sessionUser, sessionUserID;
     private EditText txtWebAddress, txtLastName, txtFirstName, txtUserName, txtSurename, txtPhone, txtEmail, txtAddress, txtUsername, txtPassword, txtUserID;
 
     @Override
@@ -53,6 +55,11 @@ public class EditUserActivity extends AppCompatActivity {
             }
         });
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
+
+        sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE);
+        sessionUserID = sharedPreferences.getString("USER_ID", null);
+        sessionUser = sharedPreferences.getString("USER", null);
+
         Query query = mDatabase.orderByKey().equalTo(USER_ID);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -88,8 +95,8 @@ public class EditUserActivity extends AppCompatActivity {
 
     public void UpdateUser() {
         //Update user
+        System.out.println("USER ID in EDIT "+sessionUserID);
         String UserName, Password, FirstName, LastName, Contact, Email, WebAddress, UserType;
-        USER_TYPE = "Client";
         UserName = txtUserName.getText().toString().trim();
         Password = txtPassword.getText().toString().trim();
         FirstName = txtFirstName.getText().toString().trim();
@@ -105,8 +112,7 @@ public class EditUserActivity extends AppCompatActivity {
         updates.put("firstname", FirstName);
         updates.put("lastname", LastName);
         updates.put("password", Password);
-        updates.put("type", USER_TYPE);
-        updates.put("userId", USER_ID);
+        updates.put("userId", sessionUserID);
         updates.put("username", UserName);
         updates.put("web", WebAddress);
 
