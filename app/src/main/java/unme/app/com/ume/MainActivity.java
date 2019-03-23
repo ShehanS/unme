@@ -26,7 +26,7 @@ public static String LOG_APP = "U&ME : ";
 private Spinner userType;
 private Button btnSave;
 private DatabaseReference mDatabase;
-    private EditText txtWebAddress, txtLastName, txtFirstName, txtUserName, txtPhone, txtEmail, txtPassword;
+private EditText txtWebAddress, txtLastName, txtFirstName, txtUserName, txtPhone, txtEmail, txtPassword;
 
 
 
@@ -35,20 +35,23 @@ private DatabaseReference mDatabase;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Random random = new Random();
-        final String user_uuid =  String.format("%04d", random.nextInt(10000));
+        final String user_uuid =  String.format("%04d", random.nextInt(10000)); //create random id for user wise
+        //create object from xml
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        txtUserName = findViewById(R.id.txtUsername);
+        txtPassword = findViewById(R.id.txtPassword);
+        txtFirstName = findViewById(R.id.txtFirstName);
+        txtLastName = findViewById(R.id.txtLastName);
+        txtPhone = findViewById(R.id.txtPhone);
+        txtEmail = findViewById(R.id.txtEmail);
+        txtWebAddress = findViewById(R.id.txtWeb);
+        userType = findViewById(R.id.select1);
+        btnSave = findViewById(R.id.btnSave);
+        //Load user types from string xml file
 
-        txtUserName = (EditText) findViewById(R.id.txtUsername);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
-        txtFirstName = (EditText) findViewById(R.id.txtFirstName);
-        txtLastName = (EditText) findViewById(R.id.txtLastName);
-        txtPhone = (EditText) findViewById(R.id.txtPhone);
-        txtEmail = (EditText) findViewById(R.id.txtEmail);
-        txtWebAddress = (EditText) findViewById(R.id.txtWeb);
-        userType = (Spinner) findViewById(R.id.select1);
-        btnSave = (Button) findViewById(R.id.btnSave);
-
+        //create array adapter and assing to the spinner
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.select1, android.R.layout.simple_spinner_item);
+       //set xml value to the adapter
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userType.setAdapter(adapter1);
 
@@ -56,10 +59,9 @@ private DatabaseReference mDatabase;
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //get edtiable text box value into the variable
                 String UserID, UserName, Password, FirstName, LastName, Contact, Email, WebAddress, UserType;
-
-                UserID = user_uuid;
+                UserID = user_uuid; //assign random value into the user id
                 UserName = txtUserName.getEditableText().toString().trim();
                 Password = txtPassword.getEditableText().toString().trim();
                 FirstName = txtFirstName.getEditableText().toString().trim();
@@ -69,7 +71,7 @@ private DatabaseReference mDatabase;
                 WebAddress = txtWebAddress.getEditableText().toString().trim();
                 UserType = userType.getSelectedItem().toString();
 
-
+                //check empty fields
                 if (TextUtils.isEmpty(UserName)) {
                     Toast.makeText(getApplicationContext(), "Enter your Username !", Toast.LENGTH_SHORT).show();
                     return;
@@ -121,13 +123,13 @@ private DatabaseReference mDatabase;
                     return;
                 }
 
-
+                //set variable value in to the usermodel
                 UserModel userModel = new UserModel(UserID, UserType, UserName, Password, FirstName, LastName, Email, Contact, WebAddress);
-                mDatabase.child("users").child(user_uuid).setValue(userModel);
+                mDatabase.child("users").child(user_uuid).setValue(userModel); //save model into the database
                 Toast.makeText(MainActivity.this, "Create Profile !", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                finish();
-                startActivity(intent);
+                finish(); //close singup page
+                startActivity(intent);//start login form
 
 
 
