@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,9 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -34,14 +31,8 @@ import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-
-
-import unme.app.com.ume.model.Countdown;
 import unme.app.com.ume.model.Todo;
 
 public class TodoList extends AppCompatActivity {

@@ -18,13 +18,14 @@ public class LandingPageActivity extends AppCompatActivity {
     private TextView userLogin;
     private SharedPreferences sharedPreferences;
     String sessionUserID, sessionUser, appSwitch;
-    private ImageButton btnProfile, btnLogOut, btnEditProfile, btnCountDown, btnToDo;
+    private ImageButton btnProfile, btnLogOut, btnEditProfile, btnCountDown, btnToDo, btnGuest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
         //Get login user id
+        btnGuest = findViewById(R.id.btnGust);
         userLogin = findViewById(R.id.txtUsername);
         btnProfile = findViewById(R.id.btnProfile);
         btnCountDown = findViewById(R.id.btnCountDown);
@@ -54,6 +55,15 @@ public class LandingPageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // call countdown page
                 Intent intent = new Intent(LandingPageActivity.this, CountdownActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        btnGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingPageActivity.this, GuestViewActivity.class);
                 startActivity(intent);
             }
         });

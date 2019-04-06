@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   android:background="@drawable/singup"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Add Guest"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:padding="10dp"
+            android:divider="@drawable/divider"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            >
+
+            <EditText
+                android:id="@+id/gustName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/inputbox"
+                android:ems="10"
+                android:hint="Guest Name"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textColor="@color/color1"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/gustContct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/inputbox"
+                android:ems="10"
+                android:hint="Contact"
+                android:inputType="textPostalAddress"
+                android:padding="16dp"
+                android:textColor="@color/color1"
+                android:text="Contact" />
+
+            <EditText
+                android:id="@+id/gustContct2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/inputbox"
+                android:ems="10"
+                android:hint="Guest Count"
+                android:inputType="number"
+                android:padding="16dp"
+                android:textColor="@color/color1"
+                android:text="Guest count" />
+
+            <Button
+                android:id="@+id/button"
+                android:background="@drawable/button"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

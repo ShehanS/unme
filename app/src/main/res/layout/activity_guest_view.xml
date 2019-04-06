@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/singup"
+    tools:context=".GuestViewActivity"
+    tools:layout_editor_absoluteY="25dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="568dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/totGuest"
+
+                android:layout_width="301dp"
+                android:layout_height="wrap_content"
+                android:padding="10pt"
+                android:text="Guests"
+                android:textColor="@color/white"
+                android:textSize="12pt" />
+
+            <Button
+                android:id="@+id/btnAddGuest"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/button"
+                android:text="+"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Total"
+                    android:textColor="@color/white"
+                    android:textSize="8pt" />
+
+                <TextView
+                    android:id="@+id/totalGuest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="8pt" />
+
+                <TextView
+                    android:id="@+id/totalGuest3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Current "
+                    android:textColor="@color/white"
+                    android:textSize="8pt" />
+
+                <TextView
+                    android:id="@+id/currentGuests"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="8pt" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="734dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="427dp"
+                        android:layout_marginBottom="30dp"
+                        android:alwaysDrawnWithCache="true"
+                        android:dividerHeight="1dp"
+                        android:horizontalSpacing="3dp"
+                        android:scrollingCache="true"
+                        android:smoothScrollbar="true"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="3dp" />
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

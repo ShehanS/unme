@@ -28,6 +28,7 @@
         <activity android:name=".LandingPage2Activity" />
         <activity android:name=".CountdownActivity" />
         <activity android:name=".TodoList" />
+        <activity android:name=".GuestViewActivity"></activity>
     </application>
 
 </manifest>
