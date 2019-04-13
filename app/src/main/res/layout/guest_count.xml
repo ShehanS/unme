@@ -34,7 +34,7 @@
             android:textSize="8pt" />
 
         <EditText
-            android:id="@+id/GuestCount"
+            android:id="@+id/guestCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

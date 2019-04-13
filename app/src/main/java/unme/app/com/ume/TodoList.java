@@ -60,7 +60,6 @@ public class TodoList extends AppCompatActivity {
         listView = findViewById(R.id.listView);
 
 
-
         getData();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -125,21 +124,17 @@ public class TodoList extends AppCompatActivity {
                 }
 
 
-
                 Todo todo = new Todo(key, sessionUserID, MyTaskName, MyTask, "Ongoing", currentDate);
                 mDatabase.child(sessionUserID).child(key).setValue(todo);
 
 
-
-                    Toast.makeText(getApplicationContext(), "Add task !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Add task !", Toast.LENGTH_SHORT).show();
                 adapter.clear();
                 alert.dismiss();
 
 
-
             }
         });
-
 
 
     }
@@ -216,7 +211,7 @@ public class TodoList extends AppCompatActivity {
                 query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                             dataSnapshot1.getRef().removeValue();
                             adapter.clear();
                             adapter.notifyDataSetChanged();
@@ -229,52 +224,51 @@ public class TodoList extends AppCompatActivity {
                     }
                 });
 // Show remove task
-        Toast.makeText(getApplicationContext(),"Removed task !", Toast.LENGTH_LONG).show();
-        alert.dismiss();
-
+                Toast.makeText(getApplicationContext(), "Removed task !", Toast.LENGTH_LONG).show();
+                alert.dismiss();
 
 
             }
         });
-btnUpdate.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        updateTask();
-    }
-});
-
-
-
-    }
-
-
-
-    public void updateTask(){
-        mDatabase = FirebaseDatabase.getInstance().getReference("todo").child(sessionUserID);
-        Query query = mDatabase.orderByChild("taskName").equalTo(selected);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){ // database updte by edit text box values
-                   dataSnapshot1.getRef().child("taskName").setValue(editTaskName.getEditableText().toString());
-                   dataSnapshot1.getRef().child("task").setValue(editTask.getEditableText().toString());
-                   dataSnapshot1.getRef().child("date").setValue(editDate.getEditableText().toString());
-                   adapter.clear();
-                   adapter.notifyDataSetChanged();
-               }
-            }
+            public void onClick(View v) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println(databaseError.getMessage());
-            }
-        });
+                    mDatabase = FirebaseDatabase.getInstance().getReference("todo").child(sessionUserID);
+                    Query query = mDatabase.orderByChild("taskName").equalTo(selected);
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) { // database updte by edit text box values
+                                dataSnapshot1.getRef().child("taskName").setValue(editTaskName.getEditableText().toString());
+                                dataSnapshot1.getRef().child("task").setValue(editTask.getEditableText().toString());
+                                dataSnapshot1.getRef().child("date").setValue(editDate.getEditableText().toString());
+                                adapter.clear();
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            System.out.println(databaseError.getMessage());
+                        }
+                    });
 // show update message
-Toast.makeText(getApplicationContext(), "Updated !",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Updated !", Toast.LENGTH_LONG).show();
 
-            }
+                }
 
+
+
+
+        });
+
+
+    }
 }
+
+
+
 
 
 
