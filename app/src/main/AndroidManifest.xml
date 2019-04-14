@@ -28,7 +28,9 @@
         <activity android:name=".LandingPage2Activity" />
         <activity android:name=".CountdownActivity" />
         <activity android:name=".TodoList" />
-        <activity android:name=".GuestViewActivity"></activity>
+        <activity android:name=".GuestViewActivity" />
+        <activity android:name=".AddServiceActivity" />
+        <activity android:name=".MyAllServicesActivity"></activity>
     </application>
 
 </manifest>

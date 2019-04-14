@@ -7,6 +7,11 @@
 
     </string-array>
 
+    <string-array name="category">
+        <item>Photography</item>
+        <item>Floras</item>
+    </string-array>
+
 
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
