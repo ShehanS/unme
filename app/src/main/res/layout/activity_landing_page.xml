@@ -9,98 +9,98 @@
     >
 
     <LinearLayout
-        android:id="@+id/main"
-        android:layout_width="395dp"
-        android:layout_height="678dp"
+    android:id="@+id/main"
+    android:layout_width="395dp"
+    android:layout_height="678dp"
+    android:orientation="vertical"
+    tools:layout_editor_absoluteX="8dp"
+    tools:layout_editor_absoluteY="8dp">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/header"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+
+        >
 
         <LinearLayout
-            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/header"
-            android:orientation="vertical"
-
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
             >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_gravity="center_horizontal"
-                >
+            <ImageButton
+                android:id="@+id/btnProfile"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/profile_button"
+                app:srcCompat="@mipmap/user" />
 
-                <ImageButton
-                    android:id="@+id/btnProfile"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/profile_button"
-                    app:srcCompat="@mipmap/user" />
-
-                <TextView
-                    android:id="@+id/txtUsername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
-                    android:gravity="right"
-                    android:text="Hi..."
-                    android:textSize="14pt" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/txtUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:gravity="right"
+                android:text="Hi..."
+                android:textSize="14pt" />
 
         </LinearLayout>
 
-        <TableLayout
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp">
+
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="30dp">
+            android:layout_gravity="center_horizontal"
+            >
 
-            <TableRow
+            <ImageButton
+                android:id="@+id/btnCountDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                app:srcCompat="@mipmap/countdown" />
+
+            <ImageButton
+                android:id="@+id/btnTodo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                >
+                android:padding="30dp"
+                app:srcCompat="@mipmap/todo" />
 
-                <ImageButton
-                    android:id="@+id/btnCountDown"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="30dp"
-                    app:srcCompat="@mipmap/countdown" />
-
-                <ImageButton
-                    android:id="@+id/btnTodo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="30dp"
-                    app:srcCompat="@mipmap/todo" />
-
-                <ImageButton
-                    android:id="@+id/btnGust"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="30dp"
-                    app:srcCompat="@mipmap/gust" />
-            </TableRow>
-
-            <TableRow
+            <ImageButton
+                android:id="@+id/btnGust"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:padding="30dp"
+                app:srcCompat="@mipmap/gust" />
+        </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </TableLayout>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    </LinearLayout>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
+
+</LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

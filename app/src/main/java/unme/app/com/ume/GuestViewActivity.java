@@ -51,8 +51,9 @@ private int count, totMembers, currentMembers, currentVariance;;
 
 
     private SharedPreferences sharedPreferences;
-    String sessionUserID, sessionUser;
+    private String sessionUserID, sessionUser, selectedItem;
     private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +70,6 @@ private int count, totMembers, currentMembers, currentVariance;;
         GuestVariance = findViewById(R.id.variance);
         CurrentGuests = findViewById(R.id.currentGuests);
         loadData();
-
-
-
-
-
-
 
 
 

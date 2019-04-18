@@ -30,7 +30,10 @@
         <activity android:name=".TodoList" />
         <activity android:name=".GuestViewActivity" />
         <activity android:name=".AddServiceActivity" />
-        <activity android:name=".MyAllServicesActivity"></activity>
+        <activity android:name=".MyAllServicesActivity" />
+        <activity android:name=".EditServiceActivity" />
+        <activity android:name=".SearchServicesActivity" />
+        <activity android:name=".CategoryActivity"></activity>
     </application>
 
 </manifest>
