@@ -33,7 +33,8 @@
         <activity android:name=".MyAllServicesActivity" />
         <activity android:name=".EditServiceActivity" />
         <activity android:name=".SearchServicesActivity" />
-        <activity android:name=".CategoryActivity"></activity>
+        <activity android:name=".CategoryActivity" />
+        <activity android:name=".MyServiceListActivity"></activity>
     </application>
 
 </manifest>

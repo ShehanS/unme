@@ -57,7 +57,7 @@ public class EditServiceActivity extends AppCompatActivity {
         sessionUserID = sharedPreferences.getString("USER_ID", null);//session save key user id
         sessionUser = sharedPreferences.getString("USER", null); //session save key username
         System.out.println(getIntent().getStringExtra("service"));
-        mDatabase = FirebaseDatabase.getInstance().getReference("services").child(sessionUserID);
+        mDatabase = FirebaseDatabase.getInstance().getReference("services").child("service-user").child(sessionUserID);
         mDatabase.orderByChild(sessionUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -100,7 +100,7 @@ btnDelete.setOnClickListener(new View.OnClickListener() {
     }
 
     public void UpdateService() {
-        mDatabase = FirebaseDatabase.getInstance().getReference("services").child(sessionUserID);
+        mDatabase = FirebaseDatabase.getInstance().getReference("services").child("service-user").child(sessionUserID);
         Query query = mDatabase.orderByChild("category").equalTo(selectedItem);
         final String CompanyName, FirstName, LastName, ContactNumber, Email, Address, Website, Category, Message, AmountString;
         CompanyName = companyName.getEditableText().toString().trim();
@@ -182,7 +182,7 @@ btnDelete.setOnClickListener(new View.OnClickListener() {
     }
 
     public void DeleteService(){
-        mDatabase = FirebaseDatabase.getInstance().getReference("services").child(sessionUserID);
+        mDatabase = FirebaseDatabase.getInstance().getReference("services").child("service-user").child(sessionUserID);
         Query query = mDatabase.orderByChild("category").equalTo(selectedItem);
         query.addValueEventListener(new ValueEventListener() {
             @Override

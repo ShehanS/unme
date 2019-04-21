@@ -17,8 +17,8 @@ public class LandingPageActivity extends AppCompatActivity {
     //create object from xml
     private TextView userLogin;
     private SharedPreferences sharedPreferences;
-    String sessionUserID, sessionUser, appSwitch;
-    private ImageButton btnProfile, btnLogOut, btnEditProfile, btnCountDown, btnToDo, btnGuest;
+    String sessionUserID, sessionUser;
+    private ImageButton btnProfile, btnLogOut, btnEditProfile, btnCountDown, btnToDo, btnGuest, btnSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +29,19 @@ public class LandingPageActivity extends AppCompatActivity {
         userLogin = findViewById(R.id.txtUsername);
         btnProfile = findViewById(R.id.btnProfile);
         btnCountDown = findViewById(R.id.btnCountDown);
+        btnSearch = findViewById(R.id.btnSearch);
         btnToDo =  findViewById(R.id.btnTodo);
         sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE); //session save name
         sessionUserID = sharedPreferences.getString("USER_ID", null);//session save key user id
         sessionUser = sharedPreferences.getString("USER", null); //session save key username
 
-
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingPageActivity.this, CategoryActivity.class);
+                startActivity(intent);
+            }
+        });
         userLogin.setText("Hi.." + sessionUser); //Landing page header
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override

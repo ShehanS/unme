@@ -55,7 +55,7 @@ public class MyAllServicesActivity extends AppCompatActivity {
 
     public void loadListData(){
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("services").child(sessionUserID);
+        mDatabase = FirebaseDatabase.getInstance().getReference("services").child("service-user").child(sessionUserID);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, list);
         listView.setAdapter(adapter);
 

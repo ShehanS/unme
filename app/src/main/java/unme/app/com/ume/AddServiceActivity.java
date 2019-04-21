@@ -98,7 +98,7 @@ public class AddServiceActivity extends AppCompatActivity {
                 }
 
                 if (TextUtils.isEmpty(AmountString)){
-                     
+
                 }else{
                     Amount = Double.parseDouble(AmountString);
                 }
