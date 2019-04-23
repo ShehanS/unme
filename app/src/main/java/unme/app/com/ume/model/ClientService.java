@@ -2,32 +2,23 @@ package unme.app.com.ume.model;
 
 public class ClientService {
     private int id;
+    private String userID;
     private String company;
     private String category;
     private String serviceID;
-    private int rate;
 
 
-    public ClientService(int id, String serviceID, String company, String category, int rate) {
+    public ClientService(int id, String userID, String company, String category, String serviceID) {
         this.id = id;
-        this.serviceID = serviceID;
+        this.userID = userID;
         this.company = company;
         this.category = category;
-        this.rate = rate;
+        this.serviceID = serviceID;
 
     }
-
 
     public int getId() {
         return id;
-    }
-
-    public String getServiceID(){
-        return serviceID;
-    }
-
-    public void setServiceID(String serviceID){
-        this.serviceID = serviceID;
     }
 
     public void setId(int id) {
@@ -42,6 +33,14 @@ public class ClientService {
         this.company = company;
     }
 
+    public String getUserID(){
+        return userID;
+    }
+
+    public void setUserID(String userID){
+        this.userID=userID;
+    }
+
     public String getCategory() {
         return category;
     }
@@ -50,14 +49,12 @@ public class ClientService {
         this.category = category;
     }
 
-    public int getRate() {
-        return rate;
+    public String getServiceID() {
+        return serviceID;
     }
 
-    public void setRate(int rate) {
-        this.rate = rate;
+    public void setServiceID(String serviceID) {
+        this.serviceID = serviceID;
     }
-
-
 
 }

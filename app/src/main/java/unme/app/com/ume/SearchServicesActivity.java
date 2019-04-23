@@ -1,17 +1,23 @@
 package unme.app.com.ume;
 
+
 import android.content.SharedPreferences;
+
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+
 import android.view.View;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,12 +36,15 @@ public class SearchServicesActivity extends AppCompatActivity {
     private String category;
     private SharedPreferences sharedPreferences;
     private DatabaseReference mDatabase;
-    String sessionUserID, sessionUser;
+    String sessionUserID, sessionUser, userID, serviceID;
     private ListView listView;
     private ServiceListAdapter serviceListAdapter;
     private List<ClientService> mServiceList;
+    private Button btnClose, btnAdd;
     ArrayList<String> list = new ArrayList<>(); //create array list
     ArrayAdapter<String> adapter; //create array adapter
+    private TextView viewCompany, viewCategory, viewMessage, viewContact, viewEmail, viewWebsite, viewPackge, viewName, viewAddress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,28 +55,31 @@ public class SearchServicesActivity extends AppCompatActivity {
         category = getIntent().getStringExtra("category");
         listView = findViewById(R.id.listView);
         listView = findViewById(R.id.listView);
-        System.out.println(category);
         GetCategory();
+       // listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView serviceId = view.findViewById(R.id.txtServiceID);
+                TextView userId = view.findViewById(R.id.txtUserID);
+               userID = userId.getText().toString().trim();
+               serviceID = serviceId.getText().toString().trim();
+                showService();
+
+
+
+
+            }
+        });
+
 
     }
 
     public void GetCategory(){
         mServiceList = new ArrayList<>();
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, list);
-        listView.setAdapter(adapter);
-        mDatabase = FirebaseDatabase.getInstance().getReference("services");
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textView = view.findViewById(R.id.txtServiceID);
-                System.out.println(textView.getText());
-            }
-        });
-
-
-
-/*
+       /*
         Query query = FirebaseDatabase.getInstance().getReference("services").orderByChild("category").equalTo(category);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -95,17 +107,19 @@ public class SearchServicesActivity extends AppCompatActivity {
 
 */
 
-
+        mDatabase = FirebaseDatabase.getInstance().getReference("services");
         ValueEventListener roomsValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for ( DataSnapshot userDataSnapshot : dataSnapshot.getChildren() ) {
+                    Object UserKey = userDataSnapshot.getKey();
                     if (userDataSnapshot != null) {
                         for ( DataSnapshot childSnapshot : userDataSnapshot.getChildren() ) {
                             Service service = childSnapshot.getValue(Service.class);
                             String serviceKey = childSnapshot.getKey();
+                            System.out.println(serviceKey);
                             //list.add(service.getCompany());
-                           mServiceList.add(new ClientService(1,serviceKey,service.getCompany(),service.getCategory(),0));
+                            mServiceList.add(new ClientService(1,String.valueOf(UserKey),service.getCompany(),service.getCategory(),serviceKey));
                             //adapter.notifyDataSetChanged();
                             serviceListAdapter = new ServiceListAdapter(getApplicationContext(),mServiceList);
                             listView.setAdapter(serviceListAdapter);
@@ -124,7 +138,74 @@ public class SearchServicesActivity extends AppCompatActivity {
 
         mDatabase.addListenerForSingleValueEvent(roomsValueEventListener);
 
+    }
+
+    public void showService(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View view = inflater.inflate(R.layout.view_service, null);
+        viewCompany = view.findViewById(R.id.txtCompany);
+        viewCategory = view.findViewById(R.id.txtCategory);
+        viewMessage = view.findViewById(R.id.txtMessage);
+        viewContact = view.findViewById(R.id.txtContact);
+        viewEmail = view.findViewById(R.id.txtEmail);
+        viewWebsite = view.findViewById(R.id.txtWeb);
+        viewPackge = view.findViewById(R.id.txtPackge);
+        viewName = view.findViewById(R.id.txtName);
+        btnClose = view.findViewById(R.id.btnClose);
+        viewAddress = view.findViewById(R.id.txtAddress);
+        btnAdd = view.findViewById(R.id.btnAdd);
+        builder.setView(view);
+        final AlertDialog alert = builder.create();
+        alert.show();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("services").child(userID);
+        Query query = mDatabase.orderByChild("serviceID").equalTo(serviceID);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for(DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+
+                        Service service = childSnapshot.getValue(Service.class);
+                        viewCompany.setText("Company : "+service.getCompany());
+                        viewCategory.setText("Category : "+service.getCategory());
+                        viewMessage.setText("Messages : "+service.getMessage());
+                        viewContact.setText("Contact : "+service.getContactNumber());
+                        viewEmail.setText("Email : "+service.getEmail());
+                        viewWebsite.setText("Website : "+service.getWebsite());
+                        viewPackge.setText("Packeges "+String.valueOf(service.getPrice()));
+                        viewName.setText("Person : "+service.getFirstName()+" "+service.getLastName());
+                        viewAddress.setText("Address : "+service.getAddress());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+btnClose.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        alert.dismiss();
+    }
+});
+
+btnAdd.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        showService();
+    }
+});
 
 
     }
 }
+
