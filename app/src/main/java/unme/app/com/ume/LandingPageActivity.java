@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.content.SharedPreferences;
 
+import unme.app.com.ume.model.MyServiceList;
 
 
 public class LandingPageActivity extends AppCompatActivity {
@@ -18,7 +19,7 @@ public class LandingPageActivity extends AppCompatActivity {
     private TextView userLogin;
     private SharedPreferences sharedPreferences;
     String sessionUserID, sessionUser;
-    private ImageButton btnProfile, btnLogOut, btnEditProfile, btnCountDown, btnToDo, btnGuest, btnSearch;
+    private ImageButton btnProfile, btnLogOut, btnEditProfile, btnCountDown, btnToDo, btnGuest, btnSearch, btnMyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class LandingPageActivity extends AppCompatActivity {
         btnCountDown = findViewById(R.id.btnCountDown);
         btnSearch = findViewById(R.id.btnSearch);
         btnToDo =  findViewById(R.id.btnTodo);
+        btnMyList = findViewById(R.id.btnMyList);
         sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE); //session save name
         sessionUserID = sharedPreferences.getString("USER_ID", null);//session save key user id
         sessionUser = sharedPreferences.getString("USER", null); //session save key username
@@ -71,6 +73,14 @@ public class LandingPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LandingPageActivity.this, GuestViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnMyList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(LandingPageActivity.this, MyListActivity.class);
                 startActivity(intent);
             }
         });

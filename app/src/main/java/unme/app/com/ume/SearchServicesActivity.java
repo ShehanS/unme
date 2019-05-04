@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,10 +26,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import unme.app.com.ume.model.ClientService;
+import unme.app.com.ume.model.MyServiceList;
 import unme.app.com.ume.model.Service;
 import unme.app.com.ume.model.Todo;
 
@@ -44,7 +49,8 @@ public class SearchServicesActivity extends AppCompatActivity {
     ArrayList<String> list = new ArrayList<>(); //create array list
     ArrayAdapter<String> adapter; //create array adapter
     private TextView viewCompany, viewCategory, viewMessage, viewContact, viewEmail, viewWebsite, viewPackge, viewName, viewAddress;
-
+    private String company, mycategory, message, contact, email, website, person, address;
+    private Double mypackage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,14 +175,23 @@ public class SearchServicesActivity extends AppCompatActivity {
 
                         Service service = childSnapshot.getValue(Service.class);
                         viewCompany.setText("Company : "+service.getCompany());
+                        company = service.getCompany();
                         viewCategory.setText("Category : "+service.getCategory());
+                        mycategory = service.getCategory();
                         viewMessage.setText("Messages : "+service.getMessage());
+                        message = service.getMessage();
                         viewContact.setText("Contact : "+service.getContactNumber());
+                        contact = service.getContactNumber();
                         viewEmail.setText("Email : "+service.getEmail());
+                        email = service.getEmail();
                         viewWebsite.setText("Website : "+service.getWebsite());
+                        website = service.getWebsite();
                         viewPackge.setText("Packeges "+String.valueOf(service.getPrice()));
+                        mypackage = service.getPrice();
                         viewName.setText("Person : "+service.getFirstName()+" "+service.getLastName());
+                        person = service.getFirstName()+" "+service.getLastName();
                         viewAddress.setText("Address : "+service.getAddress());
+                        address = service.getAddress();
                 }
 
             }
@@ -201,7 +216,19 @@ btnClose.setOnClickListener(new View.OnClickListener() {
 btnAdd.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        showService();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+        String currentDate = simpleDateFormat.format(new Date());
+        Random random = new Random();
+        String id = String.format("%08d", random.nextInt(100000000));
+        mDatabase = FirebaseDatabase.getInstance().getReference("my-services");
+        MyServiceList myServiceList = new MyServiceList(id,serviceID,company,mycategory,message,contact,email,website,mypackage,person,address,currentDate);
+        mDatabase.child(sessionUserID).child(id).setValue(myServiceList);
+        Toast.makeText(getApplicationContext(), "Service added !", Toast.LENGTH_SHORT).show();
+
+
+
+
+
     }
 });
 

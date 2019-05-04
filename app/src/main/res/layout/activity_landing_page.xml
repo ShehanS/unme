@@ -99,6 +99,13 @@
                 android:layout_height="wrap_content"
                 android:padding="30dp"
                 app:srcCompat="@mipmap/seo" />
+
+            <ImageButton
+                android:id="@+id/btnMyList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                app:srcCompat="@mipmap/clipboard" />
         </TableRow>
 
         <TableRow
