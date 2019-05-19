@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.util.CollectionUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,11 +32,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+
+import javax.jdo.PersistenceManager;
+
 
 import unme.app.com.ume.model.ClientService;
 import unme.app.com.ume.model.MyServiceList;
 import unme.app.com.ume.model.Service;
-import unme.app.com.ume.model.Todo;
+
+
 
 public class SearchServicesActivity extends AppCompatActivity {
     private String category;
@@ -119,17 +125,28 @@ public class SearchServicesActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for ( DataSnapshot userDataSnapshot : dataSnapshot.getChildren() ) {
                     Object UserKey = userDataSnapshot.getKey();
-                    if (userDataSnapshot != null) {
+
+
+                      if (userDataSnapshot != null) {
                         for ( DataSnapshot childSnapshot : userDataSnapshot.getChildren() ) {
+                            System.out.println("++++++++++++++++++++++++++++FLITER ACTIVE++++++++++++");
+                            System.out.println(category);
                             Service service = childSnapshot.getValue(Service.class);
+
                             String serviceKey = childSnapshot.getKey();
-                            System.out.println(serviceKey);
+
                             //list.add(service.getCompany());
-                            mServiceList.add(new ClientService(1,String.valueOf(UserKey),service.getCompany(),service.getCategory(),serviceKey));
-                            //adapter.notifyDataSetChanged();
-                            serviceListAdapter = new ServiceListAdapter(getApplicationContext(),mServiceList);
-                            listView.setAdapter(serviceListAdapter);
-                            serviceListAdapter.notifyDataSetChanged();
+
+                            if(service.getCategory().equals(category)) {
+
+
+                                mServiceList.add(new ClientService(1, String.valueOf(UserKey), service.getCompany(), service.getCategory(), serviceKey));
+                                //adapter.notifyDataSetChanged();
+                                serviceListAdapter = new ServiceListAdapter(getApplicationContext(), mServiceList);
+
+                                listView.setAdapter(serviceListAdapter);
+                                serviceListAdapter.notifyDataSetChanged();
+                            }
 
                         }
                     }
@@ -221,7 +238,7 @@ btnAdd.setOnClickListener(new View.OnClickListener() {
         Random random = new Random();
         String id = String.format("%08d", random.nextInt(100000000));
         mDatabase = FirebaseDatabase.getInstance().getReference("my-services");
-        MyServiceList myServiceList = new MyServiceList(id,serviceID,company,mycategory,message,contact,email,website,mypackage,person,address,currentDate);
+        MyServiceList myServiceList = new MyServiceList(id,id,company,mycategory,message,contact,email,website,mypackage,person,address,currentDate,false);
         mDatabase.child(sessionUserID).child(id).setValue(myServiceList);
         Toast.makeText(getApplicationContext(), "Service added !", Toast.LENGTH_SHORT).show();
 

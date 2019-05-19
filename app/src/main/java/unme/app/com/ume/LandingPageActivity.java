@@ -19,7 +19,7 @@ public class LandingPageActivity extends AppCompatActivity {
     private TextView userLogin;
     private SharedPreferences sharedPreferences;
     String sessionUserID, sessionUser;
-    private ImageButton btnProfile, btnLogOut, btnEditProfile, btnCountDown, btnToDo, btnGuest, btnSearch, btnMyList;
+    private ImageButton btnProfile, btnLogOut, btnEditProfile, btnCountDown, btnToDo, btnGuest, btnSearch, btnMyList, btnMyListConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class LandingPageActivity extends AppCompatActivity {
         btnSearch = findViewById(R.id.btnSearch);
         btnToDo =  findViewById(R.id.btnTodo);
         btnMyList = findViewById(R.id.btnMyList);
+        btnMyListConfirm = findViewById(R.id.btnMyListConfirm);
         sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE); //session save name
         sessionUserID = sharedPreferences.getString("USER_ID", null);//session save key user id
         sessionUser = sharedPreferences.getString("USER", null); //session save key username
@@ -81,6 +82,14 @@ public class LandingPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(LandingPageActivity.this, MyListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnMyListConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingPageActivity.this, ConfirmActivity.class);
                 startActivity(intent);
             }
         });

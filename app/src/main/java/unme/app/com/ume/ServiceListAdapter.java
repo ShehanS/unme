@@ -47,7 +47,7 @@ public class ServiceListAdapter extends BaseAdapter {
         txtCategory.setText("Category : "+mServiceList.get(position).getCategory());
         txtUserID.setText(mServiceList.get(position).getUserID());
         txtServiceID.setText(mServiceList.get(position).getServiceID());
-        view.setTag(mServiceList.get(mServiceList.get(position).getId()));
+
 
         return view;
     }

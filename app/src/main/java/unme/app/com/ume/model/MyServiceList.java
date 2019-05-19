@@ -13,10 +13,11 @@ public class MyServiceList {
     private String name;
     private String address;
     private String date;
+    private boolean confirm=false;
 
     public MyServiceList(){}
 
-    public MyServiceList(String id, String serviceID, String company, String category, String message, String contact, String email, String website, Double price, String name, String address, String date) {
+    public MyServiceList(String id, String serviceID, String company, String category, String message, String contact, String email, String website, Double price, String name, String address, String date, boolean confirm) {
         this.id = id;
         this.serviceID = serviceID;
         this.company = company;
@@ -29,6 +30,7 @@ public class MyServiceList {
         this.name = name;
         this.address = address;
         this.date = date;
+        this.confirm= confirm;
     }
 
     public String getId() {
@@ -125,5 +127,13 @@ public class MyServiceList {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public boolean isConfirm() {
+        return confirm;
+    }
+
+    public void setConfirm(boolean confirm) {
+        this.confirm = confirm;
     }
 }

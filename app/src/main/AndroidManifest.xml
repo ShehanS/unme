@@ -36,7 +36,8 @@
         <activity android:name=".CategoryActivity" />
         <activity android:name=".MyServiceListActivity" />
         <activity android:name=".ViewServiceActivity" />
-        <activity android:name=".MyListActivity"></activity>
+        <activity android:name=".MyListActivity" />
+        <activity android:name=".ConfirmActivity"></activity>
     </application>
 
 </manifest>
