@@ -37,7 +37,7 @@
         <activity android:name=".MyServiceListActivity" />
         <activity android:name=".ViewServiceActivity" />
         <activity android:name=".MyListActivity" />
-        <activity android:name=".ConfirmActivity"></activity>
+        <activity android:name=".MyConfirmList"></activity>
     </application>
 
 </manifest>

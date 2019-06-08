@@ -103,7 +103,7 @@ public class AddServiceActivity extends AppCompatActivity {
                     Amount = Double.parseDouble(AmountString);
                 }
 
-                Service service = new Service(sessionUserID,key,CompanyName, FirstName, LastName, ContactNumber, Email, Address, Website, Category, currentDate, Amount, Message, true, true);
+                Service service = new Service(sessionUserID,key,CompanyName, FirstName, LastName, ContactNumber, Email, Address, Website, Category, currentDate, Amount, Message, false, false);
                 mDatabase.child(sessionUserID).child(key).setValue(service);
 
                 Toast.makeText(getApplicationContext(), "Adding service !", Toast.LENGTH_SHORT).show();

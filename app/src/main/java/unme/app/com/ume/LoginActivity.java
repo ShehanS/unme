@@ -128,22 +128,26 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (userModel.getUsername().equals(username) && userModel.getPassword().equals(password)) {  //set to data usermodel
                             //create session
-                            editor.putString("USER_ID", userModel.getUserId());//assign value for session
-                            editor.putString("USER", userModel.getUsername());//assign value for session
-                            editor.commit(); //save session
+                            if(userModel.isActive()==true) {
+                                editor.putString("USER_ID", userModel.getUserId());//assign value for session
+                                editor.putString("USER", userModel.getUsername());//assign value for session
+                                editor.commit(); //save session
 
-                            System.out.println(userModel.getType());
-                            if (userModel.getType().equals("Customer")) {
-                                editor.putString("APP_TYPE", userModel.getType()); //assign value for session
-                                editor.commit();//save session
-                                startActivity(customer_intent); //start customer intenat
-                                finish();//close login window
+                                System.out.println(userModel.getType());
+                                if (userModel.getType().equals("Customer")) {
+                                    editor.putString("APP_TYPE", userModel.getType()); //assign value for session
+                                    editor.commit();//save session
+                                    startActivity(customer_intent); //start customer intenat
+                                    finish();//close login window
 
-                            }else if(userModel.getType().equals("Service")){
-                                editor.putString("APP_TYPE", userModel.getType());//assign value for session
-                                editor.commit();//save session
-                                startActivity(service_intent);//start service intenat
-                                finish();//close login window
+                                } else if (userModel.getType().equals("Service")) {
+                                    editor.putString("APP_TYPE", userModel.getType());//assign value for session
+                                    editor.commit();//save session
+                                    startActivity(service_intent);//start service intenat
+                                    finish();//close login window
+                                }
+                            }else{
+                                Toast.makeText(LoginActivity.this, "Please active your account !", Toast.LENGTH_LONG).show();
                             }
                         } else {
                             // if password is wrong show toast

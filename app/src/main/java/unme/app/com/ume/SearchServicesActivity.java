@@ -30,7 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -51,7 +53,7 @@ public class SearchServicesActivity extends AppCompatActivity {
     private ListView listView;
     private ServiceListAdapter serviceListAdapter;
     private List<ClientService> mServiceList;
-    private Button btnClose, btnAdd;
+    private Button btnClose, btnAdd, btnConfirm;
     ArrayList<String> list = new ArrayList<>(); //create array list
     ArrayAdapter<String> adapter; //create array adapter
     private TextView viewCompany, viewCategory, viewMessage, viewContact, viewEmail, viewWebsite, viewPackge, viewName, viewAddress;
@@ -137,7 +139,7 @@ public class SearchServicesActivity extends AppCompatActivity {
 
                             //list.add(service.getCompany());
 
-                            if(service.getCategory().equals(category)) {
+                            if((service.getCategory().equals(category))&&(service.isFliterKey1()==true)&&(service.isFliterKey2()==true)) {
 
 
                                 mServiceList.add(new ClientService(1, String.valueOf(UserKey), service.getCompany(), service.getCategory(), serviceKey));
@@ -179,6 +181,7 @@ public class SearchServicesActivity extends AppCompatActivity {
         btnClose = view.findViewById(R.id.btnClose);
         viewAddress = view.findViewById(R.id.txtAddress);
         btnAdd = view.findViewById(R.id.btnAdd);
+
         builder.setView(view);
         final AlertDialog alert = builder.create();
         alert.show();
@@ -241,15 +244,13 @@ btnAdd.setOnClickListener(new View.OnClickListener() {
         MyServiceList myServiceList = new MyServiceList(id,id,company,mycategory,message,contact,email,website,mypackage,person,address,currentDate,false);
         mDatabase.child(sessionUserID).child(id).setValue(myServiceList);
         Toast.makeText(getApplicationContext(), "Service added !", Toast.LENGTH_SHORT).show();
-
-
-
-
-
     }
 });
 
 
+
+
     }
+
 }
 

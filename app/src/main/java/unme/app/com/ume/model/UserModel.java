@@ -10,11 +10,12 @@ public class UserModel {
     private String email;
     private String contact;
     private String web;
+    private boolean active;
 
     private UserModel() {
     }
 
-    public UserModel(String userId, String type, String username, String password, String firstname, String lastname, String email, String contact, String web) {
+    public UserModel(String userId, String type, String username, String password, String firstname, String lastname, String email, String contact, String web, boolean active) {
         this.userId = userId;
         this.type = type;
         this.username = username;
@@ -24,6 +25,7 @@ public class UserModel {
         this.email = email;
         this.contact = contact;
         this.web = web;
+        this.active=active;
     }
 
 
@@ -99,5 +101,11 @@ public class UserModel {
         this.web = web;
     }
 
+    public boolean isActive() {
+        return active;
+    }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

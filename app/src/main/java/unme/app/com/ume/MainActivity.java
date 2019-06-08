@@ -124,7 +124,7 @@ private EditText txtWebAddress, txtLastName, txtFirstName, txtUserName, txtPhone
                 }
 
                 //set variable value in to the usermodel
-                UserModel userModel = new UserModel(UserID, UserType, UserName, Password, FirstName, LastName, Email, Contact, WebAddress);
+                UserModel userModel = new UserModel(UserID, UserType, UserName, Password, FirstName, LastName, Email, Contact, WebAddress,false);
                 mDatabase.child("users").child(user_uuid).setValue(userModel); //save model into the database
                 Toast.makeText(MainActivity.this, "Create Profile !", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);

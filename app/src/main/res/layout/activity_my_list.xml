@@ -28,7 +28,7 @@
                 android:layout_width="301dp"
                 android:layout_height="wrap_content"
                 android:padding="10pt"
-                android:text="My Services List"
+                android:text="My Services"
                 android:textColor="@color/white"
                 android:textSize="12pt" />
 

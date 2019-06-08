@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyServiceListActivity"
+    tools:context=".MyListActivity"
     android:background="@drawable/singup"
     >
     <LinearLayout
@@ -28,7 +28,7 @@
                 android:layout_width="301dp"
                 android:layout_height="wrap_content"
                 android:padding="10pt"
-                android:text="My Services List"
+                android:text="My Services List 1"
                 android:textColor="@color/white"
                 android:textSize="12pt" />
 

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.content.SharedPreferences;
@@ -34,6 +35,7 @@ public class LandingPageActivity extends AppCompatActivity {
         btnToDo =  findViewById(R.id.btnTodo);
         btnMyList = findViewById(R.id.btnMyList);
         btnMyListConfirm = findViewById(R.id.btnMyListConfirm);
+
         sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE); //session save name
         sessionUserID = sharedPreferences.getString("USER_ID", null);//session save key user id
         sessionUser = sharedPreferences.getString("USER", null); //session save key username
@@ -89,8 +91,8 @@ public class LandingPageActivity extends AppCompatActivity {
         btnMyListConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LandingPageActivity.this, ConfirmActivity.class);
-                startActivity(intent);
+               Intent intent =new Intent(LandingPageActivity.this, MyConfirmList.class);
+               startActivity(intent);
             }
         });
     }
