@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:background="@drawable/singup"
-    >
+    android:background="@mipmap/background"
+
+    tools:context=".LoginActivity">
 
     <LinearLayout
         android:id="@+id/btnSingup"
@@ -31,9 +31,9 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="179dp"
             android:layout_marginTop="60dp"
-            app:srcCompat="@mipmap/mini_logo" />
+            app:srcCompat="@mipmap/logo" />
 
         <EditText
             android:id="@+id/txtUsername"
@@ -44,8 +44,8 @@
             android:hint="Username"
             android:inputType="text"
             android:padding="16dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimary" />
 
         <EditText
             android:id="@+id/txtPassword"
@@ -56,8 +56,8 @@
             android:hint="Password"
             android:inputType="textPassword"
             android:padding="16dp"
-            android:textColor="@color/color1"
-            android:textColorHint="@color/white" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimary" />
 
         <Button
             android:id="@+id/btnLogin"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button"
             android:text="Login"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/input_form_lights"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:text="Singup"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="15dp"
             android:textStyle="bold" />
 

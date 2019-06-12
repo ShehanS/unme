@@ -241,7 +241,7 @@ btnAdd.setOnClickListener(new View.OnClickListener() {
         Random random = new Random();
         String id = String.format("%08d", random.nextInt(100000000));
         mDatabase = FirebaseDatabase.getInstance().getReference("my-services");
-        MyServiceList myServiceList = new MyServiceList(id,id,company,mycategory,message,contact,email,website,mypackage,person,address,currentDate,false);
+        MyServiceList myServiceList = new MyServiceList(id,id,company,mycategory,message,contact,email,website,mypackage,person,address,currentDate,false,"Pending",0.00);
         mDatabase.child(sessionUserID).child(id).setValue(myServiceList);
         Toast.makeText(getApplicationContext(), "Service added !", Toast.LENGTH_SHORT).show();
     }

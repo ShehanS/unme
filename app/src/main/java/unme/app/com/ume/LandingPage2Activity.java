@@ -14,7 +14,7 @@ public class LandingPage2Activity extends AppCompatActivity {
     String sessionUserID, sessionUser;
     private SharedPreferences sharedPreferences;
     private TextView userLogin;
-    private ImageButton btnProfile, btnLogOut, btnEditProfile, addServices, myServices;
+    private ImageButton btnProfile, btnLogOut, btnEditProfile, addServices, myServices, btnRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,7 @@ public class LandingPage2Activity extends AppCompatActivity {
         btnProfile = findViewById(R.id.btnProfile);
         addServices = findViewById(R.id.btnAddService);
         myServices = findViewById(R.id.btnMyServices);
+        btnRequest = findViewById(R.id.btnRequest);
 
 
         sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE);
@@ -51,6 +52,14 @@ public class LandingPage2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LandingPage2Activity.this, MyAllServicesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingPage2Activity.this, ClientActivity.class);
                 startActivity(intent);
             }
         });

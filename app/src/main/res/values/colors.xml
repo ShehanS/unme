@@ -5,12 +5,13 @@
     <color name="colorAccent">#d81b60</color>
     <color name="ColorGradent1">#AD01A7 </color>
     <color name="ColorGradnt2">#AD0169 </color>
-    <color name="inputBox">#F5ECF1</color>
-    <color name="color1">#f1eef0</color>
-    <color name="input_form_details">#ccffffff</color>
+    <color name="inputBox">#00574B</color>
+    <color name="color1">#00574B</color>
+    <color name="input_form_details">#00574B</color>
     <color name="input_form_lights">#1affffff</color>
     <color name="input_form_medium">#66ffffff</color>
-    <color name="white">#FFFFFF</color>
+    <color name="white">#008577</color>
     <color name="sky_blue">#00DFDF</color>
+    <color name="popup">#ffff</color>
 
 </resources>

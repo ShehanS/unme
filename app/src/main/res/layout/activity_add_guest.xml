@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   android:background="@drawable/singup"
+    android:background="@mipmap/background"
     >
 
     <LinearLayout
@@ -65,6 +65,39 @@
                 android:padding="16dp"
                 android:text="0"
                 android:textColor="@color/color1" />
+
+            <TextView
+                android:id="@+id/txtpriority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Set priority" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <RadioButton
+                    android:id="@+id/Rbtn1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="1" />
+
+                <RadioButton
+                    android:id="@+id/Rbtn2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="2" />
+
+                <RadioButton
+                    android:id="@+id/Rbtn3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="3" />
+            </RadioGroup>
 
             <Button
                 android:id="@+id/addGuest"

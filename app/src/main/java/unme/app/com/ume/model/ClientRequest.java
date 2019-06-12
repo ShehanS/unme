@@ -9,8 +9,11 @@ public class ClientRequest {
     private String service;
     private String serviceId;
     private boolean requestStatus;
+    private String eventDate;
+    private String status;
 
-    public ClientRequest(String userId, String name, String contact, String email, String web, String service, String serviceId, boolean requestStatus) {
+
+    public ClientRequest(String userId, String name, String contact, String email, String web, String service, String serviceId, boolean requestStatus, String eventDate, String status) {
         this.userId = userId;
         this.name = name;
         this.contact = contact;
@@ -19,10 +22,28 @@ public class ClientRequest {
         this.service = service;
         this.serviceId = serviceId;
         this.requestStatus = requestStatus;
+        this.eventDate = eventDate;
+        this.status = status;
     }
-
+    private ClientRequest(){}
     public String getUserId() {
         return userId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
     }
 
     public void setUserId(String userId) {

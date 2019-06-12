@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.UUID;
 
 import unme.app.com.ume.model.Guest;
 import unme.app.com.ume.model.Service;
@@ -72,8 +73,8 @@ public class AddServiceActivity extends AppCompatActivity {
                 Message = message.getEditableText().toString().trim();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
                 String currentDate = simpleDateFormat.format(new Date());
-                Random random = new Random();
-                String key = String.format("%08d", random.nextInt(100000000));
+
+                String key = UUID.randomUUID().toString();
 
 
 

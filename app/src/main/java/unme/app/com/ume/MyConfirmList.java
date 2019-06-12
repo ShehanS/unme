@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,15 +22,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import unme.app.com.ume.model.ClientRequest;
 import unme.app.com.ume.model.ClientService;
+import unme.app.com.ume.model.Countdown;
+import unme.app.com.ume.model.Event;
 import unme.app.com.ume.model.MyServiceList;
 import unme.app.com.ume.model.UserModel;
+
+import static android.provider.Settings.System.DATE_FORMAT;
 
 public class MyConfirmList extends AppCompatActivity {
 
@@ -39,11 +47,20 @@ public class MyConfirmList extends AppCompatActivity {
     private ListView listView;
     private SharedPreferences sharedPreferences;
     private String sessionUserID, sessionUser;
-    private Button btnClose, btnRemove, btnSendRequest;
+    private Button btnClose, btnRemove, btnSendRequest,btnBudget;
     private String ServiceID;
-    private TextView title, company, name, contact, packge;
-
-    String userId,fullName,Contact,Email,Web,Service,ServiceId;
+    private TextView title, company, name, contact, status;
+    private String uniqueId;
+    private Boolean getData;
+    private EditText txtBudget;
+    String Title,Company,Name,ContactNum,Status;
+    String userId,fullName,Contact,Email,Web,Address,Service;
+    private double mybudget=0.00;
+    private boolean isEventDate = false;
+    private Long eventMilis;
+    private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private String EVENT_DATE_TIME;
+    private long timeMils = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +72,15 @@ public class MyConfirmList extends AppCompatActivity {
         sessionUser = sharedPreferences.getString("USER", null);    //session save key username
         mServiceList = new ArrayList<>();
         listLoad();
+        getUserData();
+        requestEventDate();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 TextView serviceId = view.findViewById(R.id.txtServiceID);
                 ServiceID = serviceId.getText().toString();
+                System.out.println("OnItemClicking "+ServiceID);
                 confirmDialog();
 
 
@@ -70,6 +91,8 @@ public class MyConfirmList extends AppCompatActivity {
     }
 
     public void confirmDialog() {
+        System.out.println(sessionUserID+"/"+ServiceID);
+        System.out.println("Dialog");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View view = inflater.inflate(R.layout.activity_service_confirm_remove, null);
@@ -78,25 +101,43 @@ public class MyConfirmList extends AppCompatActivity {
         company = view.findViewById(R.id.txtCompany);
         name = view.findViewById(R.id.txtName);
         contact = view.findViewById(R.id.txtContact);
-        packge = view.findViewById(R.id.txtPackge);
+        status = view.findViewById(R.id.txtStatus);
+        title.setText(Title);
+        company.setText(Company);
+        name.setText(Name);
+        contact.setText(ContactNum);
+        status.setText(Status);
+        btnClose = view.findViewById(R.id.btnClose);
+        btnRemove = view.findViewById(R.id.btnRemove);
+        txtBudget = view.findViewById(R.id.txtBudget);
+        btnBudget = view.findViewById(R.id.btnAddBudget);
+        btnSendRequest = view.findViewById(R.id.btnRequest);
+
         final AlertDialog alert = builder.create();
+
+
         mDatabase = FirebaseDatabase.getInstance().getReference("my-services").child(sessionUserID);
         Query query = mDatabase.orderByChild("serviceID").equalTo(ServiceID);
+
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-
                     MyServiceList myServiceList = userSnapshot.getValue(MyServiceList.class);
-                    System.out.println(myServiceList.getCategory());
+                    System.out.println("OUT DATA");
                     title.setText(myServiceList.getCategory());
                     company.setText(myServiceList.getCompany());
                     name.setText(myServiceList.getName());
                     contact.setText(myServiceList.getContact());
+                    status.setText(myServiceList.getStatus());
+                    txtBudget.setText(String.valueOf(myServiceList.getBudget()));
                     Service = myServiceList.getCategory();
-                    ServiceId = myServiceList.getServiceID();
+                    Status = myServiceList.getStatus();
+
 
                 }
+
+
 
             }
 
@@ -107,9 +148,6 @@ public class MyConfirmList extends AppCompatActivity {
         });
 
 
-        btnClose = view.findViewById(R.id.btnClose);
-        btnRemove = view.findViewById(R.id.btnRemove);
-        btnSendRequest = view.findViewById(R.id.btnRequest);
 
         btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,19 +161,45 @@ public class MyConfirmList extends AppCompatActivity {
                 alert.dismiss();
             }
         });
-
         btnSendRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendRequest();
+
+            }
+        });
+        btnBudget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mybudget = Double.valueOf(txtBudget.getEditableText().toString().trim());
+
+                mDatabase = FirebaseDatabase.getInstance().getReference().child("my-services").child(sessionUserID).child(ServiceID);
+                Map<String, Object> updates = new HashMap<String, Object>();
+                updates.put("budget", mybudget);
+                mDatabase.updateChildren(updates); //force to the update
+
+                Toast.makeText(getApplicationContext(), "Added budget!", Toast.LENGTH_SHORT).show();
+
+
+
             }
         });
 
 
+
+
+
+
+
+
         alert.show();
+
+
+
     }
 
     public void listLoad() {
+
         mDatabase = FirebaseDatabase.getInstance().getReference("my-services");
         ValueEventListener roomsValueEventListener = new ValueEventListener() {
             @Override
@@ -194,20 +258,72 @@ public class MyConfirmList extends AppCompatActivity {
 
 
     public void sendRequest() {
+          requestEventDate();
+        if (isEventDate==true) {
+
+            uniqueId = UUID.randomUUID().toString();
+            mDatabase = FirebaseDatabase.getInstance().getReference("client-request");
+            ClientRequest clientRequest = new ClientRequest(userId, fullName, Contact, Email, Web, Service, ServiceID, false,EVENT_DATE_TIME,"Pending");
+            mDatabase.child(sessionUserID).child(ServiceID).setValue(clientRequest);
+            Toast.makeText(getApplicationContext(),"Your request has been sent !",Toast.LENGTH_LONG).show();
+        }else{
+
+            Toast.makeText(getApplicationContext(),"Please set your events date",Toast.LENGTH_LONG).show();
+
+        }
+
+    }
+public void getUserData(){
+    mDatabase = FirebaseDatabase.getInstance().getReference("users").child(sessionUserID);       //Get firebase table path
+    mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            UserModel user = dataSnapshot.getValue(UserModel.class);
+            userId = user.getUserId();
+            fullName = user.getFirstname()+ " "+user.getLastname();
+            Contact = user.getContact();
+            Email = user.getEmail();
+            Web = user.getWeb();
 
 
-        System.out.println(sessionUserID);
-        mDatabase = FirebaseDatabase.getInstance().getReference("users").child(sessionUserID);       //Get firebase table path
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    });
+}
+
+
+
+
+
+    public void requestEventDate(){
+       mDatabase=FirebaseDatabase.getInstance().getReference("event");
+        Query query = mDatabase.orderByChild("userId").equalTo(sessionUserID);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserModel user = dataSnapshot.getValue(UserModel.class);
-                userId = user.getUserId();
-                fullName = user.getFirstname()+ " "+user.getLastname();
-                Contact = user.getContact();
-                Email = user.getEmail();
-                Web = user.getWeb();
+                if(dataSnapshot.exists()) {
+                    isEventDate = true;
+                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                        Countdown countdown = childSnapshot.getValue(Countdown.class);
 
+
+                        timeMils = countdown.getEvent_time(); //get event name  in the database
+                        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(timeMils);
+                        EVENT_DATE_TIME = formatter.format(calendar.getTime());
+                        System.out.println(EVENT_DATE_TIME);
+
+
+                    }
+
+                }else{
+                    isEventDate=false;
+                }
             }
 
             @Override
@@ -216,11 +332,12 @@ public class MyConfirmList extends AppCompatActivity {
             }
         });
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("client-request");
-        ClientRequest clientRequest = new ClientRequest(userId,fullName,Contact,Email,Web,Service,ServiceId,false);
-        mDatabase.child(sessionUserID).setValue(clientRequest);
-
     }
+
+
+
+
+
 }
 
 

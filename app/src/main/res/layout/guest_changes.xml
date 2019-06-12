@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/singup"
+    android:background="@mipmap/background"
     >
 
     <LinearLayout
@@ -30,6 +30,12 @@
             android:showDividers="middle"
             >
 
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name" />
+
             <EditText
                 android:id="@+id/guestName"
                 android:layout_width="match_parent"
@@ -40,6 +46,12 @@
                 android:inputType="text"
                 android:padding="16dp"
                 android:textColor="@color/color1" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contact" />
 
             <EditText
                 android:id="@+id/guestContact"
@@ -52,8 +64,32 @@
                 android:padding="16dp"
                 android:textColor="@color/color1" />
 
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Members" />
+
             <EditText
                 android:id="@+id/guestCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/inputbox"
+                android:ems="10"
+                android:hint="Guest Count"
+                android:inputType="number"
+                android:padding="16dp"
+                android:text="0"
+                android:textColor="@color/color1" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Priority " />
+
+            <EditText
+                android:id="@+id/guestPriority "
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/inputbox"

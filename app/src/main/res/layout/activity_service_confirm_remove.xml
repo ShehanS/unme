@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/singup"
+
     >
 
     <android.support.constraint.ConstraintLayout
@@ -15,7 +15,7 @@
 
 
         <LinearLayout
-            android:layout_width="296dp"
+            android:layout_width="310dp"
             android:layout_height="347dp"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="8dp"
@@ -51,9 +51,24 @@
                 android:padding="5dp"
                 tools:text="Name" />
 
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                tools:text="Status" />
+
+            <EditText
+                android:id="@+id/txtBudget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Budget"
+                android:inputType="number" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
@@ -96,6 +111,35 @@
                     android:textColor="@color/white"
                     tools:layout_editor_absoluteX="38dp"
                     tools:layout_editor_absoluteY="363dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnAddBudget"
+                        android:layout_width="242dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button"
+                        android:padding="5dp"
+                        android:text="Add to budget"
+                        android:textColor="@color/white"
+
+                        tools:layout_editor_absoluteX="38dp"
+                        tools:layout_editor_absoluteY="363dp" />
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>

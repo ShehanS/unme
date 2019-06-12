@@ -52,6 +52,7 @@ public class CountdownActivity extends AppCompatActivity {
     private Long eventMilis;
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private String EVENT_DATE_TIME;
+    private long timeMils = 0;
     private LinearLayout linear_layout_2;
     private TextView tv_days, tv_hour, tv_minute, tv_second, txtEventName, txtEventTime;
     private Handler handler = new Handler();
@@ -62,7 +63,7 @@ public class CountdownActivity extends AppCompatActivity {
     private EditText inputEventName;
     public static String LOG_APP = "[CountDown ] : ";
     private Countdown countdown;
-    private long timeMils = 0;
+
     private String eventName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

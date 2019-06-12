@@ -14,10 +14,12 @@ public class MyServiceList {
     private String address;
     private String date;
     private boolean confirm=false;
+    private String status;
+    private Double budget = 0.00;
 
     public MyServiceList(){}
 
-    public MyServiceList(String id, String serviceID, String company, String category, String message, String contact, String email, String website, Double price, String name, String address, String date, boolean confirm) {
+    public MyServiceList(String id, String serviceID, String company, String category, String message, String contact, String email, String website, Double price, String name, String address, String date, boolean confirm, String status, Double budget) {
         this.id = id;
         this.serviceID = serviceID;
         this.company = company;
@@ -30,7 +32,17 @@ public class MyServiceList {
         this.name = name;
         this.address = address;
         this.date = date;
-        this.confirm= confirm;
+        this.confirm = confirm;
+        this.status = status;
+        this.budget = budget;
+    }
+
+    public Double getBudget() {
+        return budget;
+    }
+
+    public void setBudget(Double budget) {
+        this.budget = budget;
     }
 
     public String getId() {
@@ -135,5 +147,13 @@ public class MyServiceList {
 
     public void setConfirm(boolean confirm) {
         this.confirm = confirm;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

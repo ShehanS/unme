@@ -15,7 +15,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,11 +44,16 @@ import unme.app.com.ume.model.Todo;
 
 public class GuestViewActivity extends AppCompatActivity {
 private Button addCount, btnAddGuest, btnAddCount,btnAdd, btnGuestDelete, btnGuestUpdate;
-private EditText guestName, guestContact, guestCount;
+private EditText guestName, guestContact, guestCount,guestPriorit;
 private TextView totalGuesView, CurrentGuests,GuestVariance, title;
 private ListView listView;
 private String selected,selectedGuest;
-private int count, totMembers, currentMembers, currentVariance;;
+private RadioGroup radioGroup;
+private RadioButton radioButton;
+int selectID;
+
+private int selectedId;
+    private int count, totMembers, currentMembers, currentVariance;;
     ArrayList<String> list = new ArrayList<>(); //create array list
     ArrayAdapter<String> adapter; //create array adapter
 
@@ -53,7 +61,7 @@ private int count, totMembers, currentMembers, currentVariance;;
     private SharedPreferences sharedPreferences;
     private String sessionUserID, sessionUser, selectedItem;
     private DatabaseReference mDatabase;
-
+    private Spinner userType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +71,16 @@ private int count, totMembers, currentMembers, currentVariance;;
         sessionUserID = sharedPreferences.getString("USER_ID", null);//session save key user id
         sessionUser = sharedPreferences.getString("USER", null); //session save key username
 
+
         title = findViewById(R.id.Guest);
         btnAdd = findViewById(R.id.btnAdd);
         listView = findViewById(R.id.listView);
         totalGuesView = findViewById(R.id.totalGuest);
         GuestVariance = findViewById(R.id.variance);
         CurrentGuests = findViewById(R.id.currentGuests);
+
+
+
         loadData();
 
 
@@ -172,34 +184,37 @@ private int count, totMembers, currentMembers, currentVariance;;
 
     public void addGuest() {
         //show alert
-
-
-
-
-
-
-
-
-
-
-
         mDatabase = FirebaseDatabase.getInstance().getReference("guest");
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.activity_add_guest, null);
+        final View view = inflater.inflate(R.layout.activity_add_guest, null);
         builder.setView(view);
         final AlertDialog alert = builder.create();
         alert.show();
+
 
         guestName = view.findViewById(R.id.guestName);
         guestContact = view.findViewById(R.id.guestContact);
         guestCount = view.findViewById(R.id.guestCount);
         btnAddGuest = view.findViewById(R.id.addGuest);
+
+
+
+
+
+
+
+
         btnAddGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                radioGroup = view.findViewById(R.id.radioGroup);
+                selectedId = radioGroup.getCheckedRadioButtonId();
+                radioButton = radioGroup.findViewById(selectedId);
+               String priority = radioButton.getText().toString();
+                //guestName.setText(priority);
                 //get current date
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
                 String currentDate = simpleDateFormat.format(new Date());
@@ -227,8 +242,8 @@ private int count, totMembers, currentMembers, currentVariance;;
                adapter.clear();
                 currentMembers=0;
 
-                Guest guest = new Guest(sessionUserID, currentDate, GuestName, GuestContact, count);
-                mDatabase.child(sessionUserID).child(key).setValue(guest);
+               Guest guest = new Guest(sessionUserID, currentDate, GuestName, GuestContact, count,priority);
+               mDatabase.child(sessionUserID).child(key).setValue(guest);
 
                 Toast.makeText(getApplicationContext(), "Adding guest !", Toast.LENGTH_SHORT).show();
                 alert.dismiss();
@@ -259,7 +274,7 @@ private int count, totMembers, currentMembers, currentVariance;;
 
 
                 }
-              loadListData();
+             loadListData();
 
 
             }
@@ -332,6 +347,7 @@ private int count, totMembers, currentMembers, currentVariance;;
         btnGuestUpdate = view.findViewById(R.id.btnUpdateGuest);
         guestName = view.findViewById(R.id.guestName);
         guestCount = view.findViewById(R.id.guestCount);
+        guestPriorit = view.findViewById(R.id.guestPriority);
 
         mDatabase = FirebaseDatabase.getInstance().getReference("guest").child(sessionUserID);
         Query query = mDatabase.orderByChild("name").equalTo(selectedGuest);
@@ -343,6 +359,7 @@ private int count, totMembers, currentMembers, currentVariance;;
                     guestName.setText(guest.getName());
                     guestCount.setText(String.valueOf(guest.getCount()));
                     guestContact.setText(guest.getContact());
+                    guestPriorit.setText(guest.getPriority());
 
                 }
             }

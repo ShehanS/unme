@@ -83,7 +83,7 @@ public class LandingPageActivity extends AppCompatActivity {
         btnMyList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(LandingPageActivity.this, MyListActivity.class);
+                Intent intent =new Intent(LandingPageActivity.this, BudgetActivity.class);
                 startActivity(intent);
             }
         });
