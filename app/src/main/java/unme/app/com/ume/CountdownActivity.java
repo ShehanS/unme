@@ -57,10 +57,10 @@ public class CountdownActivity extends AppCompatActivity {
     private TextView tv_days, tv_hour, tv_minute, tv_second, txtEventName, txtEventTime;
     private Handler handler = new Handler();
     private Runnable runnable;
-    private Button btnShowDateTime, btnAddEvent;
+    private Button btnAddEvent, btnChangeEvent, btnChangeEventDate;
     private DatabaseReference mDatabase;
     private SharedPreferences sharedPreferences;
-    private EditText inputEventName;
+    private EditText EventName, EventTime;
     public static String LOG_APP = "[CountDown ] : ";
     private Countdown countdown;
 
@@ -76,22 +76,63 @@ public class CountdownActivity extends AppCompatActivity {
         sessionUser = sharedPreferences.getString("USER", null);
 
         //Get xml components
-        txtEventName = findViewById(R.id.txtEventName);
-        txtEventTime = findViewById(R.id.txtEventTime);
-        inputEventName = findViewById(R.id.txtEvent);
 
-        btnShowDateTime = findViewById(R.id.btnShowDateTime);
-        btnAddEvent = findViewById(R.id.btnAddEvent);
         mDatabase = FirebaseDatabase.getInstance().getReference("event");
         // Load database data
         getData();
+        countDownStart();
 
-        //Create countdown
-        btnAddEvent.setOnClickListener(new View.OnClickListener() {
+
+
+        txtEventName = findViewById(R.id.txtEventName);
+        txtEventTime = findViewById(R.id.txtEventTime);
+
+        btnChangeEvent = findViewById(R.id.btnChangeEvent);
+        btnChangeEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                eventName = inputEventName.getText().toString();
-            //check inputs values
+                showDateTime();
+            }
+        });
+
+        //Create countdown
+           }
+
+//Show alert
+    public void showDateTime() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+        final View dialogView = View.inflate(this, R.layout.date_time, null);
+        final View MyEvent = View.inflate(this, R.layout.set_event_time_view, null);
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+        EventName = dialogView.findViewById(R.id.EventName);
+
+
+        dialogView.findViewById(R.id.date_time_set).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eventName = EventName.getEditableText().toString().trim();
+                DatePicker datePicker = dialogView.findViewById(R.id.date_picker);
+                TimePicker timePicker = dialogView.findViewById(R.id.time_picker);
+
+                Calendar calendar = new GregorianCalendar(datePicker.getYear(),
+                        datePicker.getMonth(),
+                        datePicker.getDayOfMonth(),
+                        timePicker.getCurrentHour(),
+                        timePicker.getCurrentMinute());
+               eventMilis = calendar.getTimeInMillis();
+
+
+
+
+
+                linear_layout_2 = findViewById(R.id.linear_layout_2);
+                tv_days = findViewById(R.id.tv_days);
+                tv_hour = findViewById(R.id.tv_hour);
+                tv_minute = findViewById(R.id.tv_minute);
+                tv_second = findViewById(R.id.tv_second);
+
+
                 if (TextUtils.isEmpty(eventName)) {
                     Toast.makeText(getApplicationContext(), "Please enter event name!", Toast.LENGTH_SHORT).show();
                     return;
@@ -104,58 +145,18 @@ public class CountdownActivity extends AppCompatActivity {
 
                 //Refresh data, save and start timer
                 getData();
-                countdown = new Countdown(sessionUserID,inputEventName.getText().toString(), eventMilis);
+                countdown = new Countdown(sessionUserID,eventName, eventMilis);
                 mDatabase.child(sessionUserID).setValue(countdown);
                 countDownStart();
-
-            }
-        });
-
-        linear_layout_2 = findViewById(R.id.linear_layout_2);
-        tv_days = findViewById(R.id.tv_days);
-        tv_hour = findViewById(R.id.tv_hour);
-        tv_minute = findViewById(R.id.tv_minute);
-        tv_second = findViewById(R.id.tv_second);
-
-        if ((sessionUser == null) || (sessionUser == null)) {
-            Intent intent = new Intent(CountdownActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
-        countDownStart();
-
-
-       btnShowDateTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDateTime();
-            }
-        });
-
-
-
-    }
-
-//Show alert
-    public void showDateTime() {
-        final View dialogView = View.inflate(this, R.layout.date_time, null);
-        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-
-        dialogView.findViewById(R.id.date_time_set).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.date_picker);
-                TimePicker timePicker = (TimePicker) dialogView.findViewById(R.id.time_picker);
-
-                Calendar calendar = new GregorianCalendar(datePicker.getYear(),
-                        datePicker.getMonth(),
-                        datePicker.getDayOfMonth(),
-                        timePicker.getCurrentHour(),
-                        timePicker.getCurrentMinute());
-               eventMilis = calendar.getTimeInMillis();
                 alertDialog.dismiss();
+
+                if ((sessionUser == null) || (sessionUser == null)) {
+                    Intent intent = new Intent(CountdownActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+                countDownStart();
 
             }
         });
@@ -168,6 +169,11 @@ public class CountdownActivity extends AppCompatActivity {
 
 
     private void countDownStart() {
+        linear_layout_2 = findViewById(R.id.linear_layout_2);
+        tv_days = findViewById(R.id.tv_days);
+        tv_hour = findViewById(R.id.tv_hour);
+        tv_minute = findViewById(R.id.tv_minute);
+        tv_second = findViewById(R.id.tv_second);
         runnable = new Runnable() {
             @Override
             public void run() {
@@ -175,6 +181,7 @@ public class CountdownActivity extends AppCompatActivity {
                     handler.postDelayed(this, 1000);
                     SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
                     Date event_date = dateFormat.parse(EVENT_DATE_TIME);
+
                     Date current_date = new Date();
                     if (!current_date.after(event_date)) {
                         long diff = event_date.getTime() - current_date.getTime();
@@ -183,6 +190,10 @@ public class CountdownActivity extends AppCompatActivity {
                         long Minutes = diff / (60 * 1000) % 60;
                         long Seconds = diff / 1000 % 60;
                         //
+
+
+
+
                         tv_days.setText(String.format("%02d", Days));
                         tv_hour.setText(String.format("%02d", Hours));
                         tv_minute.setText(String.format("%02d", Minutes));
@@ -233,6 +244,70 @@ public class CountdownActivity extends AppCompatActivity {
                 Log.d(LOG_APP, databaseError.getDetails());
             }
         });
+
+    }
+
+
+
+    public void setEvent(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.set_event_time_view, null);
+        builder.setView(view);
+        final AlertDialog alert = builder.create();
+
+
+
+/*
+        btnShowDateTime = view.findViewById(R.id.btnShowDateTime);
+
+
+        btnAddEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventName = inputEventName.getText().toString();
+                //check inputs values
+                if (TextUtils.isEmpty(eventName)) {
+                    Toast.makeText(getApplicationContext(), "Please enter event name!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (eventMilis.equals(0)) {
+                    Toast.makeText(getApplicationContext(), "Please pick time !", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //Refresh data, save and start timer
+                getData();
+                countdown = new Countdown(sessionUserID,inputEventName.getText().toString(), eventMilis);
+                mDatabase.child(sessionUserID).setValue(countdown);
+                countDownStart();
+
+            }
+        });
+*/
+
+
+/*
+        btnShowDateTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateTime();
+            }
+        });
+*/
+
+
+
+
+
+
+
+
+
+        alert.show();
+
 
     }
 

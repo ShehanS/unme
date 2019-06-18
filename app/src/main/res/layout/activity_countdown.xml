@@ -8,19 +8,66 @@
     tools:context=".CountdownActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/singup"
-        android:orientation="horizontal"
+        android:layout_height="82dp"
+        android:background="@drawable/list_view"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp">
+        <TextView
+            android:id="@+id/txtUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:gravity="right"
+            android:text="Countdown"
+            android:textSize="14pt" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="636dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="10dp"
+        tools:layout_editor_absoluteY="71dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="101dp"
+            android:background="@drawable/header_title"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtEventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:padding="3dp"
+                android:text="Event Name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/txtEventTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:padding="3dp"
+                android:text="Event Time"
+                android:textColor="@color/inputBox"
+                android:textSize="8pt" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linear_layout_2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="165dp"
+
+            android:background="@drawable/list_view"
 
             android:visibility="visible">
 
@@ -36,8 +83,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="00"
-                    android:textColor="@android:color/white"
-                    android:textSize="20dp"
+                    android:textColor="@color/perpal"
+                    android:textSize="40dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -46,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Days"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/ColorGradent1"
                     android:textSize="20dp"
                     android:textStyle="normal" />
             </LinearLayout>
@@ -64,8 +111,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="00"
-                    android:textColor="@android:color/white"
-                    android:textSize="20dp"
+                    android:textColor="@color/perpal"
+                    android:textSize="40dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -74,14 +121,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Hour"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/ColorGradent1"
                     android:textSize="20dp"
                     android:textStyle="normal" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
 
                 android:orientation="vertical">
@@ -92,8 +139,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="00"
-                    android:textColor="@android:color/white"
-                    android:textSize="20dp"
+                    android:textColor="@color/perpal"
+                    android:textSize="40dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -102,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Minute"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/ColorGradent1"
                     android:textSize="20dp"
                     android:textStyle="normal" />
             </LinearLayout>
@@ -116,6 +163,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+
                     android:orientation="vertical" />
 
                 <TextView
@@ -124,8 +172,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="00"
-                    android:textColor="@android:color/white"
-                    android:textSize="20dp"
+                    android:textColor="@color/perpal"
+                    android:textSize="40dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -134,125 +182,37 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Second"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/ColorGradent1"
                     android:textSize="20dp"
                     android:textStyle="normal" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="680dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="111dp">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="55dp"
-            android:background="@drawable/singup"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="62dp">
+            android:layout_height="107dp"
+            android:orientation="vertical"
 
-
-            <EditText
-                android:id="@+id/txtEvent"
-                android:layout_width="193dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/inputbox"
-                android:ems="10"
-                android:hint="Event Name"
-                android:inputType="text"
-                android:padding="16dp"
-                android:textColor="@color/color1"
-                android:textColorHint="@color/white" />
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="254dp">
 
             <Button
-                android:id="@+id/btnShowDateTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:padding="18dp"
-                android:text="Event Time"
-                android:textColor="@color/white"
-
-                />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="395dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="62dp">
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
+                android:id="@+id/btnChangeEvent"
                 android:layout_width="match_parent"
+                android:background="@drawable/header_title"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:text="Change Event" />
 
-                <TextView
-                    android:id="@+id/My_Event"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="6pt"
-                    android:text="My Event"
-                    android:textColor="@color/white"
-                    android:textSize="12pt" />
-
-                <TextView
-                    android:id="@+id/txtEventName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:padding="3dp"
-                    android:text="Event Name"
-                    android:textColor="@color/white"
-                    android:textSize="10pt" />
-
-                <TextView
-                    android:id="@+id/txtEventTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:padding="3dp"
-                    android:text="Event Time"
-                    android:textColor="@color/white"
-                    android:textSize="10pt" />
-
-                <Button
-                    android:id="@+id/btnAddEvent"
-                    android:layout_width="324dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="60dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:padding="18dp"
-                    android:text="Save"
-
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

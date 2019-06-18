@@ -55,7 +55,7 @@ boolean isValidUser;
         txtWebAddress = findViewById(R.id.txtWeb);
         userType = findViewById(R.id.select1);
         btnSave = findViewById(R.id.btnSave);
-        button2 = findViewById(R.id.button2);
+
         //Load user types from string xml file
 
         //create array adapter and assing to the spinner
@@ -64,12 +64,6 @@ boolean isValidUser;
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userType.setAdapter(adapter1);
 
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkExistingUsers();
-            }
-        });
 
         txtUserName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

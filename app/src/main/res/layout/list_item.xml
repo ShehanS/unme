@@ -13,20 +13,19 @@
 
 
     <TextView
-            android:id="@+id/txtCompany"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="20dp"
-            android:textColor="#00a7f5"
-            />
+        android:id="@+id/txtCompany"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/ColorGradnt2"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/txtCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textColor="#f92a3f"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="14dp" />
 
     <LinearLayout

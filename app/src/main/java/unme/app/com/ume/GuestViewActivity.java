@@ -50,7 +50,10 @@ private ListView listView;
 private String selected,selectedGuest;
 private RadioGroup radioGroup;
 private RadioButton radioButton;
+private Button btnAll,btn1,btn2,btn3;
 int selectID;
+private String fliterValue = "all";
+private String priority;
 
 private int selectedId;
     private int count, totMembers, currentMembers, currentVariance;;
@@ -70,6 +73,49 @@ private int selectedId;
         sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE); //session save name
         sessionUserID = sharedPreferences.getString("USER_ID", null);//session save key user id
         sessionUser = sharedPreferences.getString("USER", null); //session save key username
+
+        btnAll = findViewById(R.id.btnAll);
+        btn1 = findViewById(R.id.btn1);
+        btn2 = findViewById(R.id.btn2);
+        btn3 = findViewById(R.id.btn3);
+
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.clear();
+                currentMembers = 0;
+                fliterValue = "1";
+                loadListData();
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               adapter.clear();
+                currentMembers = 0;
+                fliterValue = "2";
+                loadListData();
+            }
+        });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               adapter.clear();
+                currentMembers = 0;
+                fliterValue = "3";
+                loadListData();
+            }
+        });
+        btnAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+adapter.clear();
+                currentMembers = 0;
+                fliterValue = "all";
+                loadListData();
+            }
+        });
 
 
         title = findViewById(R.id.Guest);
@@ -210,10 +256,22 @@ private int selectedId;
         btnAddGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 radioGroup = view.findViewById(R.id.radioGroup);
                 selectedId = radioGroup.getCheckedRadioButtonId();
                 radioButton = radioGroup.findViewById(selectedId);
-               String priority = radioButton.getText().toString();
+
+                if(radioGroup.getCheckedRadioButtonId()==-1){
+                    Toast.makeText(getApplicationContext(),"Please select priority !",Toast.LENGTH_LONG).show();
+                    return;
+                }else{
+                    priority = radioButton.getText().toString();
+
+
+
+                }
+
+
                 //guestName.setText(priority);
                 //get current date
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
@@ -238,13 +296,13 @@ private int selectedId;
                     return;
                 }
 
-                // add guest count
-               adapter.clear();
-                currentMembers=0;
+
 
                Guest guest = new Guest(sessionUserID, currentDate, GuestName, GuestContact, count,priority);
                mDatabase.child(sessionUserID).child(key).setValue(guest);
-
+                // add guest count
+                adapter.clear();
+                currentMembers=0;
                 Toast.makeText(getApplicationContext(), "Adding guest !", Toast.LENGTH_SHORT).show();
                 alert.dismiss();
             }
@@ -290,6 +348,8 @@ private int selectedId;
 
     public void loadListData(){
 
+
+
         mDatabase = FirebaseDatabase.getInstance().getReference("guest").child(sessionUserID);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, list);
         listView.setAdapter(adapter);
@@ -298,12 +358,34 @@ private int selectedId;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         if(dataSnapshot.exists()) {
+
                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    Guest guest = childSnapshot.getValue(Guest.class);
-                    System.out.println(guest.getName()+guest.getCount());
-                    list.add(guest.getName());
-                   currentMembers += (guest.getCount());
-                   adapter.notifyDataSetChanged();
+                   Guest guest = childSnapshot.getValue(Guest.class);
+                   if (fliterValue.equals("1")) {
+                       if(guest.getPriority().equals("1")) {
+                           list.add(guest.getName());
+                           currentMembers += (guest.getCount());
+                           adapter.notifyDataSetChanged();
+                       }
+
+                   }else if(fliterValue.equals("2")){
+                      if (guest.getPriority().equals("2")) {
+                          list.add(guest.getName());
+                          currentMembers += (guest.getCount());
+                          adapter.notifyDataSetChanged();
+                      }
+                   }else if(fliterValue.equals("3")){
+                          if (guest.getPriority().equals("3")) {
+                              list.add(guest.getName());
+                              currentMembers += (guest.getCount());
+                              adapter.notifyDataSetChanged();
+                          }
+                      }else if(fliterValue.equals("all")) {
+
+                       list.add(guest.getName());
+                       currentMembers += (guest.getCount());
+                       adapter.notifyDataSetChanged();
+                   }
 
 
     }
@@ -323,6 +405,7 @@ private int selectedId;
 
 
         });
+
 
 
 
@@ -377,10 +460,11 @@ private int selectedId;
 
 
         btnGuestDelete.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
-
+                adapter.clear();
                 mDatabase = FirebaseDatabase.getInstance().getReference("guest").child(sessionUserID);
                 Query query = mDatabase.orderByChild("name").equalTo(selectedGuest);
                 query.addValueEventListener(new ValueEventListener() {
@@ -390,8 +474,9 @@ private int selectedId;
                             dataSnapshot1.getRef().removeValue();
                             adapter.clear();
                             currentMembers = 0;
-                            adapter.notifyDataSetChanged();
+
                         }
+                        adapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -412,24 +497,28 @@ btnGuestUpdate.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         //check empty
-        final String GuestName, GuestContact;
+        adapter.clear();
+
+        final String GuestName, GuestContact, GuestCount;
         mDatabase = FirebaseDatabase.getInstance().getReference("guest").child(sessionUserID);
         Query query = mDatabase.orderByChild("name").equalTo(selectedGuest);
 
 
         GuestName = guestName.getEditableText().toString().trim();
         GuestContact = guestContact.getEditableText().toString().trim();
-        count = Integer.parseInt(guestCount.getEditableText().toString().trim());
+        GuestCount = guestCount.getEditableText().toString().trim();
+
+
         if (TextUtils.isEmpty(GuestName)) {
             Toast.makeText(getApplicationContext(), "Please enter guest name!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (count==0) {
+        if (TextUtils.isEmpty(GuestCount)) {
             Toast.makeText(getApplicationContext(), "Please enter guest count!", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        count = Integer.parseInt(guestCount.getEditableText().toString().trim());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -440,11 +529,13 @@ btnGuestUpdate.setOnClickListener(new View.OnClickListener() {
                     dataSnapshot1.getRef().child("contact").setValue(GuestContact);
                     dataSnapshot1.getRef().child("count").setValue(count);
 
-                    adapter.clear();
-                    currentMembers = 0;
 
-                   adapter.notifyDataSetChanged();
+
                 }
+
+                currentMembers = 0;
+
+                adapter.notifyDataSetChanged();
 
                 alert.dismiss();
             }

@@ -2,73 +2,65 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="395dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyAllServicesActivity"
     android:background="@mipmap/background"
-    >
+    tools:context=".MyAllServicesActivity">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="568dp"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:background="@drawable/list_view"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/Guest"
+                android:id="@+id/Services"
 
-                android:layout_width="301dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10pt"
                 android:text="My Services"
                 android:textColor="@color/white"
                 android:textSize="12pt" />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="734dp"
-            android:layout_gravity="center_vertical"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="604dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:orientation="vertical">
 
                     <ListView
                         android:id="@+id/listView"
                         android:layout_width="match_parent"
-                        android:layout_height="505dp"
-                        android:layout_marginBottom="30dp"
+                        android:layout_height="531dp"
                         android:alwaysDrawnWithCache="true"
+                        android:background="@drawable/header_title"
                         android:dividerHeight="1dp"
                         android:horizontalSpacing="3dp"
+                        android:overScrollMode="ifContentScrolls"
                         android:scrollingCache="true"
                         android:smoothScrollbar="true"
                         android:stretchMode="columnWidth"
-                        android:verticalSpacing="3dp" />
+                        android:verticalSpacing="3dp"
+                        tools:overScrollMode="always" />
                 </LinearLayout>
             </ScrollView>
 
         </LinearLayout>
-
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>

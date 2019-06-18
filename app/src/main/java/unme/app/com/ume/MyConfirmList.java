@@ -49,12 +49,12 @@ public class MyConfirmList extends AppCompatActivity {
     private String sessionUserID, sessionUser;
     private Button btnClose, btnRemove, btnSendRequest,btnBudget;
     private String ServiceID;
-    private TextView title, company, name, contact, status;
+    private TextView title, company, name, contact, status, notice;
     private String uniqueId;
     private Boolean getData;
     private EditText txtBudget;
     String Title,Company,Name,ContactNum,Status;
-    String userId,fullName,Contact,Email,Web,Address,Service;
+    String userId,fullName,Contact,Email,Web,Address,Service, Notice;
     private double mybudget=0.00;
     private boolean isEventDate = false;
     private Long eventMilis;
@@ -102,11 +102,13 @@ public class MyConfirmList extends AppCompatActivity {
         name = view.findViewById(R.id.txtName);
         contact = view.findViewById(R.id.txtContact);
         status = view.findViewById(R.id.txtStatus);
+        notice = view.findViewById(R.id.txtNotice);
         title.setText(Title);
         company.setText(Company);
         name.setText(Name);
         contact.setText(ContactNum);
         status.setText(Status);
+
         btnClose = view.findViewById(R.id.btnClose);
         btnRemove = view.findViewById(R.id.btnRemove);
         txtBudget = view.findViewById(R.id.txtBudget);
@@ -131,6 +133,7 @@ public class MyConfirmList extends AppCompatActivity {
                     contact.setText(myServiceList.getContact());
                     status.setText(myServiceList.getStatus());
                     txtBudget.setText(String.valueOf(myServiceList.getBudget()));
+                    notice.setText(myServiceList.getMessage());
                     Service = myServiceList.getCategory();
                     Status = myServiceList.getStatus();
 

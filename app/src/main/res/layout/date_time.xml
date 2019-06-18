@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/singup"
+
     >
 
     <ScrollView
@@ -12,38 +12,78 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
 
-            >
-
-            <DatePicker
-                android:id="@+id/date_picker"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="4"
-                android:calendarViewShown="true"
-                android:isScrollContainer="true"
-                android:spinnersShown="false" />
-
-            <TimePicker
-                android:id="@+id/time_picker"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="4"
-                android:calendarViewShown="false"
-                android:isScrollContainer="true"
-                 />
-
-            <Button
-                android:id="@+id/date_time_set"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="Set"
-                android:background="@drawable/button"
-                />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:id="@+id/My_Event"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="6pt"
+                        android:text="My Event"
+                        android:textColor="@color/white"
+                        android:textSize="12pt" />
+
+                    <EditText
+                        android:id="@+id/EventName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Event Name"
+                        android:inputType="textPersonName" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="8dp"
+
+                >
+
+                <DatePicker
+                    android:id="@+id/date_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:calendarViewShown="true"
+                    android:headerBackground="@color/colorPrimary"
+                    android:isScrollContainer="true"
+                    android:spinnersShown="false" />
+
+                <TimePicker
+                    android:id="@+id/time_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:calendarViewShown="false"
+                    android:headerBackground="@color/colorPrimary"
+                    android:isScrollContainer="true" />
+
+                <Button
+                    android:id="@+id/date_time_set"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button"
+                    android:text="Set" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

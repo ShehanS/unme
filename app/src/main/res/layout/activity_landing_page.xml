@@ -9,121 +9,130 @@
     >
 
     <LinearLayout
-    android:id="@+id/main"
-    android:layout_width="395dp"
-    android:layout_height="678dp"
-    android:orientation="vertical"
-    tools:layout_editor_absoluteX="8dp"
-    tools:layout_editor_absoluteY="8dp">
-
-    <LinearLayout
-        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/header"
-        android:orientation="vertical"
-
-        >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            >
+            android:layout_height="80dp"
+            android:background="@drawable/list_view"
+            android:orientation="vertical"
 
-            <ImageButton
-                android:id="@+id/btnProfile"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_vertical|right"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/profile_button"
-                app:srcCompat="@mipmap/user" />
 
-            <TextView
-                android:id="@+id/txtUsername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="15dp"
-                android:gravity="right"
-                android:text="Hi..."
-                android:textSize="14pt" />
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <LinearLayout
+                android:layout_width="403dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnProfile"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/profile_button"
+                    app:srcCompat="@mipmap/user" />
+
+                <TextView
+                    android:id="@+id/txtUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="right"
+                    android:text="Hi..."
+                    android:textSize="14pt" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-        <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="30dp">
-
-        <TableRow
+        <LinearLayout
+            android:id="@+id/main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            >
+            android:layout_margin="30dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:background="@drawable/sm_box"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
 
-            <ImageButton
-                android:id="@+id/btnCountDown"
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="30dp"
-                app:srcCompat="@mipmap/countdown" />
+                android:layout_height="wrap_content">
 
-            <ImageButton
-                android:id="@+id/btnTodo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="30dp"
-                app:srcCompat="@mipmap/todo" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal">
 
-            <ImageButton
-                android:id="@+id/btnGust"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="30dp"
-                app:srcCompat="@mipmap/gust" />
+                    <ImageButton
+                        android:id="@+id/btnCountDown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#00000000"
+                        android:padding="30dp"
+                        app:srcCompat="@mipmap/countdown" />
 
-        </TableRow>
+                    <ImageButton
+                        android:id="@+id/btnTodo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00000000"
+                        android:padding="30dp"
+                        app:srcCompat="@mipmap/todo" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+                    <ImageButton
+                        android:id="@+id/btnGust"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00000000"
+                        android:padding="30dp"
+                        app:srcCompat="@mipmap/gust" />
 
-            <ImageButton
-                android:id="@+id/btnSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="30dp"
-                app:srcCompat="@mipmap/seo" />
+                </TableRow>
 
-            <ImageButton
-                android:id="@+id/btnMyList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="30dp"
-                app:srcCompat="@mipmap/clipboard" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <ImageButton
-                android:id="@+id/btnMyListConfirm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="30dp"
-                app:srcCompat="@mipmap/clipboard" />
-        </TableRow>
+                    <ImageButton
+                        android:id="@+id/btnSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#00000000"
+                        android:padding="30dp"
+                        app:srcCompat="@mipmap/seo" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+                    <ImageButton
+                        android:id="@+id/btnMyList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#00000000"
+                        android:padding="30dp"
+                        app:srcCompat="@mipmap/clipboard" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </TableLayout>
+                </TableRow>
 
-</LinearLayout>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </TableLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -15,22 +15,30 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
 
+
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
-        <TextView
-            android:id="@+id/Services"
-
-            android:layout_width="301dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10pt"
-            android:text="Services"
-            android:textColor="@color/white"
-            android:textSize="12pt" />
+            android:background="@drawable/list_view"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Services"
+
+                android:layout_width="301dp"
+                android:layout_height="wrap_content"
+                android:padding="10pt"
+                android:text="Services"
+                android:textColor="@color/white"
+                android:textSize="12pt" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="734dp"
+            android:layout_height="738dp"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="8dp"
@@ -43,11 +51,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:orientation="vertical"
 
                     >
 
                     <ListView
+                        android:background="@drawable/header_title"
                         android:id="@+id/listView"
                         android:layout_width="412dp"
                         android:layout_height="603dp"

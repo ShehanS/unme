@@ -39,7 +39,7 @@ public class MyListActivity extends AppCompatActivity {
     private String sessionUserID, sessionUser, userID, serviceID;
     private Button btnClose,btnRemove,btnConfirm;
     private String ServiceID;
-    private  TextView title, company, name, contact, packge;
+    private  TextView title, company, name, contact, packge, notice;
 
 
     @Override
@@ -78,6 +78,7 @@ listLoad();
         name = view.findViewById(R.id.txtName);
         contact = view.findViewById(R.id.txtContact);
         packge = view.findViewById(R.id.txtPackge);
+        notice = view.findViewById(R.id.txtNotice);
         final AlertDialog alert = builder.create();
         mDatabase = FirebaseDatabase.getInstance().getReference("my-services").child(sessionUserID);
         Query query = mDatabase.orderByChild("serviceID").equalTo(ServiceID);
@@ -92,6 +93,7 @@ listLoad();
                         company.setText(myServiceList.getCompany());
                         name.setText(myServiceList.getName());
                         contact.setText(myServiceList.getContact());
+                        notice.setText(myServiceList.getMessage());
 
                     }
 

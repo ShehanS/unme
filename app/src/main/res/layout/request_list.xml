@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textColor="#00a7f5"
+        android:textColor="@color/perpal"
         android:textSize="20dp" />
 
     <LinearLayout
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="#f92a3f"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="14dp" />
         </LinearLayout>
 

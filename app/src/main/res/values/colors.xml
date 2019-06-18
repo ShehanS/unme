@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimary">#3a3a3a</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#d81b60</color>
     <color name="ColorGradent1">#AD01A7 </color>
     <color name="ColorGradnt2">#AD0169 </color>
-    <color name="inputBox">#00574B</color>
+    <color name="inputBox">#373a3a</color>
     <color name="color1">#00574B</color>
     <color name="input_form_details">#00574B</color>
     <color name="input_form_lights">#1affffff</color>
     <color name="input_form_medium">#66ffffff</color>
     <color name="white">#008577</color>
     <color name="sky_blue">#00DFDF</color>
-    <color name="popup">#ffff</color>
+    <color name="pureWhite">#ffff</color>
+    <color name="yellow">#ffdc00</color>
+    <color name="perpal">#581845 </color>
 
 </resources>

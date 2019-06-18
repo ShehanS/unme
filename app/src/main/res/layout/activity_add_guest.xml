@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/background"
+
     >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_height="485dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView6"
@@ -26,11 +25,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            android:padding="10dp"
             android:divider="@drawable/divider"
             android:orientation="vertical"
-            android:showDividers="middle"
-            >
+            android:padding="10dp"
+            android:showDividers="middle">
 
             <EditText
                 android:id="@+id/guestName"

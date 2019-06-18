@@ -167,12 +167,12 @@ public class ClientActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mDatabase = FirebaseDatabase.getInstance().getReference().child("client-request").child(clientUserID).child(clientServiceID);
                 Map<String, Object> updatesClient = new HashMap<String, Object>();
-                updatesClient.put("status", "Pending");
+                updatesClient.put("status", "Cancel");
                 mDatabase.updateChildren(updatesClient); //force to the update
 
                 mDatabase = FirebaseDatabase.getInstance().getReference().child("my-services").child(clientUserID).child(clientServiceID);
                 Map<String, Object> updatesMyService = new HashMap<String, Object>();
-                updatesMyService.put("status", "Pending");
+                updatesMyService.put("status", "Cancel");
                 mDatabase.updateChildren(updatesMyService); //force to the update
                 Toast.makeText(getApplicationContext(), "Cancel user request !", Toast.LENGTH_SHORT).show();
             }

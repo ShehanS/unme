@@ -20,7 +20,7 @@ public class LandingPageActivity extends AppCompatActivity {
     private TextView userLogin;
     private SharedPreferences sharedPreferences;
     String sessionUserID, sessionUser;
-    private ImageButton btnProfile, btnLogOut, btnEditProfile, btnCountDown, btnToDo, btnGuest, btnSearch, btnMyList, btnMyListConfirm;
+    private ImageButton btnProfile, btnLogOut, btnEditProfile, btnCountDown, btnToDo, btnGuest, btnSearch, btnMyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class LandingPageActivity extends AppCompatActivity {
         btnSearch = findViewById(R.id.btnSearch);
         btnToDo =  findViewById(R.id.btnTodo);
         btnMyList = findViewById(R.id.btnMyList);
-        btnMyListConfirm = findViewById(R.id.btnMyListConfirm);
+
 
         sharedPreferences = getSharedPreferences("USER_LOGIN", MODE_PRIVATE); //session save name
         sessionUserID = sharedPreferences.getString("USER_ID", null);//session save key user id
@@ -88,13 +88,7 @@ public class LandingPageActivity extends AppCompatActivity {
             }
         });
 
-        btnMyListConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Intent intent =new Intent(LandingPageActivity.this, MyConfirmList.class);
-               startActivity(intent);
-            }
-        });
+
     }
 
     public void alertModal() {

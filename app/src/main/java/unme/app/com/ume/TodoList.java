@@ -95,7 +95,7 @@ public class TodoList extends AppCompatActivity {
         btnSaveTask = view.findViewById(R.id.btnSave);
         taskName = view.findViewById(R.id.txtTaskName);
         task = view.findViewById(R.id.txtTask);
-        checkedTextView = view.findViewById(R.id.taskStatus);
+        //checkedTextView = view.findViewById(R.id.taskStatus);
         mDatabase = FirebaseDatabase.getInstance().getReference("todo");
         final AlertDialog alert = builder.create();
         alert.show();

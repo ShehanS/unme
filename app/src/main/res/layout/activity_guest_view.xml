@@ -21,6 +21,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/list_view"
             android:orientation="horizontal">
 
             <TextView
@@ -48,7 +49,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="82dp"
+            android:layout_height="133dp"
+            android:background="@drawable/header_title"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -117,6 +119,51 @@
                     android:textColor="@color/white"
                     android:textSize="8pt" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnAll"
+                        android:background="@drawable/button"
+                        android:layout_width="178dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="All" />
+
+                    <Button
+                        android:id="@+id/btn1"
+                        android:background="@drawable/button"
+                        android:layout_width="178dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="1" />
+
+                    <Button
+                        android:id="@+id/btn2"
+                        android:background="@drawable/button"
+                        android:layout_width="178dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="2" />
+
+                    <Button
+                        android:id="@+id/btn3"
+                        android:background="@drawable/button"
+                        android:layout_width="178dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="3" />
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -124,6 +171,7 @@
             android:layout_height="734dp"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
+            android:background="@drawable/sm_box"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="8dp">
 
@@ -134,15 +182,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+
+                    >
 
                     <ListView
                         android:id="@+id/listView"
+                        android:background="@drawable/list_view"
+
                         android:layout_width="match_parent"
                         android:layout_height="427dp"
                         android:layout_marginBottom="30dp"
                         android:alwaysDrawnWithCache="true"
-                        android:dividerHeight="1dp"
+                        android:dividerHeight="3dp"
+                        android:listSelector="@drawable/list_view"
                         android:horizontalSpacing="3dp"
                         android:scrollingCache="true"
                         android:smoothScrollbar="true"

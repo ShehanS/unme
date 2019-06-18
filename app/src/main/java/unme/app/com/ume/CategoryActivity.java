@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+
+import unme.app.com.ume.model.MyServiceList;
 
 public class CategoryActivity extends AppCompatActivity {
     private ImageButton btnWVenus, btnWstationayry, btnWdecoration, btnWbouqets, btnWCultural, btnWwear, btnWBridal, btnWcake,
             btnWent, btnWtransport, btnWphotography, btnWhoneymoon;
     private Intent intent;
+    private Button btnList, btnConfirmList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +30,8 @@ public class CategoryActivity extends AppCompatActivity {
         btnWtransport = findViewById(R.id.btnWtransport);
         btnWphotography = findViewById(R.id.btnWphotography);
         btnWhoneymoon = findViewById(R.id.btnWhoneymoon);
+        btnList = findViewById(R.id.btnList);
+        btnConfirmList = findViewById(R.id.btnConfirmList);
         intent = new Intent(CategoryActivity.this, SearchServicesActivity.class);
         btnWVenus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,5 +126,21 @@ public class CategoryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CategoryActivity.this,MyListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnConfirmList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CategoryActivity.this,MyConfirmList.class);
+                startActivity(intent);
+            }
+        });
+
         }
 }

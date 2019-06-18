@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/singup"
+
     android:divider="@drawable/divider"
 
     >
@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="735dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp"
             tools:layout_editor_absoluteX="8dp"
@@ -31,7 +31,7 @@
 
             <LinearLayout
                 android:layout_width="303dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:divider="@drawable/divider"
                 android:orientation="vertical"
                 android:showDividers="middle"
@@ -54,23 +54,15 @@
                 <EditText
                     android:id="@+id/txtTask"
                     android:layout_width="match_parent"
-                    android:layout_height="175dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/inputbox"
                     android:ems="10"
                     android:hint="Task"
-                    android:inputType="text"
+                    android:inputType="text |textMultiLine"
                     android:padding="16dp"
                     android:textColor="@color/color1"
                     android:textColorHint="@color/white" />
 
-
-                <CheckedTextView
-                    android:id="@+id/taskStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ongoing"
-                    android:textColor="@color/white"
-                    android:textSize="8pt" />
 
                 <Button
                     android:id="@+id/btnSave"

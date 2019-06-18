@@ -22,7 +22,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@drawable/list_view"
+            >
 
             <TextView
                 android:id="@+id/MyBudget"
@@ -35,7 +37,7 @@
                 android:textSize="12pt" />
 
             <Button
-                android:id="@+id/btnAdd"
+                android:id="@+id/btnAddBudget"
                 android:layout_width="wrap_content"
                 android:layout_height="64dp"
                 android:layout_marginRight="10dp"
@@ -49,7 +51,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="85dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/header_title"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -59,48 +62,29 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/txtExpetedBudget"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Expeted Budget : 25000"
+                    android:text="My Eexpected Budget"
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/txtCurrentBudget"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Current Budget : 5000"
+                    android:text="Current Budget"
                     android:textSize="18dp" />
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="812dp"
+            android:layout_height="523dp"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="8dp">
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="WEDDING WEARE"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="90000"
-                android:textSize="18dp" />
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -111,6 +95,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <ListView
+                        android:id="@+id/listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="505dp"
+                        android:layout_marginBottom="30dp"
+                        android:alwaysDrawnWithCache="true"
+                        android:dividerHeight="1dp"
+                        android:horizontalSpacing="3dp"
+                        android:scrollingCache="true"
+                        android:smoothScrollbar="true"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="3dp" />
                 </LinearLayout>
             </ScrollView>
 
