@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,12 +31,12 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
 public static String LOG_APP = "U&ME : ";
 private Spinner userType;
-private Button btnSave, button2;
+private Button btnSave, button2, check;
 private DatabaseReference mDatabase, mDatabase1;
 private EditText txtWebAddress, txtLastName, txtFirstName, txtUserName, txtPhone, txtEmail, txtPassword;
 private String user_uuid;
-String UserID, UserName, Password, FirstName, LastName, Contact, Email, WebAddress, UserType;
-boolean isValidUser;
+String UserID, UserName, Password, FirstName, LastName, Contact, Email, WebAddress, UserType,  checkUser;
+public boolean isValidUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,8 @@ boolean isValidUser;
 
 
 
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("users");
         //create object from xml
         mDatabase = FirebaseDatabase.getInstance().getReference();
         txtUserName = findViewById(R.id.txtUsername);
@@ -55,6 +58,7 @@ boolean isValidUser;
         txtWebAddress = findViewById(R.id.txtWeb);
         userType = findViewById(R.id.select1);
         btnSave = findViewById(R.id.btnSave);
+        check = findViewById(R.id.btnCheck);
 
         //Load user types from string xml file
 
@@ -65,26 +69,29 @@ boolean isValidUser;
         userType.setAdapter(adapter1);
 
 
-        txtUserName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    Toast.makeText(getApplicationContext(), "Focus Lose", Toast.LENGTH_SHORT).show();
-                }else{
-                    checkExistingUsers();
-                    Toast.makeText(getApplicationContext(), "Get Focus", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
+
+check.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        checkExistingUsers();
+
+
+
+    }
+});
 
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 UserName = txtUserName.getEditableText().toString().trim();
-
-                if (isValidUser==false) {
-
+                checkExistingUsers();
+                if (checkUser==("FOUND")) {
+                    Toast.makeText(getApplicationContext(), "Username is already taken !", Toast.LENGTH_SHORT).show();
+                }else{
+                    UserName = txtUserName.getEditableText().toString().trim();
 
                     user_uuid = UUID.randomUUID().toString();
                     //get edtiable text box value into the variable
@@ -94,14 +101,12 @@ boolean isValidUser;
                     Password = txtPassword.getEditableText().toString().trim();
 
 
-
-
                     FirstName = txtFirstName.getEditableText().toString().trim();
 
                     txtFirstName.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            checkExistingUsers();
+
                         }
                     });
 
@@ -170,11 +175,11 @@ boolean isValidUser;
                     finish(); //close singup page
                     startActivity(intent);//start login form
 
-                }else{
-                    Toast.makeText(MainActivity.this, "Username was already taken !", Toast.LENGTH_LONG).show();
                 }
 
+
             }
+
 
 
         });
@@ -184,35 +189,42 @@ boolean isValidUser;
 
     }
 
-    public void checkExistingUsers(){
 
-        System.out.println("Check validation");
+    public void checkExistingUsers(){
         UserName = txtUserName.getEditableText().toString().trim();
-        mDatabase1 = FirebaseDatabase.getInstance().getReference("users");
-       ValueEventListener valueEventListener = new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot userDataSnapshot: dataSnapshot.getChildren()){
-                    for(DataSnapshot childSnapshot: userDataSnapshot.getChildren()){
+              //Get firebase table path
+
+        Query query = mDatabase.orderByChild("username").equalTo(UserName);          //Check entered username in the User collection
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {// check database availability
+                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) { // check all the data in the database one by one
                         UserModel userModel = childSnapshot.getValue(UserModel.class);
-                        if (userModel.getUsername()!=null&&userModel.getUsername().equalsIgnoreCase(UserName)) {
-                            isValidUser = true;
+
+                        if (userModel.getUsername().equals(UserName)) {
+                            System.out.println("FOUND");
+                            checkUser = "FOUND";
+
+
                         }else{
-                           isValidUser = false;
+                            checkUser = "NOTFOUND";
                         }
 
                     }
                 }
-           }
+            }
+            //show database error
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println(databaseError.toException());
+            }
+        });
 
-           @Override
-           public void onCancelled(@NonNull DatabaseError databaseError) {
 
-           }
-
-
-       };
-        mDatabase.addListenerForSingleValueEvent(valueEventListener);
     }
+
+
+
 
 }
