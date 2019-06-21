@@ -7,200 +7,202 @@
     tools:context=".EditServiceActivity"
     android:background="@mipmap/background"
     >
-    <LinearLayout
-        android:layout_width="402dp"
-        android:layout_height="26dp"
-        android:orientation="vertical"
-
-
-        android:paddingLeft="0dp"
-        android:paddingBottom="0dp"
-        tools:layout_editor_absoluteX="-2dp"
-        tools:layout_editor_absoluteY="5dp">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="370dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="Edit Services"
-            android:textColor="@color/color1"
-            android:textSize="18sp" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="743dp"
-        android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingTop="30dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="10dp"
-        tools:layout_editor_absoluteY="6dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="704dp">
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_view"
+            android:orientation="vertical">
 
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/Services"
 
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10pt"
+                android:text="My Services"
+                android:textColor="@color/white"
+                android:textSize="12pt" />
+        </LinearLayout>
 
-                android:divider="@drawable/divider"
-                android:orientation="vertical"
-                android:showDividers="middle"
-                android:verticalScrollbarPosition="defaultPosition">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="743dp"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="30dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            tools:layout_editor_absoluteY="6dp">
 
-                <EditText
-                    android:id="@+id/txtCompany"
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="704dp">
+
+
+                <LinearLayout
+
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
+                    android:layout_height="match_parent"
+android:background="@drawable/header_title"
+                    android:divider="@drawable/divider"
+                    android:orientation="vertical"
+                    android:showDividers="middle"
+                    android:verticalScrollbarPosition="defaultPosition">
 
-                    android:hint="Company Name"
-                    android:inputType="text"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
+                    <EditText
+                        android:id="@+id/txtCompany"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
 
-                <EditText
-                    android:id="@+id/txtFirstName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
+                        android:hint="Company Name"
+                        android:inputType="text"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
 
-                    android:hint="First Name"
-                    android:inputType="text"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
+                    <EditText
+                        android:id="@+id/txtFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
 
-                <EditText
-                    android:id="@+id/txtLastName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
+                        android:hint="First Name"
+                        android:inputType="text"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
 
-                    android:hint="Last Name"
-                    android:inputType="text"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
+                    <EditText
+                        android:id="@+id/txtLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
 
-                <EditText
-                    android:id="@+id/txtContact"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                        android:hint="Last Name"
+                        android:inputType="text"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
 
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
+                    <EditText
+                        android:id="@+id/txtContact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-                    android:hint="Phone"
-                    android:inputType="phone"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
 
-                <EditText
-                    android:id="@+id/txtEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
+                        android:hint="Phone"
+                        android:inputType="phone"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
 
-                    android:hint="Email"
-                    android:inputType="textEmailAddress"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
+                    <EditText
+                        android:id="@+id/txtEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
 
-                <EditText
-                    android:id="@+id/txtAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
 
-                    android:hint="Address"
-                    android:inputType="text"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
+                    <EditText
+                        android:id="@+id/txtWeb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
 
-                <EditText
-                    android:id="@+id/txtWeb"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
+                        android:hint="Website"
+                        android:inputType="textWebEditText"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
 
-                    android:hint="Website"
-                    android:inputType="textWebEditText"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
+                    <EditText
+                        android:id="@+id/txtAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
 
-                <EditText
-                    android:id="@+id/txtCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
+                        android:hint="Address"
+                        android:inputType="text"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
 
-                    android:hint="Category"
-                    android:inputType="textWebEditText"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
+                    <EditText
+                        android:id="@+id/txtCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
 
-                <EditText
-                    android:id="@+id/txtAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
+                        android:hint="Category"
+                        android:inputType="textWebEditText"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
 
-                    android:hint=" Packages"
-                    android:inputType="numberDecimal"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
+                    <EditText
+                        android:id="@+id/txtAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
 
-
-                <EditText
-                    android:id="@+id/txtMessage"
-                    android:layout_width="match_parent"
-                    android:layout_height="106dp"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-                    android:hint="Message"
-                    android:inputType="textMultiLine"
-                    android:padding="16dp"
-                    android:singleLine="false"
-                    android:textColor="@color/color1" />
-
-                <Button
-                    android:id="@+id/btnUpdate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button"
-                    android:text="UPDATE"
-                    android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <Button
-                    android:id="@+id/btnDelete"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="180dp"
-                    android:background="@drawable/button"
-                    android:text="Delete"
-                    android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                        android:hint=" Packages"
+                        android:inputType="numberDecimal"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
 
 
-            </LinearLayout>
-        </ScrollView>
+                    <EditText
+                        android:id="@+id/txtMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="106dp"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
+
+                        android:hint="Message"
+                        android:inputType="textMultiLine"
+                        android:padding="16dp"
+                        android:singleLine="false"
+                        android:textColor="@color/color1" />
+
+                    <Button
+                        android:id="@+id/btnUpdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button"
+                        android:text="UPDATE"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Button
+                        android:id="@+id/btnDelete"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="180dp"
+                        android:background="@drawable/button"
+                        android:text="Delete"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

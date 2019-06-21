@@ -11,9 +11,10 @@ public class ClientRequest {
     private boolean requestStatus;
     private String eventDate;
     private String status;
+    private String serviceUserID;
 
 
-    public ClientRequest(String userId, String name, String contact, String email, String web, String service, String serviceId, boolean requestStatus, String eventDate, String status) {
+    public ClientRequest(String userId, String name, String contact, String email, String web, String service, String serviceId, boolean requestStatus, String eventDate, String status, String serviceUserID) {
         this.userId = userId;
         this.name = name;
         this.contact = contact;
@@ -24,6 +25,7 @@ public class ClientRequest {
         this.requestStatus = requestStatus;
         this.eventDate = eventDate;
         this.status = status;
+        this.serviceUserID = serviceUserID;
     }
     private ClientRequest(){}
     public String getUserId() {
@@ -104,5 +106,13 @@ public class ClientRequest {
 
     public void setRequestStatus(boolean requestStatus) {
         this.requestStatus = requestStatus;
+    }
+
+    public String getServiceUserID() {
+        return serviceUserID;
+    }
+
+    public void setServiceUserID(String serviceUserID) {
+        this.serviceUserID = serviceUserID;
     }
 }

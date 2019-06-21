@@ -63,7 +63,7 @@ public class ClientActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                TextView serviceId = view.findViewById(R.id.txtServiceID);
+                TextView serviceId = view.findViewById(R.id.txtService);
                 ServiceID = serviceId.getText().toString();
                 System.out.println("OnItemClicking "+ServiceID);
 
@@ -77,7 +77,7 @@ public class ClientActivity extends AppCompatActivity {
 
     public void LoadList(){
         mClientList = new ArrayList<>();
-
+        System.out.println("SESSION USER "+sessionUserID);
         mDatabase = FirebaseDatabase.getInstance().getReference("client-request");
         ValueEventListener roomsValueEventListener = new ValueEventListener() {
             @Override
@@ -86,17 +86,20 @@ public class ClientActivity extends AppCompatActivity {
 
                     for(DataSnapshot childSnapshot : userDataSnapshot.getChildren()) {
                         ClientRequest client = childSnapshot.getValue(ClientRequest.class);
-                        mClientList.add(new RequestClientList(client.getUserId(), client.getName(), client.getContact(), client.getService(), client.getServiceId()));
-                        requestClientAdapter = new RequestClientAdapter(getApplicationContext(), mClientList);
-                        clientName = client.getName();
-                        clientContact = client.getContact();
-                        clientEventDate = client.getEventDate();
-                        clientStatus = client.getStatus();
-                        clientUserID = client.getUserId();
-                        clientServiceID = client.getServiceId();
-                        clientRequestService = client.getService();
-                        listView.setAdapter(requestClientAdapter);
-                        requestClientAdapter.notifyDataSetChanged();
+                        System.out.println("Client Userid "+client.getServiceUserID());
+                        if (client.getServiceUserID().equals(sessionUserID)) {
+                            mClientList.add(new RequestClientList(client.getUserId(), client.getName(), client.getContact(), client.getService(), client.getServiceId()));
+                            requestClientAdapter = new RequestClientAdapter(getApplicationContext(), mClientList);
+                            clientName = client.getName();
+                            clientContact = client.getContact();
+                            clientEventDate = client.getEventDate();
+                            clientStatus = client.getStatus();
+                            clientUserID = client.getUserId();
+                            clientServiceID = client.getServiceId();
+                            clientRequestService = client.getService();
+                            listView.setAdapter(requestClientAdapter);
+                            requestClientAdapter.notifyDataSetChanged();
+                        }
                     }
                 }
             }

@@ -60,9 +60,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="30dp"
+            android:background="@drawable/sm_box"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:background="@drawable/sm_box"
+            android:padding="10dp"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="8dp">
 
@@ -75,29 +76,69 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal">
 
-                    <ImageButton
-                        android:id="@+id/btnCountDown"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#00000000"
-                        android:padding="30dp"
-                        app:srcCompat="@mipmap/countdown" />
-
-                    <ImageButton
-                        android:id="@+id/btnTodo"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#00000000"
-                        android:padding="30dp"
-                        app:srcCompat="@mipmap/todo" />
+                        android:orientation="vertical">
 
-                    <ImageButton
-                        android:id="@+id/btnGust"
+                        <ImageButton
+                            android:id="@+id/btnCountDown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#00000000"
+                            android:padding="30dp"
+                            app:srcCompat="@mipmap/countdown" />
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="My Event" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#00000000"
-                        android:padding="30dp"
-                        app:srcCompat="@mipmap/gust" />
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/btnTodo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#00000000"
+                            android:padding="30dp"
+                            app:srcCompat="@mipmap/todo" />
+
+                        <TextView
+                            android:id="@+id/textView13"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Too List" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/btnGust"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#00000000"
+                            android:padding="30dp"
+                            app:srcCompat="@mipmap/gust" />
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="My Guest" />
+                    </LinearLayout>
 
                 </TableRow>
 
@@ -105,21 +146,49 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageButton
-                        android:id="@+id/btnSearch"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#00000000"
-                        android:padding="30dp"
-                        app:srcCompat="@mipmap/seo" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <ImageButton
-                        android:id="@+id/btnMyList"
+                        <ImageButton
+                            android:id="@+id/btnSearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="83dp"
+                            android:background="#00000000"
+                            android:padding="30dp"
+                            app:srcCompat="@mipmap/seo" />
+
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Services" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#00000000"
-                        android:padding="30dp"
-                        app:srcCompat="@mipmap/clipboard" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/btnMyList"
+                            android:layout_width="match_parent"
+                            android:layout_height="83dp"
+                            android:background="#00000000"
+                            android:padding="30dp"
+                            app:srcCompat="@mipmap/clipboard" />
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="My Budget" />
+
+                    </LinearLayout>
 
                 </TableRow>
 

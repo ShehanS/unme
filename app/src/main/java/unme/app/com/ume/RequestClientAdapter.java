@@ -41,13 +41,13 @@ public class RequestClientAdapter extends BaseAdapter {
         TextView txtCategory = view.findViewById(R.id.txtCategory);
         TextView txtUserID = view.findViewById(R.id.txtUserID);
         TextView txtContact = view.findViewById(R.id.txtContact);
-        TextView txtServiceId = view.findViewById(R.id.txtServiceID);
+        TextView txtServiceId = view.findViewById(R.id.txtService);
 
 
         txtName.setText(mClientList.get(position).getName());
         txtCategory.setText(mClientList.get(position).getService());
         txtUserID.setText(mClientList.get(position).getUserID());
-        txtServiceId.setText(mClientList.get(position).getServiceID());
+        txtServiceId.setText(mClientList.get(position).getUserID());
         txtContact.setText(mClientList.get(position).getContact());
 
 

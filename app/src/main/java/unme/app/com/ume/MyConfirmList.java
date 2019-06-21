@@ -54,7 +54,7 @@ public class MyConfirmList extends AppCompatActivity {
     private Boolean getData;
     private EditText txtBudget;
     String Title,Company,Name,ContactNum,Status;
-    String userId,fullName,Contact,Email,Web,Address,Service, Notice;
+    String userId,fullName,Contact,Email,Web,Address,Service, Notice, serviceUserId;
     private double mybudget=0.00;
     private boolean isEventDate = false;
     private Long eventMilis;
@@ -136,6 +136,8 @@ public class MyConfirmList extends AppCompatActivity {
                     notice.setText(myServiceList.getMessage());
                     Service = myServiceList.getCategory();
                     Status = myServiceList.getStatus();
+                    serviceUserId = myServiceList.getServiceUserId();
+
 
 
                 }
@@ -261,16 +263,23 @@ public class MyConfirmList extends AppCompatActivity {
 
 
     public void sendRequest() {
-          requestEventDate();
+
+          if ((userId==null) || (fullName==null)||(Contact==null)||(Email==null)||(Web==null)||(Service==null)||(ServiceID==null)||(EVENT_DATE_TIME==null)|| (serviceUserId==null)){
+              return;
+          }else{
+              getUserData();
+              requestEventDate();
+
+          }
+
         if (isEventDate==true) {
 
             uniqueId = UUID.randomUUID().toString();
             mDatabase = FirebaseDatabase.getInstance().getReference("client-request");
-            ClientRequest clientRequest = new ClientRequest(userId, fullName, Contact, Email, Web, Service, ServiceID, false,EVENT_DATE_TIME,"Pending");
+            ClientRequest clientRequest = new ClientRequest(userId, fullName, Contact, Email, Web, Service, ServiceID, false,EVENT_DATE_TIME,"Pending",serviceUserId);
             mDatabase.child(sessionUserID).child(ServiceID).setValue(clientRequest);
             Toast.makeText(getApplicationContext(),"Your request has been sent !",Toast.LENGTH_LONG).show();
         }else{
-
             Toast.makeText(getApplicationContext(),"Please set your events date",Toast.LENGTH_LONG).show();
 
         }
@@ -287,6 +296,8 @@ public void getUserData(){
             Contact = user.getContact();
             Email = user.getEmail();
             Web = user.getWeb();
+
+
 
 
         }

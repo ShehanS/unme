@@ -57,7 +57,7 @@ public class SearchServicesActivity extends AppCompatActivity {
     ArrayList<String> list = new ArrayList<>(); //create array list
     ArrayAdapter<String> adapter; //create array adapter
     private TextView viewCompany, viewCategory, viewMessage, viewContact, viewEmail, viewWebsite, viewPackge, viewName, viewAddress;
-    private String company, mycategory, message, contact, email, website, person, address;
+    private String company, mycategory, message, contact, email, website, person, address, userServiceId;
     private Double mypackage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,6 +212,7 @@ public class SearchServicesActivity extends AppCompatActivity {
                         person = service.getFirstName()+" "+service.getLastName();
                         viewAddress.setText("Address : "+service.getAddress());
                         address = service.getAddress();
+                        userServiceId = service.getUserId();
                 }
 
             }
@@ -241,7 +242,7 @@ btnAdd.setOnClickListener(new View.OnClickListener() {
         Random random = new Random();
         String id = String.format("%08d", random.nextInt(100000000));
         mDatabase = FirebaseDatabase.getInstance().getReference("my-services");
-        MyServiceList myServiceList = new MyServiceList(id,id,company,mycategory,message,contact,email,website,mypackage,person,address,currentDate,false,"Pending",0.00);
+        MyServiceList myServiceList = new MyServiceList(id,id,sessionUserID,company,mycategory,message,contact,email,website,mypackage,person,address,currentDate,false,"Pending",0.00,userServiceId);
         mDatabase.child(sessionUserID).child(id).setValue(myServiceList);
         Toast.makeText(getApplicationContext(), "Service added !", Toast.LENGTH_SHORT).show();
     }

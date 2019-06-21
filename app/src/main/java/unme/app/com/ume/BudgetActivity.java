@@ -39,8 +39,8 @@ public class BudgetActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private Button btnAdd,btnClose,btnAddClose;
     private String sessionUserID, sessionUser, userID, serviceID;
-    private TextView serviceName, serviceBudget, servicContact, serviceNote, txtExpetedBudget, setMyBudget,  MycurrentBudget;
-    private String uuid,ServiceName, ServiceContact,ServiceNote = "";
+    private TextView txtOverFlow, serviceName, serviceBudget, servicContact, serviceNote, txtExpetedBudget, setMyBudget,  MycurrentBudget;
+    private String uuid,ServiceName, ServiceContact,ServiceNote, ServiceUserId = "";
     private Double ServiceBudget;
     private Double myBudgetVal,currentBudget = 0.00;
     private ListView listView;
@@ -58,9 +58,16 @@ public class BudgetActivity extends AppCompatActivity {
         setMyBudget = findViewById(R.id.MyBudget);
         MycurrentBudget = findViewById(R.id.txtCurrentBudget);
         listView = findViewById(R.id.listView);
+        txtOverFlow = findViewById(R.id.txtOverFlow);
         getMyExpectedBudget();
         getMyListBudget();
 
+
+
+
+        System.out.println("+++BUDGETS+++");
+        System.out.println("My Budget "+myBudgetVal);
+        System.out.println("Current Budget "+currentBudget);
 
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -99,9 +106,6 @@ public class BudgetActivity extends AppCompatActivity {
 
 
     public void showAddBudget(){
-        if (currentBudget>=myBudgetVal){
-            Toast.makeText(getApplicationContext(),"Expected budget override !",Toast.LENGTH_LONG).show();
-        }
 
         mDatabase = FirebaseDatabase.getInstance().getReference("my-budget");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -112,7 +116,7 @@ public class BudgetActivity extends AppCompatActivity {
         btnClose = view.findViewById(R.id.btnClose);
         builder.setView(view);
         final AlertDialog alert = builder.create();
-        myBudget.setText(myBudgetVal.toString());
+       // myBudget.setText(myBudgetVal.toString());
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,16 +181,28 @@ btnClose.setOnClickListener(new View.OnClickListener() {
                    return;
                }
 
-               MyServiceList myServiceList = new MyServiceList(uuid, uuid, "additional service", ServiceName, ServiceNote, ServiceContact, "Unkown","Unkown",ServiceBudget,"Unkown","Unkown",currentDate,true,"Active",ServiceBudget);
+
+               if (currentBudget == 0.0){
+                   currentBudget = ServiceBudget;
+               }
+
+                System.out.println("+++BUDGETS+++");
+                System.out.println("My Budget "+myBudgetVal);
+                System.out.println("Current Budget "+currentBudget);
+
+
+
+               MyServiceList myServiceList = new MyServiceList(uuid, uuid,sessionUserID, "additional service", ServiceName, ServiceNote, ServiceContact, "Unkown","Unkown",ServiceBudget,"Unkown","Unkown",currentDate,true,"Active",ServiceBudget,"Unkown");
                 mDatabase.child(sessionUserID).child(uuid).setValue(myServiceList);
-                Toast.makeText(getApplicationContext(),"Add additiona service !", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),"Add additiona service !", Toast.LENGTH_LONG).show();
+                currentBudget = 0.00;
                 getMyListBudget();
                 serviceName.setText("");
                 servicContact.setText("");
                 servicContact.setText("");
                 serviceBudget.setText("00.00");
                 serviceNote.setText("");
-
+alert.dismiss();
 
             }
         });
@@ -237,6 +253,13 @@ public void getMyListBudget(){
                 listView.setAdapter(myBudgetAdapter);
                 myBudgetAdapter.notifyDataSetChanged();
             }
+            if (myBudgetVal<currentBudget){
+                Toast.makeText(getApplicationContext(),"Your budget is overflow !", Toast.LENGTH_LONG).show();
+                txtOverFlow.setText("Budget is overflow !");
+
+            }else{
+                txtOverFlow.setText("");
+            }
 
             MycurrentBudget.setText("Current Budget "+currentBudget.toString()+" Rs");
         }
@@ -245,27 +268,16 @@ public void getMyListBudget(){
         public void onCancelled(@NonNull DatabaseError databaseError) {
 
         }
+
+
     });
 
 
 
 
+
 }
 
-
-public void checkBudet(){
-    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    final AlertDialog alert = builder.create();
-    builder.setMessage("Expected budget override !")
-            .setCancelable(false)
-            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-
-                }
-            });
-
-    alert.show();
-}
 
 
 }

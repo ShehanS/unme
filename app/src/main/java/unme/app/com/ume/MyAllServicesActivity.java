@@ -66,7 +66,10 @@ public class MyAllServicesActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+
                         Service service = childSnapshot.getValue(Service.class);
+
+
                         list.add(service.getCategory());
                         System.out.println(service.getCategory());
                         adapter.notifyDataSetChanged();

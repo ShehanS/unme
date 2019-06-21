@@ -3,6 +3,7 @@ package unme.app.com.ume.model;
 public class MyServiceList {
     private String id;
     private String serviceID;
+    private String userID;
     private String company;
     private String category;
     private String message;
@@ -16,12 +17,14 @@ public class MyServiceList {
     private boolean confirm=false;
     private String status;
     private Double budget = 0.00;
+    private String serviceUserId;
 
     public MyServiceList(){}
 
-    public MyServiceList(String id, String serviceID, String company, String category, String message, String contact, String email, String website, Double price, String name, String address, String date, boolean confirm, String status, Double budget) {
+    public MyServiceList(String id, String serviceID,String userID, String company, String category, String message, String contact, String email, String website, Double price, String name, String address, String date, boolean confirm, String status, Double budget,String serviceUserId) {
         this.id = id;
         this.serviceID = serviceID;
+        this.userID = userID;
         this.company = company;
         this.category = category;
         this.message = message;
@@ -35,6 +38,7 @@ public class MyServiceList {
         this.confirm = confirm;
         this.status = status;
         this.budget = budget;
+        this.serviceUserId = serviceUserId;
     }
 
     public Double getBudget() {
@@ -47,6 +51,14 @@ public class MyServiceList {
 
     public String getId() {
         return id;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public void setId(String id) {
@@ -155,5 +167,13 @@ public class MyServiceList {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getServiceUserId() {
+        return serviceUserId;
+    }
+
+    public void setServiceUserId(String serviceUserId) {
+        this.serviceUserId = serviceUserId;
     }
 }

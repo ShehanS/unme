@@ -4,194 +4,216 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/background"
     tools:context=".AddServiceActivity"
 
     >
 
     <LinearLayout
-        android:layout_width="402dp"
-        android:layout_height="26dp"
-        android:orientation="vertical"
-
-
-        android:paddingLeft="0dp"
-        android:paddingBottom="0dp"
-        tools:layout_editor_absoluteX="-2dp"
-        tools:layout_editor_absoluteY="5dp">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="370dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="Add Services"
-            android:textColor="@color/color1"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="743dp"
-        android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingTop="30dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="10dp"
-        tools:layout_editor_absoluteY="6dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="704dp">
+            android:layout_height="87dp"
+            android:background="@drawable/list_view"
+            android:orientation="vertical"
 
+
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
 
             <LinearLayout
 
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="403dp"
+                android:layout_height="87dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
 
-                android:divider="@drawable/divider"
-                android:orientation="vertical"
-                android:showDividers="middle"
-                android:verticalScrollbarPosition="defaultPosition">
+                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/txtCompany"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/hs"
+
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-                    android:hint="Company Name"
-                    android:inputType="text"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
-
-                <EditText
-                    android:id="@+id/txtFirstName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-                    android:hint="First Name"
-                    android:inputType="text"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
-
-                <EditText
-                    android:id="@+id/txtLastName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-                    android:hint="Last Name"
-                    android:inputType="text"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
-
-                <EditText
-                    android:id="@+id/txtContact"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-                    android:hint="Phone"
-                    android:inputType="phone"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
-
-                <EditText
-                    android:id="@+id/txtEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-                    android:hint="Email"
-                    android:inputType="textEmailAddress"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
-
-                <EditText
-                    android:id="@+id/txtAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-                    android:hint="Address"
-                    android:inputType="text"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
-
-                <EditText
-                    android:id="@+id/txtWeb"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-                    android:hint="Website"
-                    android:inputType="textWebEditText"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
-
-                <Spinner
-                    android:id="@+id/SelectCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-                    android:textColor="@color/white"
-
-
-                    />
-
-                <EditText
-                    android:id="@+id/txtAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-                    android:hint="Packages"
-                    android:inputType="numberDecimal"
-                    android:padding="16dp"
-                    android:textColor="@color/color1" />
-
-
-                <EditText
-                    android:id="@+id/txtMessage"
-                    android:layout_width="match_parent"
-                    android:layout_height="106dp"
-                    android:background="@drawable/inputbox"
-                    android:ems="10"
-
-                    android:hint="Message"
-                    android:inputType="textMultiLine"
-                    android:padding="16dp"
-                    android:singleLine="false"
-                    android:textColor="@color/color1" />
-
-                <Button
-                    android:id="@+id/btnSave"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="180dp"
-                    android:background="@drawable/button"
-                    android:text="Save"
-                    android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="25dp"
+                    android:gravity="right"
+                    android:text="Add Services"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14pt" />
 
             </LinearLayout>
-        </ScrollView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="743dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/header_title"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="30dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            tools:layout_editor_absoluteY="6dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="500dp">
+
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:divider="@drawable/divider"
+                    android:orientation="vertical"
+                    android:showDividers="middle"
+                    android:verticalScrollbarPosition="defaultPosition">
+
+                    <EditText
+                        android:id="@+id/txtCompany"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
+
+                        android:hint="Company Name"
+                        android:inputType="text"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
+
+                    <EditText
+                        android:id="@+id/txtFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
+
+                        android:hint="First Name"
+                        android:inputType="text"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
+
+                    <EditText
+                        android:id="@+id/txtLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
+
+                        android:hint="Last Name"
+                        android:inputType="text"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
+
+                    <EditText
+                        android:id="@+id/txtContact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
+
+                        android:hint="Phone"
+                        android:inputType="phone"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
+
+                    <EditText
+                        android:id="@+id/txtEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
+
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
+
+                    <EditText
+                        android:id="@+id/txtAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
+
+                        android:hint="Address"
+                        android:inputType="text"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
+
+                    <EditText
+                        android:id="@+id/txtWeb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
+
+                        android:hint="Website"
+                        android:inputType="textWebEditText"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
+
+                    <Spinner
+                        android:id="@+id/SelectCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
+                        android:textColor="@color/white"
+
+
+                        />
+
+                    <EditText
+                        android:id="@+id/txtAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
+
+                        android:hint="Packages"
+                        android:inputType="numberDecimal"
+                        android:padding="16dp"
+                        android:textColor="@color/color1" />
+
+
+                    <EditText
+                        android:id="@+id/txtMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="106dp"
+                        android:background="@drawable/inputbox"
+                        android:ems="10"
+
+                        android:hint="Message"
+                        android:inputType="textMultiLine"
+                        android:padding="16dp"
+                        android:singleLine="false"
+                        android:textColor="@color/color1" />
+
+                    <Button
+                        android:id="@+id/btnSave"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="180dp"
+                        android:background="@drawable/button"
+                        android:text="Save"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

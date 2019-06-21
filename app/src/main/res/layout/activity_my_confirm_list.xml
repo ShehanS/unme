@@ -38,6 +38,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="734dp"
+            android:padding="15dp"
             android:background="@drawable/list_view"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"

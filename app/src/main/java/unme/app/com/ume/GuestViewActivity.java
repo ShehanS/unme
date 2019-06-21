@@ -1,5 +1,6 @@
 package unme.app.com.ume;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -45,7 +46,7 @@ import unme.app.com.ume.model.Todo;
 public class GuestViewActivity extends AppCompatActivity {
 private Button addCount, btnAddGuest, btnAddCount,btnAdd, btnGuestDelete, btnGuestUpdate;
 private EditText guestName, guestContact, guestCount,guestPriorit;
-private TextView totalGuesView, CurrentGuests,GuestVariance, title;
+private TextView totalGuesView, CurrentGuests,GuestVariance, title, guestOverflow;
 private ListView listView;
 private String selected,selectedGuest;
 private RadioGroup radioGroup;
@@ -78,6 +79,7 @@ private int selectedId;
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
         btn3 = findViewById(R.id.btn3);
+        guestOverflow = findViewById(R.id.txtGuestOverflow);
 
 
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +185,8 @@ adapter.clear();
     public void addGuestCount() {
         //show alert
 
+
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.guest_count, null);
@@ -198,6 +202,7 @@ adapter.clear();
 
             @Override
             public void onClick(View v) {
+
                 mDatabase = FirebaseDatabase.getInstance().getReference("guest-count");
                String totGuests = guestCount.getEditableText().toString().trim();
 
@@ -213,11 +218,11 @@ adapter.clear();
                mDatabase.child(sessionUserID).setValue(guestCount);
                 Toast.makeText(getApplicationContext(), "Adding guest count !", Toast.LENGTH_SHORT).show();
                 alert.dismiss();
-               // adapter.clear();
-                currentMembers = 0;
-               loadData();
-              //  guestContact.setText(String.valueOf(guestCount.getCount()));
                 adapter.clear();
+                currentMembers = 0;
+              // loadData();
+              //  guestContact.setText(String.valueOf(guestCount.getCount()));
+               // adapter.clear();
                 currentMembers=0;
 
             }
@@ -261,12 +266,11 @@ adapter.clear();
                 selectedId = radioGroup.getCheckedRadioButtonId();
                 radioButton = radioGroup.findViewById(selectedId);
 
-                if(radioGroup.getCheckedRadioButtonId()==-1){
-                    Toast.makeText(getApplicationContext(),"Please select priority !",Toast.LENGTH_LONG).show();
+                if (radioGroup.getCheckedRadioButtonId() == -1) {
+                    Toast.makeText(getApplicationContext(), "Please select priority !", Toast.LENGTH_LONG).show();
                     return;
-                }else{
+                } else {
                     priority = radioButton.getText().toString();
-
 
 
                 }
@@ -291,10 +295,11 @@ adapter.clear();
                     return;
                 }
 
-                if (count==0) {
+                if (count == 0) {
                     Toast.makeText(getApplicationContext(), "Please enter guest count!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
 
 
 
@@ -302,6 +307,7 @@ adapter.clear();
                mDatabase.child(sessionUserID).child(key).setValue(guest);
                 // add guest count
                 adapter.clear();
+                //loadData();
                 currentMembers=0;
                 Toast.makeText(getApplicationContext(), "Adding guest !", Toast.LENGTH_SHORT).show();
                 alert.dismiss();
@@ -372,7 +378,7 @@ adapter.clear();
                       if (guest.getPriority().equals("2")) {
                           list.add(guest.getName());
                           currentMembers += (guest.getCount());
-                          adapter.notifyDataSetChanged();
+                         adapter.notifyDataSetChanged();
                       }
                    }else if(fliterValue.equals("3")){
                           if (guest.getPriority().equals("3")) {
@@ -388,7 +394,13 @@ adapter.clear();
                    }
 
 
+
     }
+            if (totMembers<=currentMembers){
+                guestOverflow.setText("Guest is overflow !");
+            }else{
+                   guestOverflow.setText("");
+            }
 }
                 CurrentGuests.setText(String.valueOf(currentMembers));
                 currentVariance = totMembers-currentMembers;
@@ -476,7 +488,7 @@ adapter.clear();
                             currentMembers = 0;
 
                         }
-                        adapter.notifyDataSetChanged();
+                        //adapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -535,7 +547,7 @@ btnGuestUpdate.setOnClickListener(new View.OnClickListener() {
 
                 currentMembers = 0;
 
-                adapter.notifyDataSetChanged();
+                //adapter.notifyDataSetChanged();
 
                 alert.dismiss();
             }
@@ -555,7 +567,6 @@ btnGuestUpdate.setOnClickListener(new View.OnClickListener() {
 });
 
     }
-
 
 
 

@@ -165,7 +165,7 @@ alert.dismiss();
 
         alert.show();
     }
-    public void listLoad () {
+    public void listLoad () { //
 
         mServiceList.clear();
 
@@ -174,20 +174,24 @@ alert.dismiss();
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
+                    if (userDataSnapshot.exists()) {
                     Object UserKey = userDataSnapshot.getKey();
-                    if (userDataSnapshot != null) {
-                        for (DataSnapshot childSnapshot : userDataSnapshot.getChildren()) {
-                            Service service = childSnapshot.getValue(Service.class);
+                       for (DataSnapshot childSnapshot : userDataSnapshot.getChildren()) {
+                            MyServiceList service = childSnapshot.getValue(MyServiceList.class);
                             String serviceKey = childSnapshot.getKey();
-                            System.out.println(serviceKey);
-                            //list.add(service.getCompany());
-                            mServiceList.add(new ClientService(1, String.valueOf(UserKey), service.getCompany(), service.getCategory(), serviceKey));
-                            //adapter.notifyDataSetChanged();
-                            serviceListAdapter = new ServiceListAdapter(getApplicationContext(), mServiceList);
+                            System.out.println("USER INFO");
+                            System.out.println("SERVICE KEY "+serviceKey);
+                            System.out.println("UserID KEY "+service.getUserID());
+                            System.out.println("sesson KEY "+ sessionUserID);
+                            if (service.getUserID().equals(sessionUserID)) {
+                                mServiceList.add(new ClientService(1, String.valueOf(UserKey), service.getCompany(), service.getCategory(), serviceKey));
+                                //adapter.notifyDataSetChanged();
+                                serviceListAdapter = new ServiceListAdapter(getApplicationContext(), mServiceList);
 
-                            listView.setAdapter(serviceListAdapter);
-                            serviceListAdapter.notifyDataSetChanged();
+                                listView.setAdapter(serviceListAdapter);
+                                serviceListAdapter.notifyDataSetChanged();
 
+                            }
                         }
                     }else{
                        mServiceList.clear();
